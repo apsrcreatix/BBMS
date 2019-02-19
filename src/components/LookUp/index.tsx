@@ -68,6 +68,7 @@ export default class TableWithContent extends React.Component<{}, state> {
           { title: "Blood Group", field: "bloodGroup" },
           { title: "Gender", field: "gender" },
           { title: "Donor Type", field: "lastDonated.type" },
+          { title: "Eligibility", field: "lastDonated.type" },
           { title: "Contact", field: "residentialAddress.mobile" }
         ]}
         data={data}

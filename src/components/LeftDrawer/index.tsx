@@ -8,9 +8,9 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+// import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Search_icon from "@material-ui/icons/Search";
+// import Search_icon from "@material-ui/icons/Search";
 import TableWithContent from ".././LookUp";
 // import EntryForm from './EntryForm';
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -69,11 +69,11 @@ function PermanentDrawerLeft(props: any) {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          {["Search", "Entry", "Look Up", "Update"].map(text => (
+          {["Donor Directory Search", "Donor Directory Look Up", "New Donor Entry", "Donor Update"].map(text => (
             <ListItem button key={text}>
-              <ListItemIcon>
+              {/* <ListItemIcon>
                 <Search_icon />
-              </ListItemIcon>
+              </ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
           ))}
