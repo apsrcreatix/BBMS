@@ -1,3 +1,6 @@
+// @TODO
+// 1.Improve styling
+// 2.Manage Routes to remaining links 
 import * as React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -8,12 +11,15 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-// import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-// import Search_icon from "@material-ui/icons/Search";
+import SearchIcon from "@material-ui/icons/Search";
+import LookUpIcon from "@material-ui/icons/FindInPage";
+import AddIcon from "@material-ui/icons/NoteAdd";
+import UpdateIcon from "@material-ui/icons/Edit";
 import TableWithContent from ".././LookUp";
-// import EntryForm from './EntryForm';
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import EntryForm from '../EntryForm';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -39,16 +45,37 @@ const styles = (theme: any) => ({
     padding: theme.spacing.unit * 3
   }
 });
-// const sidebarOptions = [
-// {
-//   label: '',
-//   icon: '',
-//   route:''
-// }
-// ];
+
 function PermanentDrawerLeft(props: any) {
+  const routes = [
+    {
+      path: "/search-donor",
+      label: "Donor Directory Search",
+      icon: <SearchIcon />,
+
+    },
+    {
+      path: "/directory-lookup",
+      label: "Donor Directory Lookup",
+      icon: <LookUpIcon />,
+      main: () => <TableWithContent />
+    },
+    {
+      path: "/registerDonor",
+      label: "New Donor Entry",
+      icon: <AddIcon />,
+      main: () =><EntryForm />
+    },
+    {
+      path: "/update-donor",
+      label: "Update Donors Record",
+      icon: <UpdateIcon />,
+
+    }
+  ];
   const { classes } = props;
   return (
+    <Router>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
@@ -69,12 +96,14 @@ function PermanentDrawerLeft(props: any) {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          {["Donor Directory Search", "Donor Directory Look Up", "New Donor Entry", "Donor Update"].map(text => (
-            <ListItem button key={text}>
-              {/* <ListItemIcon>
-                <Search_icon />
-              </ListItemIcon> */}
-              <ListItemText primary={text} />
+          {routes.map(routes => (
+            <ListItem button key={routes.label}>
+            <Link to={routes.path}>
+              <ListItemIcon>
+               {routes.icon}
+              </ListItemIcon>
+              <ListItemText primary={routes.label} />
+              </Link>
             </ListItem>
           ))}
         </List>
@@ -83,11 +112,18 @@ function PermanentDrawerLeft(props: any) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
 
-        <TableWithContent />
-        {/* <EntryForm/> */}
+        {routes.map((route, index) => (
+          <Route
+            key={index}
+            path={route.path}
+            component={route.main}
+          />
+        ))}
       </main>
     </div>
+    </Router>
   );
+
 }
 
 export default withStyles(styles)(PermanentDrawerLeft);
