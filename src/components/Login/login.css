@@ -1,0 +1,72 @@
+.Login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-container {
+    width: 500px;
+    max-width: 80%;
+}
+
+.card {
+    min-height: 80vh;
+    position: relative;
+}
+
+.card::after {
+    content: ' ';
+    position: absolute;
+    height: 5px;
+    background-color: #E00016;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.card-bg {
+    top: 0;
+    bottom: 40vh;
+    left: 0;
+    right: 0;
+    position: absolute;
+    background-image: url("https://images.pexels.com/photos/98014/pexels-photo-98014.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    clip-path: polygon(0 0, 100% 0%, 100% 70%, 0% 100%);
+}
+
+.card-lg {
+    position: absolute;
+    top: 38vh;
+    left: 50%;
+    background-image: url('./../../assets/cross.png');
+    height: 60px;
+    width: 60px;
+    background-position: center;
+    background-size: contain;
+    transform: translateX(-50%);
+}
+
+.card-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+.input {
+    width: 100%;
+    margin: 5px 0 !important;
+}
+
+.btn {
+    width: 100%;
+    padding: 13px 0 !important;
+    margin: 10px 0 !important;
+}
+
+.select {
+    width: 100%;
+    padding: 13px 0 !important;
+}
