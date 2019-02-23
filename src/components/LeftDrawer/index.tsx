@@ -16,6 +16,8 @@ import AddIcon from "@material-ui/icons/NoteAdd";
 import UpdateIcon from "@material-ui/icons/Edit";
 import TableWithContent from "../Search";
 import EntryForm from '../EntryForm';
+import UpdateDonor from '../UpdateDonor';
+import LookUp from '../LookUp';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -55,6 +57,7 @@ function PermanentDrawerLeft(props: any) {
       path: "/directory-lookup",
       label: "Donor Directory Lookup",
       icon: <LookUpIcon />,
+      main: () =><LookUp />
       
     },
     {
@@ -67,6 +70,7 @@ function PermanentDrawerLeft(props: any) {
       path: "/update-donor",
       label: "Update Donors Record",
       icon: <UpdateIcon />,
+      main: () =><UpdateDonor />
 
     }
   ];
