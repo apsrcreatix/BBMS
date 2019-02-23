@@ -6,6 +6,7 @@ import MaterialTable from "material-table";
 import * as React from "react";
 import axios from "axios";
 import Config from "../../Config";
+import './search.css';
 let username = Config.AUTH.username;
 let password = Config.AUTH.token;
 let base_url = Config.SERVER_URL;
@@ -42,45 +43,126 @@ export default class TableWithContent extends React.Component<{}, state> {
   }
   render() {
     const { data } = this.state;
+    function calculateAge(value: any) {
+      let now = new Date();
+      let datefromAPITimeStamp = new Date(value).getTime();
+      let nowTimeStamp = now.getTime();
+      let microSecondsDiff = Math.abs(
+        datefromAPITimeStamp - nowTimeStamp
+      );
+      // Number of milliseconds per day =
+      //   24 hrs/day * 60 minutes/hour * 60 seconds/minute * 1000 msecs/second
+      return Math.floor(microSecondsDiff / 31556952000);
+    }
+    function humanReadableDate(value: any){
+      let event = new Date(value);
+      let options = { year: 'numeric', month: 'numeric', day: 'numeric', timezone: 'Asia/Kolkata' };
+      return event.toLocaleDateString('en-IN', options);
+    }
     return (
+      <div className="container">
       <MaterialTable
-        columns={[
-          { title: "Name", field: "name" },
-          {
-            title: "Date Of Birth",
-            render: rowData => {
-              var dateFromAPI = rowData.dob;
-
-              var now = new Date();
-              var datefromAPITimeStamp = new Date(dateFromAPI).getTime();
-              var nowTimeStamp = now.getTime();
-
-              var microSecondsDiff = Math.abs(
-                datefromAPITimeStamp - nowTimeStamp
-              );
-              // Number of milliseconds per day =
-              //   24 hrs/day * 60 minutes/hour * 60 seconds/minute * 1000 msecs/second
-              var daysDiff = Math.floor(microSecondsDiff / 31556952000);
-
-              return daysDiff;
-            }
-          },
-          { title: "Blood Group", field: "bloodGroup" },
-          { title: "Gender", field: "gender" },
-          { title: "Donor Type", field: "lastDonated.type" },
-          { title: "Eligibility", field: "lastDonated.type" },
-          { title: "Contact", field: "residentialAddress.mobile" }
-        ]}
-        data={data}
-        title="Donor Look Up"
-        options={{
-          filtering: true,
-          searchable: true,
-          loadingType: "linear",
-          pageSize: 10,
-          toolbar: true
-        }}
-      />
+          columns={[
+            { title: "Name", field: "name" },
+            { title: "Gender", field: "gender" },
+            { title: "Father/Spouse", field: "fatherSpouseName" },
+            {
+              title: "Date Of Birth",
+              field: "dob",
+              render: rowData => {
+              return humanReadableDate(rowData.dob);
+              }
+            },
+            {
+              title: "Age",
+              field: "dob",
+              render: rowData => {
+                return calculateAge(rowData.dob);
+              }
+            },
+            { title: "Residence Mobile", field: "residentialAddress.mobile" },
+            { title: "Blood Group", field: "bloodGroup" },
+            { title: "Rh Type", field: "rhType" },
+            { title: "Donor Type", field: "lastDonated.type" },
+            {
+              title: "Last WB",
+              field: "wbDonor.lastDonation",
+              render: rowData => {
+              return humanReadableDate(rowData.wbDonor.lastDonation);
+              }
+            },
+            {
+              title: "Next WB",
+              field: "wbDonor.nextDonation",
+              render: rowData => {
+              return humanReadableDate(rowData.wbDonor.nextDonation);
+              }
+            },
+            {
+              title: "Last Platlet",
+              field: "platletDonor.lastDonation",
+              render: rowData => {
+              return humanReadableDate(rowData.platletDonor.lastDonation);
+              }
+            },
+            {
+              title: "Next Platlet",
+              field: "platletDonor.nextDonation",
+              render: rowData => {
+              return humanReadableDate(rowData.platletDonor.nextDonation);
+              }
+            },
+            {
+              title: "Last DRC",
+              field: "drcDonor.lastDonation",
+              render: rowData => {
+              return humanReadableDate(rowData.drcDonor.lastDonation);
+              }
+            },
+            {
+              title: "Next DRC",
+              field: "drcDonor.nextDonation",
+              render: rowData => {
+              return humanReadableDate(rowData.drcDonor.nextDonation);
+              }
+            },
+            {
+              title: "Last Plasma",
+              field: "plasmaDonor.lastDonation",
+              render: rowData => {
+              return humanReadableDate(rowData.plasmaDonor.lastDonation);
+              }
+            },
+            {
+              title: "Next Plasma",
+              field: "plasmaDonor.nextDonation",
+              render: rowData => {
+              return humanReadableDate(rowData.plasmaDonor.nextDonation);
+              }
+            },
+            { title: "Residence Pincode", field: "residentialAddress.pincode" },
+            { title: "Office Pincode", field: "officeAddress.pincode" },
+            { title: "Office Landline", field: "officeAddress.phone" },
+            { title: "Residence Landline", field: "residentialAddress.phone" },
+            { title: "Registration Center", field: "regCenter" },
+          ]}
+          data={data}
+          title="Donor Directory Seach"
+          options={{
+            filtering: true,
+            searchable: true,
+            loadingType: "linear",
+            pageSize: 10,
+            toolbar: true,
+          }}
+          localization={{
+            body: {
+              emptyDataSourceMessage: 'Loading ... This may take a while ...',
+            },
+          }}
+        />
+        </div>
     );
   }
+
 }
