@@ -3,138 +3,20 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Divider from "@material-ui/core/Divider";
 import "./EntryForm.css";
+import DATA from "../Data";
 
-// const OBJECT_BODY = {
-//   "regDate": "",
-//   "regCenter": "",
-//   "motivatedBy": "",
-//   "name": "",
-//   "dob": "",
-//   "gender": "",
-//   "bloodGroup": "",
-//   "rhType": "",
-//   "fatherSpouseName": "",
-//   "education": "",
-//   "occupation": "",
-//   "wbDonor": {
-//     "lastDonation": null,
-//     "nextDonation": null
-//   },
-//   "platletDonor": {
-//     "lastDonation": null,
-//     "nextDonation": null
-//   },
-//   "plasmaDonor": {
-//     "lastDonation": null,
-//     "nextDonation": null
-//   },
-//   "drcDonor": {
-//     "lastDonation": null,
-//     "nextDonation": null
-//   },
-//   "lastDonated": {
-//     "type": "",
-//     "lastDonation": "",
-//     "nextDonation": ""
-//   },
-//   "residentialAddress": {
-//     "address": "",
-//     "pincode": "",
-//     "door": "",
-//     "buildingName": "",
-//     "city": "",
-//     "postOffice": "",
-//     "area": "",
-//     "taluk": "",
-//     "district": "",
-//     "mobile": "",
-//     "email": "",
-//     "phone": ""
-//   },
-//   "officeAddress": {
-//     "address": "",
-//     "pincode": "",
-//     "door": "",
-//     "buildingName": "",
-//     "city": "",
-//     "postOffice": "",
-//     "area": "Kuniyamuthur",
-//     "taluk": "",
-//     "district": "",
-//     "phone": "",
-//     "email": "",
-//     "mobile": ""
-//   }
-// };
+// for original blank object body refer USEME.txt 
 
-const INITIAL_STATE = {
-  "regDate": "",
-  "regCenter": "",
-  "motivatedBy": "",
-  "name": "",
-  "dob": "",
-  "gender": "",
-  "bloodGroup": "",
-  "rhType": "",
-  "fatherSpouseName": "",
-  "education": "",
-  "occupation": "",
-  "wbDonor_lastDonation": null,
-  "wbDonor_nextDonation": null,
-  "platletDonor_lastDonation": null,
-  "platletDonor_nextDonation": null,
-  "plasmaDonor_lastDonation": null,
-  "plasmaDonor_nextDonation": null,
-  "drcDonor_lastDonation": null,
-  "drcDonor_nextDonation": null,
-  "lastDonated_type": "",
-  "lastDonated_lastDonation": "",
-  "lastDonated_nextDonation": "",
-  "r_address": "",
-  "r_pincode": "",
-  "r_door": "",
-  "r_buildingName": "",
-  "r_city": "",
-  "r_postOffice": "",
-  "r_area": "",
-  "r_taluk": "",
-  "r_district": "",
-  "r_mobile": "",
-  "r_email": "",
-  "r_phone": "",
-  "o_address": "",
-  "o_pincode": "",
-  "o_door": "",
-  "o_buildingName": "",
-  "o_city": "",
-  "o_postOffice": "",
-  "o_area": "Kuniyamuthur",
-  "o_taluk": "",
-  "o_district": "",
-  "o_phone": "",
-  "o_email": "",
-  "o_mobile": "",
-  data: []
-  };
+const INITIAL_STATE = DATA.D_DETAILS_BLANK;
+const RHTYPE = DATA.RH_TYPE;
+const BLOOD = DATA.BLOOD_GROUP;
+const GENDER = DATA.GENDER;
 const testData = [
   {
     value: "A",
     label: "Apple"
-  },
-  {
-    value: "B",
-    label: "Ball"
-  },
-  {
-    value: "C",
-    label: "Cat"
-  },
-  {
-    value: "D",
-    label: "Doggo"
   }
 ];
-
 export default class EntryForm extends React.Component {
   state = INITIAL_STATE;
   constructor(props: any) {
@@ -268,9 +150,9 @@ export default class EntryForm extends React.Component {
           helperText="Please select Gender"
           margin="normal"
         >
-          {testData.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
+          {GENDER.map((option: string) => (
+            <option key={option} value={option}>
+              {option}
             </option>
           ))}
           </TextField>
@@ -290,9 +172,9 @@ export default class EntryForm extends React.Component {
           helperText="Please select Blood Group"
           margin="normal"
         >
-          {testData.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
+          {BLOOD.map(option => (
+            <option key={option} value={option}>
+              {option}
             </option>
           ))}
           </TextField>
@@ -312,9 +194,9 @@ export default class EntryForm extends React.Component {
           helperText="Please select Rh Type"
           margin="normal"
         >
-          {testData.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
+          {RHTYPE.map(option => (
+            <option key={option} value={option}>
+              {option}
             </option>
           ))}
           </TextField>
