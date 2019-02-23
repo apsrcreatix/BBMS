@@ -1,6 +1,3 @@
-// @TODO
-// 1.Improve styling
-// 2.Manage Routes to remaining links 
 import * as React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -17,7 +14,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import LookUpIcon from "@material-ui/icons/FindInPage";
 import AddIcon from "@material-ui/icons/NoteAdd";
 import UpdateIcon from "@material-ui/icons/Edit";
-import TableWithContent from ".././LookUp";
+import TableWithContent from "../Search";
 import EntryForm from '../EntryForm';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -97,14 +94,14 @@ function PermanentDrawerLeft(props: any) {
         <Divider />
         <List>
           {routes.map(routes => (
-            <ListItem button key={routes.label}>
             <Link to={routes.path}>
+            <ListItem button key={routes.label}>
               <ListItemIcon>
                {routes.icon}
               </ListItemIcon>
               <ListItemText primary={routes.label} />
-              </Link>
             </ListItem>
+            </Link>
           ))}
         </List>
         <Divider />
