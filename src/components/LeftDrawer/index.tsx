@@ -49,13 +49,13 @@ function PermanentDrawerLeft(props: any) {
       path: "/search-donor",
       label: "Donor Directory Search",
       icon: <SearchIcon />,
-
+      main: () => <TableWithContent />
     },
     {
       path: "/directory-lookup",
       label: "Donor Directory Lookup",
       icon: <LookUpIcon />,
-      main: () => <TableWithContent />
+      
     },
     {
       path: "/registerDonor",
