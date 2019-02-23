@@ -46,24 +46,28 @@ const styles = (theme: any) => ({
 function PermanentDrawerLeft(props: any) {
   const routes = [
     {
+      key: 1,
       path: "/search-donor",
       label: "Donor Directory Search",
       icon: <SearchIcon />,
       main: () => <TableWithContent />
     },
     {
+      key: 2,
       path: "/directory-lookup",
       label: "Donor Directory Lookup",
       icon: <LookUpIcon />,
       
     },
     {
+      key: 3,
       path: "/registerDonor",
       label: "New Donor Entry",
       icon: <AddIcon />,
       main: () =><EntryForm />
     },
     {
+      key: 4,
       path: "/update-donor",
       label: "Update Donors Record",
       icon: <UpdateIcon />,
@@ -94,9 +98,9 @@ function PermanentDrawerLeft(props: any) {
         <Divider />
         <List>
           {routes.map(routes => (
-            <Link to={routes.path}>
-            <ListItem button key={routes.label}>
-              <ListItemIcon>
+            <Link key={routes.key} to={routes.path}>
+            <ListItem button key={routes.key}>
+              <ListItemIcon key={routes.key}>
                {routes.icon}
               </ListItemIcon>
               <ListItemText primary={routes.label} />
