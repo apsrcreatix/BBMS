@@ -1,0 +1,65 @@
+
+----------------- OBJECT BODY -----------
+// const OBJECT_BODY = {
+//   "regDate": "",
+//   "regCenter": "",
+//   "motivatedBy": "",
+//   "name": "",
+//   "dob": "",
+//   "gender": "",
+//   "bloodGroup": "",
+//   "rhType": "",
+//   "fatherSpouseName": "",
+//   "education": "",
+//   "occupation": "",
+//   "wbDonor": {
+//     "lastDonation": null,
+//     "nextDonation": null
+//   },
+//   "platletDonor": {
+//     "lastDonation": null,
+//     "nextDonation": null
+//   },
+//   "plasmaDonor": {
+//     "lastDonation": null,
+//     "nextDonation": null
+//   },
+//   "drcDonor": {
+//     "lastDonation": null,
+//     "nextDonation": null
+//   },
+//   "lastDonated": {
+//     "type": "",
+//     "lastDonation": "",
+//     "nextDonation": ""
+//   },
+//   "residentialAddress": {
+//     "address": "",
+//     "pincode": "",
+//     "door": "",
+//     "buildingName": "",
+//     "city": "",
+//     "postOffice": "",
+//     "area": "",
+//     "taluk": "",
+//     "district": "",
+//     "mobile": "",
+//     "email": "",
+//     "phone": ""
+//   },
+//   "officeAddress": {
+//     "address": "",
+//     "pincode": "",
+//     "door": "",
+//     "buildingName": "",
+//     "city": "",
+//     "postOffice": "",
+//     "area": "Kuniyamuthur",
+//     "taluk": "",
+//     "district": "",
+//     "phone": "",
+//     "email": "",
+//     "mobile": ""
+//   }
+// };
+----------------------------
