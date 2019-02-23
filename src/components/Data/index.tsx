@@ -9782,5 +9782,27 @@ export default {
         "o_email": "",
         "o_mobile": "",
         data: []
-        }            
+        },
+    TEMP_REG_CENTRE: [
+        "Haemcare - Nungambakkam",
+        "Rotatory Blood Bank - Nunganallur"
+    ],
+    TEMP_MOTIVATORS: [
+        "Call Donor Aarthi",
+        "Call Donor Deepika",
+        "Call Donor Janani",
+        "Call Donor Maheswari",
+        "Call Donor Maheswari.G",
+        "Call Donor Pushparani",
+        "Call Donor Varadhan",
+        "Call Donor Maheswari .G",
+        "Camp Chairman",
+        "Relative",
+        "Rotarian Souri Rajan",
+        "Sabu",
+        "Varathan Call Donor",
+        "Voluntary",
+        "Cll Donor G.Maheshwari",
+        "Cll.Donor Gmaheswari"
+    ]          
 }
