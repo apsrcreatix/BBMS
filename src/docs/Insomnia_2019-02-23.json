@@ -1,0 +1,516 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2019-02-23T05:27:51.142Z",
+	"__export_source": "insomnia.desktop.app:v6.3.2",
+	"resources": [
+		{
+			"_id": "wrk_d7aad1586d0941f6960765f0824100bf",
+			"created": 1547804842762,
+			"description": "",
+			"modified": 1547804842762,
+			"name": "Insomnia",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_ce4b168065384e319d72b46466f2c7fc",
+			"color": null,
+			"created": 1547804842792,
+			"data": {
+				"base_url": "http://server.reezx.com/api"
+			},
+			"isPrivate": false,
+			"metaSortKey": 1547804842792,
+			"modified": 1550899620783,
+			"name": "New Environment",
+			"parentId": "wrk_d7aad1586d0941f6960765f0824100bf",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_bb32b07a315646a68c43869509c6e656",
+			"cookies": [],
+			"created": 1547804842804,
+			"modified": 1547804842804,
+			"name": "Default Jar",
+			"parentId": "wrk_d7aad1586d0941f6960765f0824100bf",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_fb1baa54da004d86b010d04b392533f1",
+			"created": 1549202388157,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1549202388157,
+			"modified": 1549202388157,
+			"name": "MARS",
+			"parentId": "wrk_d7aad1586d0941f6960765f0824100bf",
+			"_type": "request_group"
+		},
+		{
+			"_id": "env_029a77ceda474357811939d4b8318f35",
+			"color": null,
+			"created": 1549251866021,
+			"data": {
+				"admin_setup_key": "AmwaEvmXPaQ",
+				"password": "adminpassword",
+				"token": "796a7564-c85c-4ec7-ba9a-0a17894bb5e4",
+				"usernmae": "admin"
+			},
+			"isPrivate": false,
+			"metaSortKey": 1549251866021,
+			"modified": 1550896450499,
+			"name": "Admin",
+			"parentId": "env_ce4b168065384e319d72b46466f2c7fc",
+			"_type": "environment"
+		},
+		{
+			"_id": "env_44121e8b5c09424ea24c9b029425bc9f",
+			"color": null,
+			"created": 1550148468309,
+			"data": {
+				"donor_id": "5c61483f7339b42d0d3a33ca",
+				"password": "password",
+				"pincode": 600007,
+				"token": "20de946e-dce9-496d-89e2-158200153966",
+				"usernmae": "Haemcare - Nungambakkam"
+			},
+			"isPrivate": false,
+			"metaSortKey": 1550148468309,
+			"modified": 1550899403922,
+			"name": "Blood Bank",
+			"parentId": "env_ce4b168065384e319d72b46466f2c7fc",
+			"_type": "environment"
+		},
+		{
+			"_id": "fld_3b0d1bc0bf9f49f6bb7ec29be3307280",
+			"created": 1549202737508,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1549202881103,
+			"modified": 1550148268514,
+			"name": "Authentication",
+			"parentId": "fld_fb1baa54da004d86b010d04b392533f1",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_f3fc4def00e142d38c2a194aafb5dc66",
+			"created": 1549217228555,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1549202881153,
+			"modified": 1550148532293,
+			"name": "Admin",
+			"parentId": "fld_fb1baa54da004d86b010d04b392533f1",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_79fe11a3ad794380af426a83342ffdad",
+			"created": 1550148548841,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1550148548841,
+			"modified": 1550148548841,
+			"name": "Blood Bank",
+			"parentId": "fld_fb1baa54da004d86b010d04b392533f1",
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_87d3c49dff8c45e08aa05dccdbee6326",
+			"authentication": {},
+			"body": {},
+			"created": 1549202500885,
+			"description": "Checks wheater the server is running...",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1549202881053,
+			"method": "GET",
+			"modified": 1550243156620,
+			"name": "Hello Server",
+			"parameters": [],
+			"parentId": "fld_fb1baa54da004d86b010d04b392533f1",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/ping",
+			"_type": "request"
+		},
+		{
+			"_id": "req_7faca83fae7746639ab1482d3159e169",
+			"authentication": {},
+			"body": {},
+			"created": 1549202995972,
+			"description": "Return List of All avalilable Blood Banks",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1549202690994,
+			"method": "GET",
+			"modified": 1550148312862,
+			"name": "Get Blood Banks",
+			"parameters": [],
+			"parentId": "fld_fb1baa54da004d86b010d04b392533f1",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bloodbanks",
+			"_type": "request"
+		},
+		{
+			"_id": "req_de1cbdbf59d44541a7482dbf2c73b236",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\": \"{{ usernmae  }}\",\n\t\"password\": \"{{ password  }}\"\n}"
+			},
+			"created": 1549202775363,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_beabb96f272b4f65825ad527585ba9a5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1549202768031.5,
+			"method": "POST",
+			"modified": 1550148454529,
+			"name": "Login",
+			"parameters": [],
+			"parentId": "fld_3b0d1bc0bf9f49f6bb7ec29be3307280",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/auth/login",
+			"_type": "request"
+		},
+		{
+			"_id": "req_5b014e78ccdd4dd78798cfb754b7ba70",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {},
+			"created": 1549251722626,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1549251722626,
+			"method": "GET",
+			"modified": 1549252706469,
+			"name": "Logout",
+			"parameters": [],
+			"parentId": "fld_3b0d1bc0bf9f49f6bb7ec29be3307280",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/auth/logout",
+			"_type": "request"
+		},
+		{
+			"_id": "req_5381a8b8bce7433199b322102bb214b1",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {},
+			"created": 1549217317348,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1549217317348,
+			"method": "POST",
+			"modified": 1550148369470,
+			"name": "Add Blood Bank",
+			"parameters": [],
+			"parentId": "fld_f3fc4def00e142d38c2a194aafb5dc66",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/admin/bloodbank",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6b4de302ee2c4e7aa1cf02d206f4f4bb",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"key\": \"{{ admin_setup_key  }}\"\n}"
+			},
+			"created": 1549222280863,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_4bb698c1f51a4a688a94d8f193085982",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1549222280863,
+			"method": "GET",
+			"modified": 1549264229293,
+			"name": "Setup",
+			"parameters": [],
+			"parentId": "fld_f3fc4def00e142d38c2a194aafb5dc66",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/setup",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b936b4eb80644348aeb03b55c3cf7686",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {
+				"mimeType": "application/x-www-form-urlencoded",
+				"params": [
+					{
+						"id": "pair_e72f68240e9a4834a9b0e5cd81efa1a5",
+						"name": "name",
+						"value": "Cll.Donor Gmaheswari"
+					}
+				]
+			},
+			"created": 1550896335436,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_75e2f79bf7e84784bfe051f9a5ad69b1",
+					"name": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1550896335436,
+			"method": "POST",
+			"modified": 1550896781598,
+			"name": "Add Motivator",
+			"parameters": [],
+			"parentId": "fld_f3fc4def00e142d38c2a194aafb5dc66",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url }}/admin/motivator",
+			"_type": "request"
+		},
+		{
+			"_id": "fld_4d87e992210c41eaa085bf316e77d977",
+			"created": 1550897601660,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1550897601660,
+			"modified": 1550897601660,
+			"name": "areas",
+			"parentId": "fld_79fe11a3ad794380af426a83342ffdad",
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_0b68a728808b4b68a553f32b5c9dfc1d",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"query\": {\n\t\t\"limit\": 10,\n\t\t\"index\": 0\n\t}\n}"
+			},
+			"created": 1550148571838,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a11d0a27ea22499b98d43c98c20fdd37",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1550148571838,
+			"method": "POST",
+			"modified": 1550897043760,
+			"name": "Get Donors List",
+			"parameters": [],
+			"parentId": "fld_79fe11a3ad794380af426a83342ffdad",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/donors",
+			"_type": "request"
+		},
+		{
+			"_id": "req_45e046acf3b841209e2df2f0de71c811",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {},
+			"created": 1550148664556,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1550148664556,
+			"method": "GET",
+			"modified": 1550149864196,
+			"name": "Get Donor",
+			"parameters": [],
+			"parentId": "fld_79fe11a3ad794380af426a83342ffdad",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/donors/{{ donor_id  }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_5a1d83a015c2417f8e006004cd89478a",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {},
+			"created": 1550896845038,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1550896845038,
+			"method": "GET",
+			"modified": 1550896980861,
+			"name": "Get Motivators",
+			"parameters": [],
+			"parentId": "fld_79fe11a3ad794380af426a83342ffdad",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/motivators",
+			"_type": "request"
+		},
+		{
+			"_id": "req_f21d48c32caf4d12906a093b1132ba59",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {},
+			"created": 1550897607476,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1550897607476,
+			"method": "GET",
+			"modified": 1550897632183,
+			"name": "Get Post Office",
+			"parameters": [],
+			"parentId": "fld_4d87e992210c41eaa085bf316e77d977",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/areas/postoffices",
+			"_type": "request"
+		},
+		{
+			"_id": "req_24b6271d4c424ab28096b58b3d73bf66",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {},
+			"created": 1550898786872,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1550898786872,
+			"method": "GET",
+			"modified": 1550898833029,
+			"name": "Get Areas",
+			"parameters": [],
+			"parentId": "fld_4d87e992210c41eaa085bf316e77d977",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/areas/",
+			"_type": "request"
+		},
+		{
+			"_id": "req_183b87938381449985a6123a449ce7ad",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {},
+			"created": 1550899332511,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1550899332511,
+			"method": "GET",
+			"modified": 1550899383535,
+			"name": "Get Details of Pincode",
+			"parameters": [],
+			"parentId": "fld_4d87e992210c41eaa085bf316e77d977",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/areas/pincode/{{ pincode  }}",
+			"_type": "request"
+		}
+	]
+}
