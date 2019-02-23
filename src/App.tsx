@@ -1,5 +1,5 @@
 import * as React from "react";
-import Skeleton from "./components/LeftDrawer";
+import Skeleton from "./components/Drawer";
 
 class App extends React.Component {
   public render() {
