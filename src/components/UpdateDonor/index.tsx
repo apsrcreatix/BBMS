@@ -166,7 +166,7 @@ export default class UpdateDonor extends React.Component {
             helperText="Please select registration centre"
             margin="normal"
           >
-            {Data.AREAS.map(((option: any) =>
+            {Data.TEMP_REG_CENTRE.map(((option: any) =>
               <option key={option} value={option}>
                 {option}
               </option>
@@ -189,7 +189,7 @@ export default class UpdateDonor extends React.Component {
               helperText="Select motivator from list"
               margin="normal"
             >
-              {Data.AREAS.map(((option: any) =>
+              {Data.TEMP_MOTIVATORS.map(((option: any) =>
                 <option key={option} value={option}>
                   {option}
                 </option>
