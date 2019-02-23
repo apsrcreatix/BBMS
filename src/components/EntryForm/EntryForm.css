@@ -1,5 +1,15 @@
 .inputs{
-    margin-left: 10px !important;
-    margin-right:10px !important;
+    margin-left: 25px !important;
+    margin-right:25px !important;
     width: 200px !important;
+}
+.container{
+    margin-top:-100px !important;
+}
+.multiline{
+    height: 300px !important;
+}
+.center{
+    justify-content:center;
+    text-align:center;
 }
