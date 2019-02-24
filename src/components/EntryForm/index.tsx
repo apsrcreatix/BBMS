@@ -1,13 +1,3 @@
-// for original blank object body refer USEME.txt 
-//---------- @TODO-----------
-// 1.adding postoffice api
-// 2.list of motivators from server
-// 3.list of banks from server
-// 4.adding next donation time after 85 days
-// 5.alert of error messages
-// 6.improve styling
-// 7.add constraints in phone number, email and other inputs.
-// -----------------------------
 import * as React from "react";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
