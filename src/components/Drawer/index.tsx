@@ -19,7 +19,7 @@ import EntryForm from '../EntryForm';
 import UpdateDonor from '../UpdateDonor';
 import LookUp from '../LookUp';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import Config from "../../Config";
 const drawerWidth = 240;
 
 const styles = (theme: any) => ({
@@ -86,7 +86,7 @@ function PermanentDrawerLeft(props: any) {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Welcome, Blood Bank !
+            Welcome, {Config.AUTH.username} !
           </Typography>
         </Toolbar>
       </AppBar>
@@ -97,7 +97,15 @@ function PermanentDrawerLeft(props: any) {
           paper: classes.drawerPaper
         }}
         anchor="left"
-      >
+      > 
+      <div style={
+        {
+          justifyContent: 'center',
+          textAlign: 'center'
+      }
+      }>
+        <img src={require('./../../assets/icons/mars-icon.jpg')} width="72" height="72"/>
+      </div>
         <div className={classes.toolbar} />
         <Divider />
         <List>
