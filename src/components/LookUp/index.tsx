@@ -11,6 +11,7 @@ import * as React from "react";
 //import Config from "../../Config";
 import './LookUp.css';
 import Data from '../Data'
+import Button from '@material-ui/core/Button';
 
 const INITIAL_STATE = {
     "eligibility": "",
@@ -83,6 +84,9 @@ export default class LookUp extends React.Component {
             });*/
 
     }
+    Find() {
+        console.log('this is:', this);
+    }
     handleChange = (name: any) => (event: any) => {
         this.setState({ [name]: event.target.value });
     };
@@ -108,11 +112,11 @@ export default class LookUp extends React.Component {
                     margin="normal"
                 >
 
-                {Data.GENDER.map(((option: any) =>
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                    {Data.GENDER.map(((option: any) =>
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
                 </TextField>
                 <TextField
                     className="inputs"
@@ -131,11 +135,11 @@ export default class LookUp extends React.Component {
                     margin="normal"
                 >
 
-                {Data.BLOOD_GROUP.map(((option: any) =>
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                    {Data.BLOOD_GROUP.map(((option: any) =>
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
                 </TextField>
                 <TextField
                     className="inputs"
@@ -154,11 +158,11 @@ export default class LookUp extends React.Component {
                     margin="normal"
                 >
 
-                {Data.RH_TYPE.map(((option: any) =>
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                    {Data.RH_TYPE.map(((option: any) =>
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
                 </TextField>
                 <TextField
                     className="inputs"
@@ -177,11 +181,11 @@ export default class LookUp extends React.Component {
                     margin="normal"
                 >
 
-                {Data.AGE_GROUP.map(((option: any) =>
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                    {Data.AGE_GROUP.map(((option: any) =>
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
                 </TextField>
                 <TextField
                     className="inputs"
@@ -200,11 +204,11 @@ export default class LookUp extends React.Component {
                     margin="normal"
                 >
 
-                {Data.GENDER.map(((option: any) =>
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                    {Data.GENDER.map(((option: any) =>
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
                 </TextField>
                 <TextField
                     className="inputs"
@@ -223,11 +227,11 @@ export default class LookUp extends React.Component {
                     margin="normal"
                 >
 
-                {Data.GENDER.map(((option: any) =>
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                    {Data.GENDER.map(((option: any) =>
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
                 </TextField>
                 <TextField
                     className="inputs"
@@ -246,15 +250,15 @@ export default class LookUp extends React.Component {
                     margin="normal"
                 >
 
-                {Data.GENDER.map(((option: any) =>
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                    {Data.GENDER.map(((option: any) =>
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
                 </TextField>
-                
+
                 <Divider></Divider>
-                
+
                 <TextField
                     className="inputs"
                     select
@@ -272,11 +276,11 @@ export default class LookUp extends React.Component {
                     margin="normal"
                 >
 
-                {Data.AREAS.map(((option: any) =>
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                    {Data.AREAS.map(((option: any) =>
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
                 </TextField>
 
                 <TextField
@@ -296,11 +300,11 @@ export default class LookUp extends React.Component {
                     margin="normal"
                 >
 
-                {Data.POSTOFFICES.map(((option: any) =>
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                    {Data.POSTOFFICES.map(((option: any) =>
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
                 </TextField>
 
                 <TextField
@@ -311,7 +315,7 @@ export default class LookUp extends React.Component {
                     onChange={this.handleChange('r_address')}
                     margin="normal"
                     InputLabelProps={{
-                    shrink: true,
+                        shrink: true,
                     }}
                     required
                 />
@@ -333,17 +337,29 @@ export default class LookUp extends React.Component {
                     margin="normal"
                 >
 
-                {Data.TEMP_MOTIVATORS.map(((option: any) =>
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                    {Data.TEMP_MOTIVATORS.map(((option: any) =>
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
                 </TextField>
-                
+
                 <Divider></Divider>
+                <Button>
+                    <button onClick={this.Find}>
+                        Find
+                    </button>
+                </Button>
+                <Button
+                    className="inputs"
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => this.setState(INITIAL_STATE)}>
+                    Reset
+                </Button>
 
                 <MaterialTable
-                    
+
                     columns={[
                         { title: "Name", field: "name" },
                         {
