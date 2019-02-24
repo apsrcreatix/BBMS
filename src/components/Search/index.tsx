@@ -71,14 +71,15 @@ export default class TableWithContent extends React.Component<{}, state> {
               field: "dob",
               render: rowData => {
               return humanReadableDate(rowData.dob);
-              }
+              },
+              type: 'date'
             },
             {
               title: "Age",
               field: "dob",
               render: rowData => {
                 return calculateAge(rowData.dob);
-              }
+              }              
             },
             { title: "Residence Mobile", field: "residentialAddress.mobile" },
             { title: "Blood Group", field: "bloodGroup" },
@@ -148,17 +149,31 @@ export default class TableWithContent extends React.Component<{}, state> {
           ]}
           data={data}
           title="Donor Directory Seach"
+          actions={[
+            {
+              icon: 'edit',
+              tooltip: 'Edit Donor Data',
+              onClick: (event, rowData) => {
+                alert(`we need to pass ${rowData._id} using ${event} to update form`);
+              },
+            },
+          ]
+          }
           options={{
             filtering: true,
             searchable: true,
             loadingType: "linear",
             pageSize: 10,
             toolbar: true,
+            columnsButton: true
           }}
           localization={{
             body: {
               emptyDataSourceMessage: 'Loading ... This may take a while ...',
             },
+            header:{
+              actions: "Edit"
+            }
           }}
         />
         </div>
