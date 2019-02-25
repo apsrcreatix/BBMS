@@ -9779,7 +9779,7 @@ export default {
         "o_buildingName": "",
         "o_city": "",
         "o_postOffice": "",
-        "o_area": "Kuniyamuthur",
+        "o_area": "",
         "o_taluk": "",
         "o_district": "",
         "o_phone": "",
