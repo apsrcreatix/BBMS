@@ -7,18 +7,27 @@ import * as React from "react";
 import axios from "axios";
 import Config from "../../Config";
 import './search.css';
+import UpdateDonor from '../UpdateDonor';
+// import { createBrowserHistory } from 'history';
 let username = Config.AUTH.username;
 let password = Config.AUTH.token;
 let base_url = Config.SERVER_URL;
 let session_url = base_url + Config.PATHS.getDonors;
+import { BrowserRouter as Router} from "react-router-dom";
+
+// const history = createBrowserHistory();
 interface state {
-  data: object;
+  data: object,
+  setData: any,
+  redirectTo: boolean
 }
 export default class TableWithContent extends React.Component<{}, state> {
   constructor(props: any) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      setData: "",
+      redirectTo:false
     };
     axios
       .post(
@@ -39,7 +48,7 @@ export default class TableWithContent extends React.Component<{}, state> {
       })
       .catch(function(error: any) {
         console.log(`error in authentication : ${error}`);
-      });
+      }); 
   }
   render() {
     const { data } = this.state;
@@ -59,8 +68,17 @@ export default class TableWithContent extends React.Component<{}, state> {
       let options = { year: 'numeric', month: 'numeric', day: 'numeric', timezone: 'Asia/Kolkata' };
       return event.toLocaleDateString('en-IN', options);
     }
+    if (this.state.redirectTo) {
+      return <UpdateDonor data={this.state.setData}/>;
+    }
     return (
-      <div className="container">
+    <Router>
+      <div>
+      {/* <Route
+            path={"/UpdateDonor"}
+            component={()=>}
+          />
+   */}
       <MaterialTable
           columns={[
             { title: "Name", field: "name" },
@@ -154,7 +172,12 @@ export default class TableWithContent extends React.Component<{}, state> {
               icon: 'edit',
               tooltip: 'Edit Donor Data',
               onClick: (event, rowData) => {
-                alert(`we need to pass ${rowData._id} using ${event} to update form`);
+                // alert(`Data: ${JSON.stringify(rowData)} using ${event}`);
+                console.table(event);
+                this.setState({setData : rowData, redirectTo:true});
+                // history.push('/UpdateDonor');
+                
+
               },
             },
           ]
@@ -176,8 +199,8 @@ export default class TableWithContent extends React.Component<{}, state> {
             }
           }}
         />
-        </div>
+         </div>
+  </Router>
     );
   }
-
 }

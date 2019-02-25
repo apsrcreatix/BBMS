@@ -13,10 +13,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import SearchIcon from "@material-ui/icons/Search";
 import LookUpIcon from "@material-ui/icons/FindInPage";
 import AddIcon from "@material-ui/icons/NoteAdd";
-import UpdateIcon from "@material-ui/icons/Edit";
+// import UpdateIcon from "@material-ui/icons/Edit";
 import TableWithContent from "../Search";
 import EntryForm from '../EntryForm';
-import UpdateDonor from '../UpdateDonor';
+// import UpdateDonor from '../UpdateDonor';
 import LookUp from '../LookUp';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Config from "../../Config";
@@ -68,14 +68,6 @@ function PermanentDrawerLeft(props: any) {
       label: "New Donor Entry",
       icon: <AddIcon />,
       main: () =><EntryForm />
-    },
-    {
-      key: 4,
-      path: "/update-donor",
-      label: "Update Donors Record",
-      icon: <UpdateIcon />,
-      main: () =><UpdateDonor />
-
     }
   ];
   const { classes } = props;
