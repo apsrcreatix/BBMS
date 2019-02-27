@@ -13,10 +13,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import SearchIcon from "@material-ui/icons/Search";
 import LookUpIcon from "@material-ui/icons/FindInPage";
 import AddIcon from "@material-ui/icons/NoteAdd";
-// import UpdateIcon from "@material-ui/icons/Edit";
 import TableWithContent from "../Search";
 import EntryForm from '../EntryForm';
-// import UpdateDonor from '../UpdateDonor';
 import LookUp from '../LookUp';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Config from "../../Config";
@@ -28,7 +26,8 @@ const styles = (theme: any) => ({
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth
+    marginLeft: drawerWidth,
+    backgroundColor: "crimson"
   },
   drawer: {
     width: drawerWidth,
@@ -93,10 +92,11 @@ function PermanentDrawerLeft(props: any) {
       <div style={
         {
           justifyContent: 'center',
-          textAlign: 'center'
+          textAlign: 'center',
+          marginTop: "20px",
       }
       }>
-        <img src={require('./../../assets/icons/mars-icon.jpg')} width="72" height="72"/>
+        <img style={ {boxShadow: "1px 3px 1px #9E9E9E", borderRadius: "50%" }} src={require('./../../assets/icons/mars-icon.jpg')} width="100" height="100"/>
       </div>
         <div className={classes.toolbar} />
         <Divider />
