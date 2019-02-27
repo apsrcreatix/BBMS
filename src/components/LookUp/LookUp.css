@@ -1,6 +1,13 @@
 .inputs{
-    margin-left: 10px !important;
-    margin-right:10px !important;
+    margin-left: 15px !important;
+    margin-right:15px !important;
     width: 200px !important;
     margin-bottom: 10px !important;
+}
+div .form{
+margin-top: -50px !important;
+}
+#printableArea{
+    height: 400px;
+    width: 1337px;
 }
