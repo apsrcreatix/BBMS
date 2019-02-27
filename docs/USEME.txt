@@ -1,5 +1,5 @@
 
------------------ OBJECT BODY -----------
+--------- OBJECT BODY -----------
 // const OBJECT_BODY = {
 //   "regDate": "",
 //   "regCenter": "",
@@ -63,3 +63,123 @@
 //   }
 // };
 ----------------------------
+-------DATA FROM UPDATE FORM----------
+---------STATE AND PROPS--------------
+// interface IProps {
+//   data: {
+//     regDate: any,
+//     regCenter: any,
+//     motivatedBy: any,
+//     name: any,
+//     dob: any,
+//     gender: any,
+//     bloodGroup: any,
+//     rhType: any,
+//     fatherSpouseName: any,
+//     education: any,
+//     occupation: any,
+//     wbDonor: {
+//       lastDonation: any,
+//       nextDonation: any
+//     },
+//     platletDonor: {
+//       lastDonation: any,
+//       nextDonation: any
+//     },
+//     plasmaDonor: {
+//       lastDonation: any,
+//       nextDonation: any
+//     },
+//     drcDonor: {
+//       lastDonation: any,
+//       nextDonation: any
+//     },
+//     lastDonated: {
+//       type: any,
+//       lastDonation: any,
+//       nextDonation: any
+//     },
+//     residentialAddress: {
+//       address: any,
+//       pincode: any,
+//       door: any,
+//       buildingName: any,
+//       city: any,
+//       postOffice: any,
+//       area: any,
+//       taluk: any,
+//       district: any,
+//       mobile: any,
+//       email: any,
+//       phone: any
+//     },
+//     officeAddress: {
+//       address: any,
+//       pincode: any,
+//       door: any,
+//       buildingName: any,
+//       city: any,
+//       postOffice: any,
+//       area: any,
+//       taluk: any,
+//       district: any,
+//       phone: any,
+//       email: any,
+//       mobile: any
+//     }
+//   }
+// }
+// export interface IState{
+//     regDate: any | " ",
+//     regCenter: any | " ",
+//     motivatedBy: any | " ",
+//     name: any | " ",
+//     dob: any | " ",
+//     gender: any | " ",
+//     bloodGroup: any | " ",
+//     rhType: any | " ",
+//     fatherSpouseName: any | " ",
+//     education: any | " ",
+//     occupation: any | " ",
+//     wb_check: boolean,
+//     wbDonor_lastDonation: any | " ",
+//     wbDonor_nextDonation: any | " ",
+//     platlet_check: boolean,
+//     platletDonor_lastDonation: any | " ",
+//     platletDonor_nextDonation: any | " ",
+//     plasma_check: boolean,
+//     plasmaDonor_lastDonation: any | " ",
+//     plasmaDonor_nextDonation: any | " ",
+//     drc_check:boolean,
+//     drcDonor_lastDonation: any | " ",
+//     drcDonor_nextDonation: any | " ",
+//     lastDonated_type: any | " ",
+//     lastDonated_lastDonation: any | " ",
+//     lastDonated_nextDonation: any | " ",
+//     r_address: any | " ",
+//     r_pincode: any | " ",
+//     r_door: any | " ",
+//     r_buildingName: any | " ",
+//     r_city: any | " ",
+//     r_postOffice: any | " ",
+//     r_area: any | " ",
+//     r_taluk: any | " ",
+//     r_district: any | " ",
+//     r_mobile: any | " ",
+//     r_email: any | " ",
+//     r_phone: any | " ",
+//     o_address: any | " ",
+//     o_pincode: any | " ",
+//     o_door: any | " ",
+//     o_buildingName: any | " ",
+//     o_city: any | " ",
+//     o_postOffice: any | " ",
+//     o_area: any | " ",
+//     o_taluk: any | " ",
+//     o_district: any | " ",
+//     o_phone: any | " ",
+//     o_email: any | " ",
+//     o_mobile: any | " ",
+   
+// }
+--------------------------------
