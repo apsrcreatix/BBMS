@@ -8,14 +8,13 @@ import axios from "axios";
 import Config from "../../Config";
 import './search.css';
 import UpdateDonor from '../UpdateDonor';
-// import { createBrowserHistory } from 'history';
+import { BrowserRouter as Router } from "react-router-dom";
+
 let username = Config.AUTH.username;
 let password = Config.AUTH.token;
 let base_url = Config.SERVER_URL;
 let session_url = base_url + Config.PATHS.getDonors;
-import { BrowserRouter as Router} from "react-router-dom";
 
-// const history = createBrowserHistory();
 interface state {
   data: object,
   setData: any,
@@ -27,7 +26,7 @@ export default class TableWithContent extends React.Component<{}, state> {
     this.state = {
       data: [],
       setData: "",
-      redirectTo:false
+      redirectTo: false
     };
     axios
       .post(
@@ -41,14 +40,13 @@ export default class TableWithContent extends React.Component<{}, state> {
         }
       )
       .then((response: any) => {
-        // console.table(response.data.response);
         this.setState(() => ({
           data: response.data.response
         }));
       })
-      .catch(function(error: any) {
+      .catch(function (error: any) {
         console.log(`error in authentication : ${error}`);
-      }); 
+      });
   }
   render() {
     const { data } = this.state;
@@ -59,8 +57,7 @@ export default class TableWithContent extends React.Component<{}, state> {
       let microSecondsDiff = Math.abs(
         datefromAPITimeStamp - nowTimeStamp
       );
-      // Number of milliseconds per day =
-      //   24 hrs/day * 60 minutes/hour * 60 seconds/minute * 1000 msecs/second
+      // Number of milliseconds per day = 24 hrs/day * 60 minutes/hour * 60 seconds/minute * 1000 msecs/second
       return Math.floor(microSecondsDiff / 31556952000);
     }
     function humanReadableDate(value: any){
@@ -73,12 +70,7 @@ export default class TableWithContent extends React.Component<{}, state> {
     }
     return (
     <Router>
-      <div>
-      {/* <Route
-            path={"/UpdateDonor"}
-            component={()=>}
-          />
-   */}
+      <div className="container">
       <MaterialTable
           columns={[
             { title: "Name", field: "name" },
@@ -172,12 +164,8 @@ export default class TableWithContent extends React.Component<{}, state> {
               icon: 'edit',
               tooltip: 'Edit Donor Data',
               onClick: (event, rowData) => {
-                // alert(`Data: ${JSON.stringify(rowData)} using ${event}`);
-                console.table(event);
-                this.setState({setData : rowData, redirectTo:true});
-                // history.push('/UpdateDonor');
-                
-
+              this.setState({setData : rowData, redirectTo:true});
+              console.log(event);
               },
             },
           ]
