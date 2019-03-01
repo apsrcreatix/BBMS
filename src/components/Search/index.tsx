@@ -14,6 +14,12 @@ let username = Config.AUTH.username;
 let password = Config.AUTH.token;
 let base_url = Config.SERVER_URL;
 let session_url = base_url + Config.PATHS.getDonors;
+let log  = {
+	"query": {
+		"limit": 6000,
+		"index": 0
+	}
+};
 
 interface state {
   data: object,
@@ -31,7 +37,7 @@ export default class TableWithContent extends React.Component<{}, state> {
     axios
       .post(
         session_url,
-        {},
+        log,
         {
           auth: {
             username,
