@@ -155,28 +155,6 @@ export default class LookUp extends React.Component {
         <TextField
           className="inputs"
           select
-          label="Gender"
-          value={this.state.gender}
-          onChange={this.handleChange("gender")}
-          SelectProps={{
-            native: true
-          }}
-          InputLabelProps={{
-            shrink: true
-          }}
-          required
-          helperText="Please select Gender"
-          margin="normal"
-        >
-          {Data.GENDER.map((option: any) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </TextField>
-        <TextField
-          className="inputs"
-          select
           label="Donor Type"
           value={this.state.gender}
           onChange={this.handleChange("gender")}
