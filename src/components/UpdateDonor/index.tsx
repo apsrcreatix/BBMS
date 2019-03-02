@@ -84,7 +84,9 @@ handleChange = (name: any) => (event: React.ChangeEvent<HTMLSelectElement>) => {
 
     return (
       <div className="container">
-      <h1>Add New Donor</h1>
+      <h1>Update Donor</h1>
+      <br/>
+      <Divider/>
       <form className="form" noValidate autoComplete="off">
        <h3>Registration Detail</h3>
         <TextField
