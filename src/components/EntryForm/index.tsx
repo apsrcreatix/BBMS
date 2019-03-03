@@ -244,7 +244,8 @@ export default class EntryForm extends React.Component {
         />
         <Divider/>
         <h3>Blood Donation</h3>
-
+        <br/>
+        <Divider/>
           <FormControl
             error={false}
             component="div">
