@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2019-02-23T05:27:51.142Z",
+	"__export_date": "2019-03-01T20:48:43.600Z",
 	"__export_source": "insomnia.desktop.app:v6.3.2",
 	"resources": [
 		{
@@ -18,11 +18,11 @@
 			"color": null,
 			"created": 1547804842792,
 			"data": {
-				"base_url": "http://server.reezx.com/api"
+				"base_url": "http://localhost:3200"
 			},
 			"isPrivate": false,
 			"metaSortKey": 1547804842792,
-			"modified": 1550899620783,
+			"modified": 1551469878272,
 			"name": "New Environment",
 			"parentId": "wrk_d7aad1586d0941f6960765f0824100bf",
 			"_type": "environment"
@@ -69,7 +69,7 @@
 			"color": null,
 			"created": 1550148468309,
 			"data": {
-				"donor_id": "5c61483f7339b42d0d3a33ca",
+				"donor_id": "5c77f7d2f7e81b7b32237038",
 				"password": "password",
 				"pincode": 600007,
 				"token": "20de946e-dce9-496d-89e2-158200153966",
@@ -77,7 +77,7 @@
 			},
 			"isPrivate": false,
 			"metaSortKey": 1550148468309,
-			"modified": 1550899403922,
+			"modified": 1551366170693,
 			"name": "Blood Bank",
 			"parentId": "env_ce4b168065384e319d72b46466f2c7fc",
 			"_type": "environment"
@@ -336,69 +336,15 @@
 			"_type": "request_group"
 		},
 		{
-			"_id": "req_0b68a728808b4b68a553f32b5c9dfc1d",
-			"authentication": {
-				"disabled": false,
-				"password": "{{ token  }}",
-				"type": "basic",
-				"username": "{{ usernmae  }}"
-			},
-			"body": {
-				"mimeType": "application/json",
-				"text": "{\n\t\"query\": {\n\t\t\"limit\": 10,\n\t\t\"index\": 0\n\t}\n}"
-			},
-			"created": 1550148571838,
+			"_id": "fld_39ed24ed31bc45cab5c00f34307e96d7",
+			"created": 1551365170389,
 			"description": "",
-			"headers": [
-				{
-					"id": "pair_a11d0a27ea22499b98d43c98c20fdd37",
-					"name": "Content-Type",
-					"value": "application/json"
-				}
-			],
-			"isPrivate": false,
-			"metaSortKey": -1550148571838,
-			"method": "POST",
-			"modified": 1550897043760,
-			"name": "Get Donors List",
-			"parameters": [],
+			"environment": {},
+			"metaSortKey": -1551365170389,
+			"modified": 1551365170389,
+			"name": "Donors",
 			"parentId": "fld_79fe11a3ad794380af426a83342ffdad",
-			"settingDisableRenderRequestBody": false,
-			"settingEncodeUrl": true,
-			"settingMaxTimelineDataSize": 1000,
-			"settingRebuildPath": true,
-			"settingSendCookies": true,
-			"settingStoreCookies": true,
-			"url": "{{ base_url  }}/bb/donors",
-			"_type": "request"
-		},
-		{
-			"_id": "req_45e046acf3b841209e2df2f0de71c811",
-			"authentication": {
-				"disabled": false,
-				"password": "{{ token  }}",
-				"type": "basic",
-				"username": "{{ usernmae  }}"
-			},
-			"body": {},
-			"created": 1550148664556,
-			"description": "",
-			"headers": [],
-			"isPrivate": false,
-			"metaSortKey": -1550148664556,
-			"method": "GET",
-			"modified": 1550149864196,
-			"name": "Get Donor",
-			"parameters": [],
-			"parentId": "fld_79fe11a3ad794380af426a83342ffdad",
-			"settingDisableRenderRequestBody": false,
-			"settingEncodeUrl": true,
-			"settingMaxTimelineDataSize": 1000,
-			"settingRebuildPath": true,
-			"settingSendCookies": true,
-			"settingStoreCookies": true,
-			"url": "{{ base_url  }}/bb/donors/{{ donor_id  }}",
-			"_type": "request"
+			"_type": "request_group"
 		},
 		{
 			"_id": "req_5a1d83a015c2417f8e006004cd89478a",
@@ -510,6 +456,173 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{ base_url  }}/bb/areas/pincode/{{ pincode  }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_0b68a728808b4b68a553f32b5c9dfc1d",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"query\": {\n\t\t\"limit\": 10,\n\t\t\"index\": 0,\n\t\t\"filter\": {\n\t\t\t\"onlyElidibleDonor\": true,\n\t\t\t\"name\": \"\",\n\t\t\t\"bloodGroup\": \"B\",\n\t\t\t\"rhType\": \"Positive\",\n\t\t\t\"age\": {\n\t\t\t\t\"max\": 20,\n\t\t\t\t\"min\": 32\n\t\t\t},\n\t\t\t\"gender\": \"Female\",\n\t\t\t\"area\": \"\",\n\t\t\t\"postOffice\": \"\",\n\t\t\t\"address\": \"\",\n\t\t\t\"motivatedBy\": \"\"\t\n\t\t}\n\t}\n}"
+			},
+			"created": 1550148571838,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a11d0a27ea22499b98d43c98c20fdd37",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1550148571838,
+			"method": "POST",
+			"modified": 1551472990599,
+			"name": "Get Donors List",
+			"parameters": [],
+			"parentId": "fld_39ed24ed31bc45cab5c00f34307e96d7",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/donors",
+			"_type": "request"
+		},
+		{
+			"_id": "req_45e046acf3b841209e2df2f0de71c811",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {},
+			"created": 1550148664556,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1550148571888,
+			"method": "GET",
+			"modified": 1551365178731,
+			"name": "Get Donor",
+			"parameters": [],
+			"parentId": "fld_39ed24ed31bc45cab5c00f34307e96d7",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/donors/{{ donor_id  }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_1a36703f0ed74bb3bafe803525936de4",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"donor\": {\n\t\t\"regDate\": 1551365660181,\n\t\t\"motivatedBy\": \"Some One\",\n\t\t\"name\": \"ABC XYZ\",\n\t\t\"dob\": 1551315660181,\n\t\t\"gender\": \"Male\",\n\t\t\"bloodGroup\": \"A1\",\n\t\t\"rhType\": \"Positive\",\n\t\t\"fatherSpouseName\": \"PQRS\",\n\t\t\"education\": \"B.Tech\",\n\t\t\"occupation\": \"Jobless\",\n\t\t\"wbDonor\": {\n\t\t\t\"lastDonation\": 1551366668181,\n\t\t\t\"nextDonation\": 1551365660181\n\t\t},\n\t\t\"platletDonor\": {\n\t\t\t\"lastDonation\": 1551366668181,\n\t\t\t\"nextDonation\": 1551365660181\n\t\t},\n\t\t\"plasmaDonor\": {\n\t\t\t\"lastDonation\": 1551366668181,\n\t\t\t\"nextDonation\": 1551365660181\n\t\t},\n\t\t\"drcDonor\": {\n\t\t\t\"lastDonation\": 1551366668181,\n\t\t\t\"nextDonation\": 1551365660181\n\t\t},\n\t\t\"lastDonated\": {\n\t\t\t\"type\": \"wb\",\n\t\t\t\"lastDonation\": 1551366668181,\n\t\t\t\"nextDonation\": 1551365660181\n\t\t},\n\t\t\"residentialAddress\": {\n\t\t\t\"address\": \"503, UB, SRM IST, Chennai, 603203\",\n\t\t\t\"pincode\": 603203,\n\t\t\t\"buildingName\": \"UB\",\n\t\t\t\"door\": \"503\",\n\t\t\t\"city\": \"Chennai\",\n\t\t\t\"postOffice\": \"Chennai\",\n\t\t\t\"area\": \"Potheri\",\n\t\t\t\"taluk\": \"Some\",\n\t\t\t\"district\": \"Kanchipurum\",\n\t\t\t\"mobile\": 1234567890,\n\t\t\t\"email\": \"sample@gmail.com\",\n\t\t\t\"phone\": 1234567890\n\t\t},\n\t\t\"officeAddress\": {\n\t\t\t\"address\": \"503, UB, SRM IST, Chennai, 603203\",\n\t\t\t\"pincode\": 603203,\n\t\t\t\"buildingName\": \"UB\",\n\t\t\t\"door\": \"503\",\n\t\t\t\"city\": \"Chennai\",\n\t\t\t\"postOffice\": \"Chennai\",\n\t\t\t\"area\": \"Potheri\",\n\t\t\t\"taluk\": \"Some\",\n\t\t\t\"district\": \"Kanchipurum\",\n\t\t\t\"mobile\": 1234567890,\n\t\t\t\"email\": \"sample@gmail.com\",\n\t\t\t\"phone\": 1234567890\n\t\t}\n\t}\n}"
+			},
+			"created": 1551365184310,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_e84a8cee24f84329882d1d1a55f1befc",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1551365184310,
+			"method": "POST",
+			"modified": 1551365997159,
+			"name": "Add Donor",
+			"parameters": [],
+			"parentId": "fld_39ed24ed31bc45cab5c00f34307e96d7",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/donors/new",
+			"_type": "request"
+		},
+		{
+			"_id": "req_453e49a49d4f4530afef16629974ff03",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"donor\": {\n\t\t\"motivatedBy\": \"Some One\",\n\t\t\"name\": \"ABC XYZ\",\n\t\t\"dob\": 1551315660181,\n\t\t\"gender\": \"Male\",\n\t\t\"bloodGroup\": \"A1\",\n\t\t\"rhType\": \"Positive\",\n\t\t\"fatherSpouseName\": \"PQRS\",\n\t\t\"education\": \"B.Tech\",\n\t\t\"occupation\": \"Jobless\",\n\t\t\"wbDonor\": {\n\t\t\t\"lastDonation\": 1551366668181,\n\t\t\t\"nextDonation\": 1551365660181\n\t\t},\n\t\t\"platletDonor\": {\n\t\t\t\"lastDonation\": 1551366668181,\n\t\t\t\"nextDonation\": 1551365660181\n\t\t},\n\t\t\"plasmaDonor\": {\n\t\t\t\"lastDonation\": 1551366668181,\n\t\t\t\"nextDonation\": 1551365660181\n\t\t},\n\t\t\"drcDonor\": {\n\t\t\t\"lastDonation\": 1551366668181,\n\t\t\t\"nextDonation\": 1551365660181\n\t\t},\n\t\t\"lastDonated\": {\n\t\t\t\"type\": \"wb\",\n\t\t\t\"lastDonation\": 1551366668181,\n\t\t\t\"nextDonation\": 1551365660181\n\t\t},\n\t\t\"residentialAddress\": {\n\t\t\t\"address\": \"503, UB, SRM IST, Chennai, 603203\",\n\t\t\t\"pincode\": 603203,\n\t\t\t\"buildingName\": \"UB\",\n\t\t\t\"door\": \"503\",\n\t\t\t\"city\": \"Chennai\",\n\t\t\t\"postOffice\": \"Chennai\",\n\t\t\t\"area\": \"Potheri\",\n\t\t\t\"taluk\": \"Some\",\n\t\t\t\"district\": \"Kanchipurum\",\n\t\t\t\"mobile\": 1234567890,\n\t\t\t\"email\": \"sample@gmail.com\",\n\t\t\t\"phone\": 1234567890\n\t\t},\n\t\t\"officeAddress\": {\n\t\t\t\"address\": \"503, UB, SRM IST, Chennai, 603203\",\n\t\t\t\"pincode\": 603203,\n\t\t\t\"buildingName\": \"UB\",\n\t\t\t\"door\": \"503\",\n\t\t\t\"city\": \"Chennai\",\n\t\t\t\"postOffice\": \"Chennai\",\n\t\t\t\"area\": \"Potheri\",\n\t\t\t\"taluk\": \"Some\",\n\t\t\t\"district\": \"Kanchipurum\",\n\t\t\t\"mobile\": 1234567890,\n\t\t\t\"email\": \"sample@gmail.com\",\n\t\t\t\"phone\": 1234567890\n\t\t}\n\t}\n}"
+			},
+			"created": 1551366146279,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_4d6aaded22d4472abd4c6103d1b7efe9",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1551366146279,
+			"method": "PATCH",
+			"modified": 1551366216306,
+			"name": "Update Donor",
+			"parameters": [],
+			"parentId": "fld_39ed24ed31bc45cab5c00f34307e96d7",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/donors/{{ donor_id  }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_50dc1a223863496282ffd4e567842356",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ usernmae  }}"
+			},
+			"body": {},
+			"created": 1551366339932,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1551366339932,
+			"method": "DELETE",
+			"modified": 1551366362368,
+			"name": "Delete Donor",
+			"parameters": [],
+			"parentId": "fld_39ed24ed31bc45cab5c00f34307e96d7",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/donors/{{ donor_id  }}",
 			"_type": "request"
 		}
 	]
