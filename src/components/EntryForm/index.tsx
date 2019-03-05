@@ -31,6 +31,8 @@ export default class EntryForm extends React.Component {
     return (
       <div className="container">
       <h1>Add New Donor</h1>
+      <br/>
+        <Divider/>
       <form className="form" noValidate autoComplete="off">
        <h3>Registration Detail</h3>
         <TextField
@@ -244,8 +246,7 @@ export default class EntryForm extends React.Component {
         />
         <Divider/>
         <h3>Blood Donation</h3>
-        <br/>
-        <Divider/>
+
           <FormControl
             error={false}
             component="div">
