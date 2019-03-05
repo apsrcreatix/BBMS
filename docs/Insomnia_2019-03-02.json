@@ -55,7 +55,7 @@
 				"admin_setup_key": "AmwaEvmXPaQ",
 				"password": "adminpassword",
 				"token": "796a7564-c85c-4ec7-ba9a-0a17894bb5e4",
-				"usernmae": "admin"
+				"username": "admin"
 			},
 			"isPrivate": false,
 			"metaSortKey": 1549251866021,
@@ -73,7 +73,7 @@
 				"password": "password",
 				"pincode": 600007,
 				"token": "20de946e-dce9-496d-89e2-158200153966",
-				"usernmae": "Haemcare - Nungambakkam"
+				"username": "Haemcare - Nungambakkam"
 			},
 			"isPrivate": false,
 			"metaSortKey": 1550148468309,
@@ -166,7 +166,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"username\": \"{{ usernmae  }}\",\n\t\"password\": \"{{ password  }}\"\n}"
+				"text": "{\n\t\"username\": \"{{ username  }}\",\n\t\"password\": \"{{ password  }}\"\n}"
 			},
 			"created": 1549202775363,
 			"description": "",
@@ -199,7 +199,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {},
 			"created": 1549251722626,
@@ -227,7 +227,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {},
 			"created": 1549217317348,
@@ -287,7 +287,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {
 				"mimeType": "application/x-www-form-urlencoded",
@@ -352,7 +352,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {},
 			"created": 1550896845038,
@@ -380,7 +380,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {},
 			"created": 1550897607476,
@@ -408,7 +408,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {},
 			"created": 1550898786872,
@@ -436,7 +436,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {},
 			"created": 1550899332511,
@@ -464,7 +464,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {
 				"mimeType": "application/json",
@@ -501,7 +501,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {},
 			"created": 1550148664556,
@@ -529,7 +529,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {
 				"mimeType": "application/json",
@@ -566,7 +566,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {
 				"mimeType": "application/json",
@@ -603,7 +603,7 @@
 				"disabled": false,
 				"password": "{{ token  }}",
 				"type": "basic",
-				"username": "{{ usernmae  }}"
+				"username": "{{ username  }}"
 			},
 			"body": {},
 			"created": 1551366339932,
