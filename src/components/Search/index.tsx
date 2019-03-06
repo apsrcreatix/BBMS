@@ -34,6 +34,8 @@ export default class TableWithContent extends React.Component<{}, state> {
       setData: "",
       redirectTo: false
     };
+  }
+  componentDidMount(){
     axios
       .post(
         session_url,
