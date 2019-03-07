@@ -2,7 +2,15 @@ export default {
     SERVER_URL: 'http://server.reezx.com/api',
     PATHS: {
         getBloodBanks: '/bloodbanks',
-        getDonors: '/bb/donors'
+        getDonors: '/bb/donors',
+        addMotivator: '/admin/motivator',
+        getMotivators: '/bb/motivators',
+        getPostoffice: '/bb/areas/postoffices',
+        getAreas: '/bb/areas/',
+        getPincodeDetails: '/bb/areas/pincode/',
+        addDonor: '/bb/donors/new',
+        updateDonor: '/bb/donors/',
+
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',
