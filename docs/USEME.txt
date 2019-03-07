@@ -183,3 +183,89 @@
    
 // }
 --------------------------------
+-----------DUMP DATA -------------
+    // const filter = new Filter(
+    //   this.state.eligibility,
+    //   this.state.motivatedBy,
+    //   this.state.gender,
+    //   this.state.bloodGroup,
+    //   this.state.rhType,
+    //   this.state.postOffice,
+    //   this.state.donorType,
+    //   this.state.age_max,
+    //   this.state.age_min,
+    //   this.state.addressKeyword,
+    //   this.state.area
+    // );
+
+
+    ----filter making------
+    // interface FilterType {
+//     eligibility: any,
+//     motivatedBy?: any,
+//     gender?: any,
+//     bloodGroup?: any,
+//     rhType?: any,
+//     postOffice?: any,
+//     donorType?: any,
+//     age_max:any;
+//     age_min:any;
+//     addressKeyword?: any,
+//     area?: any,
+// };
+// function Filter(this:Filter,
+//   eligibility = false,
+//   motivatedBy: any,
+//   gender: any,
+//   bloodGroup: any,
+//   rhType: any,
+//   postOffice: any,
+//   donorType: any,
+//   age_max: any,
+//   age_min: any,
+//   addressKeyword: any,
+//   area: any){
+// this.eligibility = eligibility;
+// this.motivatedBy = motivatedBy;
+// this.gender = gender;
+// this.bloodGroup = bloodGroup;
+// this.rhType = rhType;
+// this.postOffice = postOffice;
+// this.age = {
+//   max: age_max,
+//   min: age_min
+// };
+// this.addressKeyword = addressKeyword;
+// this.area = area;
+// this.donorType = donorType;
+// }
+// class Filter<Filter> {
+//   constructor(
+//     eligibility = false,
+//     motivatedBy: any,
+//     gender: any,
+//     bloodGroup: any,
+//     rhType: any,
+//     postOffice: any,
+//     donorType: any,
+//     age_max: any,
+//     age_min: any,
+//     addressKeyword: any,
+//     area: any
+//   ) {
+// this.eligibility = eligibility;
+// this.motivatedBy = motivatedBy;
+// this.gender = gender;
+// this.bloodGroup = bloodGroup;
+// this.rhType = rhType;
+// this.postOffice = postOffice;
+// this.age = {
+//   max: age_max,
+//   min: age_min
+// };
+// this.addressKeyword = addressKeyword;
+// this.area = area;
+// this.donorType = donorType;
+//   }
+// }
+------------------------------
