@@ -9724,11 +9724,10 @@ export default {
           "Negative"
       ],
       AGE_GROUP: [
-          18,
-          30,
-          40,
-          50,
-          60
+          [18,30],
+          [31,40],
+          [41,50],
+          [51,60]
       ],
       DONOR_TYPE: [
           'WB',
@@ -9809,3 +9808,14 @@ export default {
         "Cll.Donor Gmaheswari"
     ]          
 }
+// "bloodGroup": this.state.bloodGroup,
+//             "rhType": this.state.rhType,
+//             "age": {
+//               "max": this.state.age_max,
+//               "min": this.state.age_min
+//             },
+//             "gender": this.state.gender,
+//             "area": this.state.area,
+//             "postOffice": this.state.postOffice,
+//             "address": this.state.addressKeyword,
+//             "motivatedBy": this.state.motivatedBy
