@@ -5,40 +5,39 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import Data from "../Data";
 import "./LookUp.css";
+import axios from "axios";
+import Config from "../../Config";
+
+const username = Config.AUTH.username;
+const password = Config.AUTH.token;
+const base_url = Config.SERVER_URL;
+const session_url = base_url + Config.PATHS.getDonors;
+const areas = base_url + Config.PATHS.getAreas;
+const postOffice = base_url + Config.PATHS.getPostoffice;
+
+let log  = {
+	"query": {
+		"limit": 100,
+		"index": 0
+	}
+};
 
 const INITIAL_STATE = {
-  eligibility: "",
+  eligibility: false,
   motivatedBy: "",
-  name: "",
-  dob: "",
   gender: "",
   bloodGroup: "",
   rhType: "",
-  r_address: "",
-  r_pincode: "",
-  r_door: "",
-  r_buildingName: "",
-  r_city: "",
-  r_postOffice: "",
-  r_area: "",
-  r_taluk: "",
-  r_district: "",
-  r_mobile: "",
-  r_email: "",
-  r_phone: "",
-  o_address: "",
-  o_pincode: "",
-  o_door: "",
-  o_buildingName: "",
-  o_city: "",
-  o_postOffice: "",
-  o_area: "",
-  o_taluk: "",
-  o_district: "",
-  o_phone: "",
-  o_email: "",
-  o_mobile: "",
-  data: []
+  postOffice: "",
+  ageGroup: "",
+  donorType: "",
+  age_max: "",
+  age_min: "",
+  addressKeyword: "",
+  area:"",
+  data: [],
+  areaList: [],
+  postOfficeList:[]
 };
 
 export default class LookUp extends React.Component {
@@ -46,10 +45,11 @@ export default class LookUp extends React.Component {
   constructor(props: any) {
     super(props);
   }
-
+// handle changes when input fields changes 
   handleChange = (name: any) => (event: any) => {
     this.setState({ [name]: event.target.value });
   };
+
   printDocument = () => {
     // const content = document.getElementById("printableArea");
     const pri = window.frames[0];
@@ -60,6 +60,122 @@ export default class LookUp extends React.Component {
     pri.focus();
     pri.print();
   }
+
+  handleAge = (name: any) => (event: any) =>{
+    this.setState({
+      age_max: event.target.value[1],
+      age_min: event.target.value[0]
+    })
+  }
+
+ filterState(){
+    var filter = {
+      eligibility: false
+    };
+    if( this.state.eligibility === true ){
+      filter.eligibility = true;
+    }
+    if( this.state.age_min != null && this.state.age_max !=null ){
+      Object.assign(filter,{
+        age: {
+          max: this.state.age_max,
+          min: this.state.age_min
+        }
+      })
+    }
+    if(this.state.area != ""){
+      Object.assign(filter,{
+        area: this.state.area
+      })
+    }
+    if(this.state.postOffice != ""){
+      Object.assign(filter,{
+        postOffice: this.state.postOffice
+      })
+    }
+    return JSON.stringify( filter );
+    }
+
+  async fetchDonorList() {
+
+    const filter = this.filterState();
+    await axios.post(
+      session_url,
+      filter,
+      {
+        auth: {
+          username,
+          password
+        }
+      }
+    )
+      .then((response: any) => {
+        this.setState(() => ({
+          data: response.data.response
+        }));
+      })
+      .catch(function (error: any) {
+        console.log(`error in authentication : ${error}`);
+      });
+  }
+  async componentDidMount(){
+     await axios
+      .post(
+        session_url,
+        log,
+        {
+          auth: {
+            username,
+            password
+          }
+        }
+      )
+      .then((response: any) => {
+        this.setState(() => ({
+          data: response.data.response
+        }));
+      })
+      .catch(function (error: any) {
+        console.log(`error in authentication : ${error}`);
+      });
+      
+      await axios
+      .get(
+        `${areas}`,
+        {
+          auth: {
+            username,
+            password
+          }
+        }
+      )
+      .then((response:any)=>{
+        this.setState(()=>({
+          areaList: response.data.response
+        }));
+      })
+      .catch(function (error: any) {
+        console.log(`error in authentication : ${error}`);
+      });
+      await axios
+      .get(
+        `${postOffice}`,
+        {
+          auth: {
+            username,
+            password
+          }
+        }
+      )
+      .then((response:any)=>{
+        this.setState(()=>({
+          postOfficeList: response.data.response
+        }));
+      })
+      .catch(function (error: any) {
+        console.log(`error in authentication : ${error}`);
+      });
+  }
   render() {
     return (
       <div>
@@ -68,8 +184,8 @@ export default class LookUp extends React.Component {
           className="inputs"
           select
           label="Eligibilty"
-          value={this.state.gender}
-          onChange={this.handleChange("gender")}
+          value={this.state.eligibility}
+          onChange={this.handleChange("eligibility")}
           SelectProps={{
             native: true
           }}
@@ -80,18 +196,20 @@ export default class LookUp extends React.Component {
           helperText="Please select Eligibilty"
           margin="normal"
         >
-          {Data.GENDER.map((option: any) => (
-            <option key={option} value={option}>
-              {option}
+        <option value="">
+              All
             </option>
+          <option value="true">
+          Only Eligible Donors
+          </option>
           ))}
         </TextField>
         <TextField
           className="inputs"
           select
           label="Blood Group"
-          value={this.state.gender}
-          onChange={this.handleChange("blooGroup")}
+          value={this.state.bloodGroup}
+          onChange={this.handleChange("bloodGroup")}
           SelectProps={{
             native: true
           }}
@@ -102,6 +220,9 @@ export default class LookUp extends React.Component {
           helperText="Please select Blood Group"
           margin="normal"
         >
+         <option value="">
+              All
+            </option>
           {Data.BLOOD_GROUP.map((option: any) => (
             <option key={option} value={option}>
               {option}
@@ -112,7 +233,7 @@ export default class LookUp extends React.Component {
           className="inputs"
           select
           label="RH Type"
-          value={this.state.gender}
+          value={this.state.rhType}
           onChange={this.handleChange("rhType")}
           SelectProps={{
             native: true
@@ -124,6 +245,9 @@ export default class LookUp extends React.Component {
           helperText="Please select RH Type"
           margin="normal"
         >
+         <option value="">
+              All
+            </option>
           {Data.RH_TYPE.map((option: any) => (
             <option key={option} value={option}>
               {option}
@@ -134,8 +258,8 @@ export default class LookUp extends React.Component {
           className="inputs"
           select
           label="Age Group"
-          value={this.state.gender}
-          onChange={this.handleChange("dob")}
+          value={`${this.state.age_min} - ${this.state.age_max}`}
+          onChange={this.handleAge("age_min")}
           SelectProps={{
             native: true
           }}
@@ -143,12 +267,15 @@ export default class LookUp extends React.Component {
             shrink: true
           }}
           required
-          helperText="Please select Gender"
+          helperText="Please select age group"
           margin="normal"
         >
+        <option value="">
+              All
+          </option>
           {Data.AGE_GROUP.map((option: any) => (
             <option key={option} value={option}>
-              {option}
+              {`${option[0]} - ${option[1]}`}         
             </option>
           ))}
         </TextField>
@@ -156,8 +283,8 @@ export default class LookUp extends React.Component {
           className="inputs"
           select
           label="Donor Type"
-          value={this.state.gender}
-          onChange={this.handleChange("gender")}
+          value={this.state.donorType}
+          onChange={this.handleChange("donorType")}
           SelectProps={{
             native: true
           }}
@@ -165,10 +292,13 @@ export default class LookUp extends React.Component {
             shrink: true
           }}
           required
-          helperText="Please select Gender"
+          helperText="Please select donor type"
           margin="normal"
         >
-          {Data.GENDER.map((option: any) => (
+         <option value="">
+              All
+            </option>
+          {Data.DONOR_TYPE.map((option: any) => (
             <option key={option} value={option}>
               {option}
             </option>
@@ -190,6 +320,9 @@ export default class LookUp extends React.Component {
           helperText="Please select Gender"
           margin="normal"
         >
+         <option value="">
+              All
+            </option>
           {Data.GENDER.map((option: any) => (
             <option key={option} value={option}>
               {option}
@@ -200,7 +333,7 @@ export default class LookUp extends React.Component {
           className="inputs"
           select
           label="Area"
-          value={this.state.gender}
+          value={this.state.area}
           onChange={this.handleChange("area")}
           SelectProps={{
             native: true
@@ -212,7 +345,10 @@ export default class LookUp extends React.Component {
           helperText="Please select Area"
           margin="normal"
         >
-          {Data.AREAS.map((option: any) => (
+         <option value="">
+              All
+            </option>
+          {this.state.areaList.map((option: any) => (
             <option key={option} value={option}>
               {option}
             </option>
@@ -223,8 +359,8 @@ export default class LookUp extends React.Component {
           className="inputs"
           select
           label="Post Office"
-          value={this.state.gender}
-          onChange={this.handleChange("r_postOffice")}
+          value={this.state.postOffice}
+          onChange={this.handleChange("postOffice")}
           SelectProps={{
             native: true
           }}
@@ -232,10 +368,13 @@ export default class LookUp extends React.Component {
             shrink: true
           }}
           required
-          helperText="Please select Post Office"
+          helperText="Please select post office"
           margin="normal"
         >
-          {Data.POSTOFFICES.map((option: any) => (
+         <option value="">
+              All
+            </option>
+          {this.state.postOfficeList.map((option: any) => (
             <option key={option} value={option}>
               {option}
             </option>
@@ -245,9 +384,9 @@ export default class LookUp extends React.Component {
         <TextField
           label="Address Keyword"
           className="inputs"
-          value={this.state.name}
+          value={this.state.addressKeyword}
           placeholder=""
-          onChange={this.handleChange("r_address")}
+          onChange={this.handleChange("addressKeyword")}
           margin="normal"
           InputLabelProps={{
             shrink: true
@@ -259,7 +398,7 @@ export default class LookUp extends React.Component {
           className="inputs"
           select
           label="Motivated By"
-          value={this.state.gender}
+          value={this.state.motivatedBy}
           onChange={this.handleChange("motivatedBy")}
           SelectProps={{
             native: true
@@ -271,6 +410,9 @@ export default class LookUp extends React.Component {
           helperText="Please select Motivated By"
           margin="normal"
         >
+         <option value="">
+              All
+            </option>
           {Data.TEMP_MOTIVATORS.map((option: any) => (
             <option key={option} value={option}>
               {option}
@@ -284,73 +426,8 @@ export default class LookUp extends React.Component {
         className="inputs"
         variant="contained"
         color="primary"
-        onClick={() => this.setState({
-          data: [
-            {
-              "_id": "5c61483f7339b42d0d3a33ca",
-        "regDate": "2019-02-11T10:02:39.548Z",
-        "regCenter": "Lions Blood Bank - Coimbatore",
-        "motivatedBy": "Sabu",
-        "name": "Suresh",
-        "dob": "1985-04-05T18:30:00.000Z",
-        "gender": "Male",
-        "bloodGroup": "B+",
-        "rhType": "+",
-        "fatherSpouseName": "MOORTHI",
-        "education": "XXXXXX",
-        "occupation": "XXXX",
-        "wbDonor": {
-          "lastDonation": null,
-          "nextDonation": "2010-06-11T18:30:00.000Z"
-        },
-        "platletDonor": {
-          "lastDonation": null,
-          "nextDonation": null
-        },
-        "plasmaDonor": {
-          "lastDonation": null,
-          "nextDonation": null
-        },
-        "drcDonor": {
-          "lastDonation": null,
-          "nextDonation": null
-        },
-        "lastDonated": {
-          "type": "WB",
-          "lastDonation": "2010-06-08T18:30:00.000Z",
-          "nextDonation": "2010-06-11T18:30:00.000Z"
-        },
-        "residentialAddress": {
-          "address": "3A,MARIYAPPA ASARI ST,\nKUNIYAMUTHUR,\nCOIMBATORE",
-          "pincode": "641008",
-          "door": "3a, Mariyappa Asari Street",
-          "buildingName": "",
-          "city": "",
-          "postOffice": "1",
-          "area": "Kuniyamuthur",
-          "taluk": "",
-          "district": "",
-          "mobile": "+919894461553",
-          "email": "PUGALENTHI_S@YAHOO.CO.IN",
-          "phone": ""
-        },
-        "officeAddress": {
-          "address": "",
-          "pincode": "",
-          "door": "",
-          "buildingName": "",
-          "city": "",
-          "postOffice": "",
-          "area": "Kuniyamuthur",
-          "taluk": "",
-          "district": "",
-          "phone": "",
-          "email": "",
-          "mobile": ""
-        }
-      }
-  ]
-  })}>
+        onClick={() =>this.fetchDonorList()}
+        >
           Look
         </Button>
         <Button
