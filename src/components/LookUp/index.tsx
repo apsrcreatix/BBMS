@@ -23,7 +23,7 @@ let log  = {
 };
 
 const INITIAL_STATE = {
-  eligibility: false,
+  eligibility: true,
   motivatedBy: "",
   gender: "",
   bloodGroup: "",
@@ -31,8 +31,8 @@ const INITIAL_STATE = {
   postOffice: "",
   ageGroup: "",
   donorType: "",
-  age_max: "",
-  age_min: "",
+  age_max: "18",
+  age_min: "30",
   addressKeyword: "",
   area:"",
   data: [],
@@ -69,11 +69,18 @@ export default class LookUp extends React.Component {
   }
 
  filterState(){
-    var filter = {
-      eligibility: false
-    };
+   console.log("inside filter State")
+   var log = {
+     query: {
+       limit: 200,
+       index: 0
+     }
+   };
+   var filter = {
+    onlyEligibleDonor: false
+   };
     if( this.state.eligibility === true ){
-      filter.eligibility = true;
+      filter.onlyEligibleDonor = true;
     }
     if( this.state.age_min != null && this.state.age_max !=null ){
       Object.assign(filter,{
@@ -84,21 +91,30 @@ export default class LookUp extends React.Component {
       })
     }
     if(this.state.area != ""){
-      Object.assign(filter,{
+      filter = Object.assign(filter,{
         area: this.state.area
       })
     }
     if(this.state.postOffice != ""){
-      Object.assign(filter,{
+      filter = Object.assign(filter,{
         postOffice: this.state.postOffice
       })
     }
-    return JSON.stringify( filter );
+    Object.assign(log,{
+      query: {
+        limit: 200,
+        index: 0,
+        filter: filter
+      }
+    })
+    console.log(JSON.stringify(log));
+    return  log ;
     }
 
   async fetchDonorList() {
 
     const filter = this.filterState();
+    console.log(filter);
     await axios.post(
       session_url,
       filter,
@@ -113,6 +129,7 @@ export default class LookUp extends React.Component {
         this.setState(() => ({
           data: response.data.response
         }));
+        console.log("inside filter state"+JSON.stringify(response.data.response));
       })
       .catch(function (error: any) {
         console.log(`error in authentication : ${error}`);
