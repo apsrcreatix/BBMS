@@ -529,7 +529,7 @@ export default class LookUp extends React.Component {
             { title: "Contact", field: "residentialAddress.mobile" }
           ]}
           data={this.state.data}
-          title="Donor Look Up"
+          title="Donor Lookup Data"
           options={{
             loadingType: "linear"
           }}
