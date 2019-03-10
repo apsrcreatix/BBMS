@@ -4,10 +4,25 @@
     width: 200px !important;
     margin-bottom: 10px !important;
 }
-div .form{
-margin-top: -50px !important;
+
+.container{
+    display: grid;
+    grid-auto-columns: 11fr 1fr;
+    grid-auto-rows: 1fr 1fr;
+    grid-gap: 10px;
 }
-#printableArea{
-    height: 400px;
+.box_options{
+    grid-column-start:1;
+    grid-column-end: 2; 
+}
+.box_buttons{
+    margin-top:20px; 
+    grid-column-start: 2;
+    grid-column-end:3;
+}
+.box_table{
+    height: 720px;
     width: 1337px;
+    grid-column: 1 / -1;
+    margin-top:-450px;
 }

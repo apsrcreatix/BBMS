@@ -36,7 +36,6 @@ const INITIAL_STATE = {
   addressKeyword: "",
   area:"",
   data: [],
-  lookupData:[],
   areaList: [],
   postOfficeList:[]
 };
@@ -52,10 +51,10 @@ export default class LookUp extends React.Component {
   };
 
   printDocument = () => {
-    // const content = document.getElementById("printableArea");
+ 
     const pri = window.frames[0];
     pri.document.open();
-    // if(content!=null) pri.document.write(content.innerHTML);
+
     pri.document.write(JSON.stringify(this.state.data));
     pri.document.close();
     pri.focus();
@@ -137,14 +136,14 @@ export default class LookUp extends React.Component {
         filter: filter
       }
     })
-    console.log(JSON.stringify(log));
+
     return  log;
     }
 
   async fetchDonorList() {
 
     const filter = this.filterState();
-    console.log(filter);
+
     await axios.post(
       session_url,
       filter,
@@ -159,7 +158,6 @@ export default class LookUp extends React.Component {
         this.setState(() => ({
           data: response.data.response
         }));
-        console.log("inside filter state"+JSON.stringify(response.data.response));
       })
       .catch(function (error: any) {
         console.log(`error in authentication : ${error}`);
@@ -225,7 +223,10 @@ export default class LookUp extends React.Component {
   }
   render() {
     return (
-      <div>
+
+  <div>
+      <div className="container">
+      <div className="box_options">
         <form className="form" noValidate autoComplete="off" />
         <TextField
           className="inputs"
@@ -469,21 +470,24 @@ export default class LookUp extends React.Component {
         <br/>
         <Divider />
         <br/>
+        </div>
+        <div className="box_buttons">
+ 
         <Button
         className="inputs"
         variant="contained"
-        color="primary"
+        color="default"
         onClick={() =>this.fetchDonorList()}
         >
-          Look
+          Apply
         </Button>
         <Button
           className="inputs"
           variant="contained"
-          color="secondary"
+          color="default"
           onClick={() => {this.setState(INITIAL_STATE);this.componentDidMount();}}
         >
-          Reset
+          Clear
         </Button>
         <Button
           className="inputs"
@@ -493,7 +497,9 @@ export default class LookUp extends React.Component {
         >
           Print
         </Button>
-<div id="printableArea">
+        </div>
+      </div>
+      <div className="box_table">
         <MaterialTable
           columns={[
             { title: "Name", field: "name" },
@@ -528,13 +534,13 @@ export default class LookUp extends React.Component {
             loadingType: "linear"
           }}
         />
-        </div>
+   </div>
         <iframe id="ifmcontentstoprint" style={{
                         height: '0px',
                         width: '0px',
                         position: 'absolute'
                     }}></iframe>    
-      </div>
+  </div>
     );
   }
 }
