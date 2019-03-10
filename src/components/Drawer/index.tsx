@@ -89,7 +89,7 @@ function PermanentDrawerLeft(props: any) {
         }}
         anchor="left"
       > 
-      <div style={
+      {/* <div style={
         {
           justifyContent: 'center',
           textAlign: 'center',
@@ -97,7 +97,7 @@ function PermanentDrawerLeft(props: any) {
       }
       }>
         <img style={ {boxShadow: "1px 3px 1px #9E9E9E", borderRadius: "50%" }} src={require('./../../assets/icons/mars-icon.jpg')} width="100" height="100"/>
-      </div>
+      </div> */}
         <div className={classes.toolbar} />
         <Divider />
         <List>
