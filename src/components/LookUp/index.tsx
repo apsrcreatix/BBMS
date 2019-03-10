@@ -23,7 +23,7 @@ let log  = {
 };
 
 const INITIAL_STATE = {
-  eligibility: true,
+  eligibility: false,
   motivatedBy: "",
   gender: "",
   bloodGroup: "",
@@ -31,11 +31,12 @@ const INITIAL_STATE = {
   postOffice: "",
   ageGroup: "",
   donorType: "",
-  age_max: "18",
-  age_min: "30",
+  age_max: "",
+  age_min: "",
   addressKeyword: "",
   area:"",
   data: [],
+  lookupData:[],
   areaList: [],
   postOfficeList:[]
 };
@@ -69,7 +70,6 @@ export default class LookUp extends React.Component {
   }
 
  filterState(){
-   console.log("inside filter State")
    var log = {
      query: {
        limit: 200,
@@ -82,7 +82,22 @@ export default class LookUp extends React.Component {
     if( this.state.eligibility === true ){
       filter.onlyEligibleDonor = true;
     }
-    if( this.state.age_min != null && this.state.age_max !=null ){
+    if( this.state.motivatedBy != ""){
+      filter = Object.assign(filter,{
+        motivatedBy: this.state.motivatedBy
+      })
+    }
+    if( this.state.gender != ""){
+      filter = Object.assign(filter,{
+        gender: this.state.gender
+      })
+    }
+    if( this.state.rhType != ""){
+      filter = Object.assign(filter,{
+        rhType: this.state.rhType
+      })
+    }
+    if( this.state.age_min != "" && this.state.age_max != "" ){
       Object.assign(filter,{
         age: {
           max: this.state.age_max,
@@ -95,9 +110,24 @@ export default class LookUp extends React.Component {
         area: this.state.area
       })
     }
+    if(this.state.addressKeyword != ""){
+      filter = Object.assign(filter,{
+        address: this.state.addressKeyword
+      })
+    }
     if(this.state.postOffice != ""){
       filter = Object.assign(filter,{
         postOffice: this.state.postOffice
+      })
+    }
+    if(this.state.bloodGroup != ""){
+      filter = Object.assign(filter,{
+        bloodGroup: this.state.bloodGroup
+      })
+    }
+    if(this.state.donorType != ""){
+      filter = Object.assign(filter,{
+        donorType: this.state.donorType
       })
     }
     Object.assign(log,{
@@ -108,7 +138,7 @@ export default class LookUp extends React.Component {
       }
     })
     console.log(JSON.stringify(log));
-    return  log ;
+    return  log;
     }
 
   async fetchDonorList() {
@@ -451,7 +481,7 @@ export default class LookUp extends React.Component {
           className="inputs"
           variant="contained"
           color="secondary"
-          onClick={() => this.setState(INITIAL_STATE)}
+          onClick={() => {this.setState(INITIAL_STATE);this.componentDidMount();}}
         >
           Reset
         </Button>
@@ -495,11 +525,7 @@ export default class LookUp extends React.Component {
           data={this.state.data}
           title="Donor Look Up"
           options={{
-            filtering: true,
-            searchable: true,
-            loadingType: "linear",
-            pageSize: 10,
-            toolbar: true
+            loadingType: "linear"
           }}
         />
         </div>
