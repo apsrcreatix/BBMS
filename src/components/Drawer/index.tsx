@@ -48,7 +48,8 @@ function PermanentDrawerLeft(props: any) {
   const routes = [
     {
       key: 1,
-      path: "/search-donor",
+      path: "/",
+      exact: true,
       label: "Donor Directory Search",
       icon: <SearchIcon />,
       main: () => <TableWithContent />
@@ -67,7 +68,7 @@ function PermanentDrawerLeft(props: any) {
       label: "New Donor Entry",
       icon: <AddIcon />,
       main: () =><EntryForm />
-    }
+    }  
   ];
   const { classes } = props;
   return (
@@ -121,6 +122,7 @@ function PermanentDrawerLeft(props: any) {
           <Route
             key={index}
             path={route.path}
+            exact={route.exact}
             component={route.main}
           />
         ))}
