@@ -5,7 +5,7 @@
     margin-bottom: 10px !important;
 }
 
-.container{
+.lookup-inputs-container{
     display: grid;
     grid-auto-columns: 4fr 1fr;
     grid-auto-rows: 1fr 1fr;
@@ -25,5 +25,4 @@
     height: 720px;
     width: 1337px;
     grid-column: 1 / -1;
-    margin-top:-450px;
 }

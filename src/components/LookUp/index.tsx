@@ -245,7 +245,7 @@ export default class LookUp extends React.Component {
     return (
 
   <div>
-      <div className="container">
+      <div className="lookup-inputs-container">
       <div className="box_options">
         <form className="form" noValidate autoComplete="off" />
         <TextField

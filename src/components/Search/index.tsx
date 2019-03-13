@@ -23,7 +23,6 @@ let log  = {
 		"index": 0
 	}
 };
-
 interface state {
   data: object,
   setData: any,
@@ -105,7 +104,7 @@ export default class TableWithContent extends React.Component<{}, state> {
     return (
      
   
-      <div className="container">
+      <div className="search-container">
         <Router>
       <Switch>
       <Route
