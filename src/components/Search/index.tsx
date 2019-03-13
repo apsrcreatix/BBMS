@@ -9,6 +9,9 @@ import Config from "../../Config";
 import './search.css';
 import UpdateDonor from '../UpdateDonor';
 import { BrowserRouter as Router } from "react-router-dom";
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Redirect,Route,Switch} from 'react-router';
 
 let username = Config.AUTH.username;
 let password = Config.AUTH.token;
@@ -25,6 +28,7 @@ interface state {
   data: object,
   setData: any,
   redirectTo: boolean
+  anchorEl: any,
 }
 export default class TableWithContent extends React.Component<{}, state> {
   constructor(props: any) {
@@ -32,9 +36,18 @@ export default class TableWithContent extends React.Component<{}, state> {
     this.state = {
       data: [],
       setData: "",
-      redirectTo: false
+      redirectTo: false,
+      anchorEl : null,
     };
   }
+  handleClick = (event: any) => {
+    this.setState({anchorEl: event.currentTarget});
+  };
+
+  handleClose = () => {
+    this.setState({anchorEl: null});
+  };
+
   componentDidMount(){
     axios
       .post(
@@ -56,6 +69,7 @@ export default class TableWithContent extends React.Component<{}, state> {
         console.log(`error in authentication : ${error}`);
       });
   }
+
   render() {
     const { data } = this.state;
     function calculateAge(value: any) {
@@ -74,11 +88,44 @@ export default class TableWithContent extends React.Component<{}, state> {
       return event.toLocaleDateString('en-IN', options);
     }
     if (this.state.redirectTo) {
-      return <UpdateDonor data={this.state.setData}/>;
+      
+      return <Router>
+        <Switch>
+        <Route
+              path={"/updateDonors"}
+              exact={true}
+              component={() => <UpdateDonor data={this.state.setData}/>}
+            />
+            <Redirect push to="/updateDonors" />
+        </Switch>
+        </Router>;
+      return <Redirect to="'updateDonors"/>;
     }
+    const { anchorEl } = this.state;
     return (
-    <Router>
+     
+  
       <div className="container">
+        <Router>
+      <Switch>
+      <Route
+            path={"/updateDonors"}
+            exact={true}
+            component={() => <UpdateDonor data={this.state.setData}/>}
+          />
+      </Switch>
+      </Router>
+      <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+        >
+          <MenuItem onClick={() => this.setState({
+            redirectTo: true
+          })}>Edit</MenuItem>
+          <MenuItem onClick={this.handleClose}>Delete</MenuItem>
+        </Menu>
       <MaterialTable
           columns={[
             { title: "Name", field: "name" },
@@ -172,8 +219,10 @@ export default class TableWithContent extends React.Component<{}, state> {
               icon: 'edit',
               tooltip: 'Edit Donor Data',
               onClick: (event, rowData) => {
-              this.setState({setData : rowData, redirectTo:true});
-              console.log(event);
+                this.setState({
+                  setData: rowData
+                });
+                this.handleClick(event);
               },
             },
           ]
@@ -196,7 +245,7 @@ export default class TableWithContent extends React.Component<{}, state> {
           }}
         />
          </div>
-  </Router>
+
     );
   }
 }
