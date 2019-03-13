@@ -501,6 +501,7 @@ export default class LookUp extends React.Component {
         >
           Apply
         </Button>
+        <br/>
         <Button
           className="inputs"
           variant="contained"
@@ -509,6 +510,7 @@ export default class LookUp extends React.Component {
         >
           Clear
         </Button>
+        <br/>
         <Button
           className="inputs"
           variant="contained"

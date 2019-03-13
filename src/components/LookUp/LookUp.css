@@ -7,7 +7,7 @@
 
 .container{
     display: grid;
-    grid-auto-columns: 11fr 1fr;
+    grid-auto-columns: 4fr 1fr;
     grid-auto-rows: 1fr 1fr;
     grid-gap: 10px;
 }
@@ -19,6 +19,7 @@
     margin-top:20px; 
     grid-column-start: 2;
     grid-column-end:3;
+    width: 200px;
 }
 .box_table{
     height: 720px;
