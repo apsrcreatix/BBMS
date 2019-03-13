@@ -10,22 +10,213 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import "./EntryForm.css";
 import DATA from "../Data";
+import axios from "axios";
+import Config from "../../Config";
 
-const INITIAL_STATE = DATA.D_DETAILS_BLANK;
+const username = Config.AUTH.username;
+const password = Config.AUTH.token;
+const base_url = Config.SERVER_URL;
+const session_url = base_url + Config.PATHS.getPincodeDetails;
+const postOffice = base_url + Config.PATHS.getPostoffice;
+const motivators = base_url + Config.PATHS.getMotivators;
+
 const RHTYPE = DATA.RH_TYPE;
 const BLOOD = DATA.BLOOD_GROUP;
 const GENDER = DATA.GENDER;
 const REG_CENTRE = DATA.TEMP_REG_CENTRE;
-const MOTIVATOR = DATA.TEMP_MOTIVATORS;
 
 export default class EntryForm extends React.Component {
-  state = INITIAL_STATE;
+  state = {
+      "regDate": "",
+      "regCenter": "",
+      "motivatedBy": "",
+      "name": "",
+      "dob": "",
+      "gender": "",
+      "bloodGroup": "",
+      "rhType": "",
+      "fatherSpouseName": "",
+      "education": "",
+      "occupation": "",
+      "wb_check": false,
+      "wbDonor_lastDonation": "",
+      "wbDonor_nextDonation": "",
+      "platlet_check": false,
+      "platletDonor_lastDonation": "",
+      "platletDonor_nextDonation": "",
+      "plasma_check": false,
+      "plasmaDonor_lastDonation": "",
+      "plasmaDonor_nextDonation": "",
+      "drc_check":false,
+      "drcDonor_lastDonation": "",
+      "drcDonor_nextDonation": "",
+      "lastDonated_type": "",
+      "lastDonated_lastDonation": "",
+      "lastDonated_nextDonation": "",
+      "r_address": "",
+      "r_pincode": "",
+      "r_door": "",
+      "r_buildingName": "",
+      "r_city": "",
+      "r_postOffice": "",
+      "r_area": "",
+      "r_taluk": "",
+      "r_district": "",
+      "r_mobile": "",
+      "r_email": "",
+      "r_phone": "",
+      "o_address": "",
+      "o_pincode": "",
+      "o_door": "",
+      "o_buildingName": "",
+      "o_city": "",
+      "o_postOffice": "",
+      "o_area": "",
+      "o_taluk": "",
+      "o_district": "",
+      "o_phone": "",
+      "o_email": "",
+      "o_mobile": "",
+      postOfficeList:[],
+      motivatedByList:[]
+  };
   constructor(props: any) {
     super(props);
+    axios
+      .get(
+        `${postOffice}`,
+        {
+          auth: {
+            username,
+            password
+          }
+        }
+      )
+      .then((response:any)=>{
+        this.setState(()=>({
+          postOfficeList: response.data.response
+        }));
+      })
+      .catch(function (error: any) {
+        console.log(`error in authentication : ${error}`);
+      });
+      axios
+      .get(
+        `${motivators}`,
+        {
+          auth: {
+            username,
+            password
+          }
+        }
+      )
+      .then((response:any)=>{
+        this.setState(()=>({
+          motivatedByList: response.data.response
+        }));
+      })
+      .catch(function (error: any) {
+        console.log(`error in authentication : ${error}`);
+      });
   }
   handleChange = (name: any) => (event: any) => {
     this.setState({ [name]: event.target.value });
   };
+  async fetchPincode(pincode:any,type:string){
+   await axios
+    .get(
+      session_url+pincode,
+      {
+        auth: {
+          username,
+          password
+        }
+      }
+    )
+    .then((response: any) => {
+      if(type == "residence"){
+        this.setState({
+          r_district: response.data.response.district,
+          r_taluk: response.data.response.taluk,
+        })
+      }
+      if(type == "office"){
+        this.setState({
+          o_district: response.data.response.district,
+          o_taluk: response.data.response.taluk,
+        })
+      }
+      console.log(JSON.stringify(response.data.response));
+    })
+    .catch(function (error: any) {
+      console.log(`error in authentication : ${error}`);
+    });
+  }
+  onSaveSumbit(){
+    let donorData = {
+      "regDate": this.state.regDate,
+      "regCenter": this.state.regCenter,
+      "motivatedBy": this.state.motivatedBy,
+      "name": this.state.name,
+      "dob": this.state.dob,
+      "gender": this.state.gender,
+      "bloodGroup": this.state.bloodGroup,
+      "rhType": this.state.rhType,
+      "fatherSpouseName": this.state.fatherSpouseName,
+      "education": this.state.education,
+      "occupation": this.state.occupation,
+      "wbDonor": {
+        "lastDonation": this.state.wbDonor_lastDonation,
+        "nextDonation": this.state.wbDonor_nextDonation
+      },
+      "platletDonor": {
+        "lastDonation": this.state.platletDonor_lastDonation,
+        "nextDonation": this.state.platletDonor_nextDonation
+      },
+      "plasmaDonor": {
+        "lastDonation": this.state.plasmaDonor_lastDonation,
+        "nextDonation": this.state.plasmaDonor_nextDonation
+      },
+      "drcDonor": {
+        "lastDonation": this.state.drcDonor_lastDonation,
+        "nextDonation": this.state.drcDonor_nextDonation
+      },
+      "lastDonated": {
+        "type": this.state.lastDonated_type,
+        "lastDonation": this.state.lastDonated_lastDonation,
+        "nextDonation": this.state.lastDonated_nextDonation
+      },
+      "residentialAddress": {
+        "address": this.state.r_address,
+        "pincode": this.state.r_pincode,
+        "door": this.state.r_door,
+        "buildingName": this.state.r_buildingName,
+        "city": this.state.r_city,
+        "postOffice": this.state.r_postOffice,
+        "area": this.state.r_area,
+        "taluk": this.state.r_taluk,
+        "district": this.state.r_district,
+        "mobile": this.state.r_mobile,
+        "email": this.state.r_email,
+        "phone": this.state.r_phone
+      },
+      "officeAddress": {
+        "address": this.state.o_address,
+        "pincode": this.state.o_pincode,
+        "door": this.state.o_door,
+        "buildingName": this.state.o_buildingName,
+        "city": this.state.o_city,
+        "postOffice": this.state.o_postOffice,
+        "area": this.state.o_area,
+        "taluk": this.state.o_taluk,
+        "district": this.state.o_district,
+        "phone": this.state.o_phone,
+        "email": this.state.o_email,
+        "mobile": this.state.o_mobile
+    }
+  }
+  console.log(JSON.stringify(donorData));
+}
   render() {
 
     return (
@@ -89,7 +280,7 @@ export default class EntryForm extends React.Component {
             helperText="Select motivator from list"
             margin="normal"
           >
-            {MOTIVATOR.map(option => (
+            {this.state.motivatedByList.map(option => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -425,7 +616,8 @@ export default class EntryForm extends React.Component {
             helperText="Enter 6 digit pincode."
             required
           />
-         <Button variant="contained" >
+         <Button variant="contained" 
+         onClick={() => this.fetchPincode(this.state.r_pincode,"residence")}>
           ...
           </Button>
           <TextField
@@ -502,7 +694,7 @@ export default class EntryForm extends React.Component {
           helperText="Please select Post Office"
           margin="normal"
         >
-          {GENDER.map((option: string) => (
+          {this.state.postOfficeList.map((option: string) => (
             <option key={option} value={option}>
               {option}
             </option>
@@ -572,7 +764,8 @@ export default class EntryForm extends React.Component {
             helperText="Enter 6 digit pincode."
             required
           />
-          <Button variant="contained" >
+          <Button variant="contained" 
+          onClick={() => this.fetchPincode(this.state.r_pincode,"office")}>
           ...
           </Button>
           <TextField
@@ -649,7 +842,7 @@ export default class EntryForm extends React.Component {
           helperText="Please select Post Office"
           margin="normal"
         >
-          {GENDER.map((option: string) => (
+          {this.state.postOfficeList.map((option: string) => (
             <option key={option} value={option}>
               {option}
             </option>
@@ -709,18 +902,20 @@ export default class EntryForm extends React.Component {
         <Button
         className="inputs" 
         variant="contained" 
-        color="primary"
-        type="submit">
+        color="default"
+        type="submit"
+        onClick={() => this.onSaveSumbit()}
+        >
         Save
       </Button>
       <Button
       className="inputs"
       variant="contained" 
-      color="secondary"
-      onClick={() => this.setState(INITIAL_STATE)}>
+      color="default"
+      onClick={() => this.setState(DATA.D_DETAILS_BLANK)}>
         Reset
       </Button>
-      </div>
+      </div>  
       </form>
       </div>
     );
