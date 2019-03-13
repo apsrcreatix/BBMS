@@ -57,6 +57,7 @@ function PermanentDrawerLeft(props: any) {
     {
       key: 2,
       path: "/directory-lookup",
+      exact: true,
       label: "Donor Directory Lookup",
       icon: <LookUpIcon />,
       main: () =><LookUp />
@@ -65,6 +66,7 @@ function PermanentDrawerLeft(props: any) {
     {
       key: 3,
       path: "/registerDonor",
+      exact: true,
       label: "New Donor Entry",
       icon: <AddIcon />,
       main: () =><EntryForm />

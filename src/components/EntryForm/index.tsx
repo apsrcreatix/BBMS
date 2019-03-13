@@ -2,10 +2,10 @@ import * as React from "react";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Divider from "@material-ui/core/Divider";
-import FormLabel from '@material-ui/core/FormLabel';
+
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
+
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import "./EntryForm.css";
@@ -441,10 +441,6 @@ export default class EntryForm extends React.Component {
           <FormControl
             error={false}
             component="div">
-            <FormLabel
-              component={"caption"}>
-              <FormHelperText>Please choose whatever applies to donation details</FormHelperText>
-          </FormLabel>
 
             <FormGroup>
               <FormControlLabel
@@ -492,7 +488,7 @@ export default class EntryForm extends React.Component {
                   <Checkbox
                     checked={this.state.platlet_check}
                     onChange={() => this.setState({ platlet_check: !this.state.platlet_check })}
-                    value={this.state.plasma_check} />
+                    value={this.state.platlet_check} />
                 }
                 label="Platelet Donor"
               />
