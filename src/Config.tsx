@@ -3,7 +3,7 @@ export default {
     PATHS: {
         getBloodBanks: '/bloodbanks',
         getDonors: '/bb/donors',
-        addMotivator: '/admin/motivator',
+        addMotivator: '/admin/motivators',
         getMotivators: '/bb/motivators',
         getPostoffice: '/bb/areas/postoffices',
         getAreas: '/bb/areas/',
