@@ -1,7 +1,7 @@
-{
+ {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2019-03-01T20:48:43.600Z",
+	"__export_date": "2019-03-09T09:44:02.418Z",
 	"__export_source": "insomnia.desktop.app:v6.3.2",
 	"resources": [
 		{
@@ -18,11 +18,11 @@
 			"color": null,
 			"created": 1547804842792,
 			"data": {
-				"base_url": "http://localhost:3200"
+				"base_url": "http://server.reezx.com/api"
 			},
 			"isPrivate": false,
 			"metaSortKey": 1547804842792,
-			"modified": 1551469878272,
+			"modified": 1552124622804,
 			"name": "New Environment",
 			"parentId": "wrk_d7aad1586d0941f6960765f0824100bf",
 			"_type": "environment"
@@ -623,6 +623,34 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{ base_url  }}/bb/donors/{{ donor_id  }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a626f21266ba4847ba67002667001851",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1551964242315,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1551964242315,
+			"method": "GET",
+			"modified": 1551964281679,
+			"name": "Count Donors",
+			"parameters": [],
+			"parentId": "fld_39ed24ed31bc45cab5c00f34307e96d7",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/donors/count",
 			"_type": "request"
 		}
 	]

@@ -269,3 +269,10 @@
 //   }
 // }
 ------------------------------
+
+
+search old method
+onClick: (event, rowData) => {
+              this.setState({setData : rowData, redirectTo:true});
+              console.log(event);
+              },
