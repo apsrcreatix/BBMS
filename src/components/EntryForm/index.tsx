@@ -2,16 +2,17 @@ import * as React from "react";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Divider from "@material-ui/core/Divider";
-
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+import Snackbar from '@material-ui/core/Snackbar';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import "./EntryForm.css";
 import DATA from "../Data";
 import axios from "axios";
 import Config from "../../Config";
+import MySnackbarContentWrapper from "../MySnackbar";
+import { withStyles } from '@material-ui/core/styles';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
@@ -25,7 +26,17 @@ const BLOOD = DATA.BLOOD_GROUP;
 const GENDER = DATA.GENDER;
 const REG_CENTRE = DATA.TEMP_REG_CENTRE;
 
-export default class EntryForm extends React.Component {
+interface props {
+  classes: any
+}
+
+const styles2 = (theme: any) => ({
+  margin: {
+    margin: theme.spacing.unit,
+  },
+});
+
+class EntryForm extends React.Component<props,{}> {
   state = {
       "regDate": "",
       "regCenter": "",
@@ -78,7 +89,10 @@ export default class EntryForm extends React.Component {
       "o_email": "",
       "o_mobile": "",
       postOfficeList:[],
-      motivatedByList:[]
+      motivatedByList:[],
+      open: false,
+      error: false,
+      success: false
   };
   constructor(props: any) {
     super(props);
@@ -152,6 +166,18 @@ export default class EntryForm extends React.Component {
       console.log(`error in authentication : ${error}`);
     });
   }
+
+  handleClick = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = (event: any, reason: any) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ open: false });
+  };
+
   onSaveSumbit(){
     let donorData = {
       "regDate": this.state.regDate,
@@ -217,14 +243,34 @@ export default class EntryForm extends React.Component {
   }
   console.log(JSON.stringify(donorData));
 }
+
   render() {
 
     return (
       <div className="container">
+    <div>
+    {/*To be used for errors in the futur*/}
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+        >
+          <MySnackbarContentWrapper
+            onClose={this.handleClose}
+            variant="info"
+            message="Cleared!"
+          />
+        </Snackbar>
+      </div>
+
       <h1>Add New Donor</h1>
       <br/>
         <Divider/>
-      <form className="form" noValidate autoComplete="off">
+      <form className="form" action="" autoComplete="off" onSubmit={() => console.log("submtitted")}>
        <h3>Registration Detail</h3>
         <TextField
           className="inputs"
@@ -442,7 +488,7 @@ export default class EntryForm extends React.Component {
             error={false}
             component="div">
 
-            <FormGroup>
+            <FormGroup className="formGroup">
               <FormControlLabel
                 control={
                   <Checkbox
@@ -482,7 +528,7 @@ export default class EntryForm extends React.Component {
                 margin="normal"
               />
               </FormGroup>
-              <FormGroup>
+              <FormGroup className="formGroup">
               <FormControlLabel
                 control={
                   <Checkbox
@@ -519,7 +565,7 @@ export default class EntryForm extends React.Component {
                 margin="normal"
               />
               </FormGroup>
-              <FormGroup>
+              <FormGroup className="formGroup">
               <FormControlLabel
                 control={
                   <Checkbox
@@ -908,7 +954,7 @@ export default class EntryForm extends React.Component {
       className="inputs"
       variant="contained" 
       color="default"
-      onClick={() => this.setState(DATA.D_DETAILS_BLANK)}>
+      onClick={() => {this.setState(DATA.D_DETAILS_BLANK);this.setState({open:true});}}>
         Reset
       </Button>
       </div>  
@@ -917,3 +963,5 @@ export default class EntryForm extends React.Component {
     );
   }
 }
+
+export default withStyles(styles2)(EntryForm);
