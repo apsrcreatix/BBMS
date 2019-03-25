@@ -24,7 +24,7 @@ let log  = {
 	}
 };
 interface state {
-  data: object,
+  data: object[],
   setData: any,
   redirectTo: boolean
   anchorEl: any,
