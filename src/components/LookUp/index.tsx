@@ -46,6 +46,80 @@ export default class LookUp extends React.Component {
   state = INITIAL_STATE;
   constructor(props: any) {
     super(props);
+   axios
+    .post(
+      session_url,
+      log,
+      {
+        auth: {
+          username,
+          password
+        }
+      }
+    )
+    .then((response: any) => {
+      this.setState(() => ({
+        data: response.data.response
+      }));
+    })
+    .catch(function (error: any) {
+      console.log(`error in authentication : ${error}`);
+    });
+    
+   axios
+    .get(
+      `${areas}`,
+      {
+        auth: {
+          username,
+          password
+        }
+      }
+    )
+    .then((response:any)=>{
+      this.setState(()=>({
+        areaList: response.data.response
+      }));
+    })
+    .catch(function (error: any) {
+      console.log(`error in authentication : ${error}`);
+    });
+  axios
+    .get(
+      `${postOffice}`,
+      {
+        auth: {
+          username,
+          password
+        }
+      }
+    )
+    .then((response:any)=>{
+      this.setState(()=>({
+        postOfficeList: response.data.response
+      }));
+    })
+    .catch(function (error: any) {
+      console.log(`error in authentication : ${error}`);
+    });
+   axios
+    .get(
+      `${motivators}`,
+      {
+        auth: {
+          username,
+          password
+        }
+      }
+    )
+    .then((response:any)=>{
+      this.setState(()=>({
+        motivatedByList: response.data.response
+      }));
+    })
+    .catch(function (error: any) {
+      console.log(`error in authentication : ${error}`);
+    });
   }
 // handle changes when input fields changes 
   handleChange = (name: any) => (event: any) => {
@@ -165,82 +239,7 @@ export default class LookUp extends React.Component {
         console.log(`error in authentication : ${error}`);
       });
   }
-  async componentDidMount(){
-     await axios
-      .post(
-        session_url,
-        log,
-        {
-          auth: {
-            username,
-            password
-          }
-        }
-      )
-      .then((response: any) => {
-        this.setState(() => ({
-          data: response.data.response
-        }));
-      })
-      .catch(function (error: any) {
-        console.log(`error in authentication : ${error}`);
-      });
-      
-      await axios
-      .get(
-        `${areas}`,
-        {
-          auth: {
-            username,
-            password
-          }
-        }
-      )
-      .then((response:any)=>{
-        this.setState(()=>({
-          areaList: response.data.response
-        }));
-      })
-      .catch(function (error: any) {
-        console.log(`error in authentication : ${error}`);
-      });
-      await axios
-      .get(
-        `${postOffice}`,
-        {
-          auth: {
-            username,
-            password
-          }
-        }
-      )
-      .then((response:any)=>{
-        this.setState(()=>({
-          postOfficeList: response.data.response
-        }));
-      })
-      .catch(function (error: any) {
-        console.log(`error in authentication : ${error}`);
-      });
-      await axios
-      .get(
-        `${motivators}`,
-        {
-          auth: {
-            username,
-            password
-          }
-        }
-      )
-      .then((response:any)=>{
-        this.setState(()=>({
-          motivatedByList: response.data.response
-        }));
-      })
-      .catch(function (error: any) {
-        console.log(`error in authentication : ${error}`);
-      });
-  }
+  
   render() {
     return (
 
@@ -506,7 +505,7 @@ export default class LookUp extends React.Component {
           className="inputs"
           variant="contained"
           color="default"
-          onClick={() => {this.setState(INITIAL_STATE);this.componentDidMount();}}
+          onClick={() => {this.setState(INITIAL_STATE);this.fetchDonorList()}}
         >
           Clear
         </Button>
