@@ -10,7 +10,9 @@ export default {
         getPincodeDetails: '/bb/areas/pincode/',
         addDonor: '/bb/donors/new',
         updateDonor: '/bb/donors/',
-
+        getSerums: '/bb/pus/serums',
+        addSerums: '/bb/pus/serums/add',
+        useSerums: '/bb/pus/serums/use'
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',
