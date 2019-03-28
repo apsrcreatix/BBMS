@@ -242,8 +242,6 @@ export default class LookUp extends React.Component {
   
   render() {
     return (
-
-  <div>
       <div className="lookup-inputs-container container">
       <div className="box_options">
         <form className="form" noValidate autoComplete="off" />
@@ -518,8 +516,7 @@ export default class LookUp extends React.Component {
         >
           Print
         </Button>
-        </div>
-      </div>
+       </div>
       <div className="box_table">
         <MaterialTable
           columns={[

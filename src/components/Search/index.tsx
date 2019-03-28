@@ -215,8 +215,7 @@ export default class TableWithContent extends React.Component<{}, state> {
           </MenuItem>
           <MenuItem onClick={this.handleClose}>More...</MenuItem>
         </Menu>
-        <div className="search-inputs-container">
-          <div className="search-inputs-box">
+         <div className="search-inputs-box">
             <TextField
               label="Mobile Number"
               className="inputs"
@@ -312,7 +311,6 @@ export default class TableWithContent extends React.Component<{}, state> {
           Clear
         </Button>
         <br/>
-        </div>
         </div>
         <div className="box_table">
         <MaterialTable
