@@ -9,6 +9,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Redirect, Route, Switch } from "react-router";
 import TextField from "@material-ui/core/TextField";
+import { Button } from '@material-ui/core';
 
 let username = Config.AUTH.username;
 let password = Config.AUTH.token;
@@ -214,7 +215,7 @@ export default class TableWithContent extends React.Component<{}, state> {
           </MenuItem>
           <MenuItem onClick={this.handleClose}>More...</MenuItem>
         </Menu>
-        <div>
+        <div className="search-inputs-container">
           <div className="search-inputs-box">
             <TextField
               label="Mobile Number"
@@ -292,8 +293,28 @@ export default class TableWithContent extends React.Component<{}, state> {
               required
             />
           </div>
-          <div className="search-buttons-box" />
+          <div className="search-buttons-box">
+          <Button
+        className="inputs"
+        variant="contained"
+        color="default"
+        onClick={() =>this.fetchDonorList()}
+        >
+          Apply
+        </Button>
+        <br/>
+        <Button
+          className="inputs"
+          variant="contained"
+          color="default"
+          onClick={() => {console.log("button pressed")}}
+        >
+          Clear
+        </Button>
+        <br/>
         </div>
+        
+        <div className="box_table">
         <MaterialTable
           columns={[
             { title: "Name", field: "name" },
@@ -398,7 +419,7 @@ export default class TableWithContent extends React.Component<{}, state> {
             filtering: true,
             searchable: true,
             loadingType: "linear",
-            pageSize: 10,
+            pageSize: 5,
             toolbar: true,
             columnsButton: true
           }}
@@ -411,6 +432,8 @@ export default class TableWithContent extends React.Component<{}, state> {
             }
           }}
         />
+        </div>
+        </div>
       </div>
     );
   }
