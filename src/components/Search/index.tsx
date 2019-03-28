@@ -187,7 +187,7 @@ export default class TableWithContent extends React.Component<{}, state> {
     const { anchorEl } = this.state;
 
     return (
-      <div className="search-container">
+      <div className="search-container container">
         <Router>
           <Switch>
             <Route
@@ -313,7 +313,7 @@ export default class TableWithContent extends React.Component<{}, state> {
         </Button>
         <br/>
         </div>
-        
+        </div>
         <div className="box_table">
         <MaterialTable
           columns={[
@@ -433,7 +433,7 @@ export default class TableWithContent extends React.Component<{}, state> {
           }}
         />
         </div>
-        </div>
+       
       </div>
     );
   }
