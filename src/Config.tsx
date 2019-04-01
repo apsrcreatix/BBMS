@@ -12,7 +12,10 @@ export default {
         updateDonor: '/bb/donors/',
         getSerums: '/bb/pus/serums',
         addSerums: '/bb/pus/serums/add',
-        useSerums: '/bb/pus/serums/use'
+        useSerums: '/bb/pus/serums/use',
+        getKits: '/bb/pus/kits',
+        addKits: '/bb/pus/kits/add',
+        useKits: '/bb/pus/kits/use'
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',
