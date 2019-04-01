@@ -77,6 +77,8 @@ export default class Data {
     "O_CELLS"
   ];
 
+  static KITS = ["HBSAG_RAPID_KIT"];
+
   static STATUS = ["USED", "REJECTED"];
 
   static USE = ["DONOR", "PATIENT"];
