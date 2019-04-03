@@ -7,6 +7,14 @@ import axios from "axios";
 import MaterialTable from "material-table";
 import "./serums.css";
 import Tooltip from '@material-ui/core/Tooltip';
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
@@ -19,7 +27,8 @@ const INITIAL_STATE = {
   selectSerum: "",
   usingSerum: false,
   addingSerum: false,
-  passedData: ""
+  passedData: "",
+  anchorEl: null,
 };
 
 export default class Serums extends React.Component {
@@ -35,6 +44,12 @@ export default class Serums extends React.Component {
 
   handleClick = (event: any) => {
     this.setState({ anchorEl: event.currentTarget });
+  };
+  handleClickOpen = () => {
+    this.setState({ usingSerum: true});
+  };
+  handleClose = () => {
+    this.setState({ anchorEl: null });
   };
 
   async fetchData() {
@@ -76,8 +91,32 @@ export default class Serums extends React.Component {
       console.log("modal for adding serum");
     }
 
+    const { anchorEl } = this.state;
+    
     return (
+      <Router>
       <div className="lookup-inputs-container container">
+       <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+        >
+         
+          <Link key={99} to={"/serums/use"} >
+          <MenuItem
+            onClick={() =>
+              this.setState({
+                usingSerum: true
+              })
+            }
+          >
+            Edit
+          </MenuItem>
+          </Link>
+          
+          
+        </Menu>
         <h1>Serums</h1>
         <div className="box_options">
           <TextField
@@ -180,11 +219,18 @@ export default class Serums extends React.Component {
               {
                 icon: "edit",
                 tooltip: "Edit Donor Data",
-                onClick: (event, rowData) => {
-                  this.setState({
+                // onClick: (event, rowData) => {
+                //   this.setState({
+                //     passedData: rowData
+                //   });
+                //   this.handleClick(event);
+                // }
+                onClick:(event,rowData)=>{
+                  event.preventDefault();
+                      this.setState({
                     passedData: rowData
                   });
-                  this.handleClick(event);
+                  this.handleClickOpen();
                 }
               }
             ]}
@@ -261,6 +307,64 @@ export default class Serums extends React.Component {
             }}
           />
         </div>
+        <Route
+                key={99}
+                exact={true}
+                path={`/serums/use`}
+                component={() => <UseSerum open={this.state.usingSerum} passedData={this.state.passedData}/>}
+        /> 
+              <UseSerum open={this.state.usingSerum} passedData={this.state.passedData}/>
+
+      </div>
+      </Router>
+    );
+  }
+}
+interface UseSerumProps {
+open: boolean,
+passedData: string
+}
+
+class UseSerum extends React.Component<UseSerumProps>{
+  state = {
+    open: this.props.open,
+    passedData: this.props.passedData
+  };
+
+  handleClickOpen = (scroll: any) => () => {
+    this.setState({ open: true, scroll });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  render() {
+    return (
+      <div>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          scroll="paper"
+          aria-labelledby="scroll-dialog-title"
+        >
+          <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <p>
+                {JSON.stringify(this.state.passedData)}
+              </p>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="default">
+              Cancel
+            </Button>
+            <Button onClick={this.handleClose} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
