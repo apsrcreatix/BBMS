@@ -98,12 +98,12 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         main: () => <Serums />
       },
       {
-        key: 5,
+        key: 4,
         path: "/kits",
         exact: true,
         label: "Kits",
         icon: <AddIcon />,
-        main: ()=> <Kits />
+        main: () => <Kits />
       }
     ];
 
