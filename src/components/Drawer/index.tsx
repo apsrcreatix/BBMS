@@ -20,8 +20,8 @@ import Config from "../../Config";
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import Serums from "../Serums";
-import Kits from "../Kits";
+import Serums from "../PUS/Serums";
+import Kits from "../PUS/Kits";
 
 const drawerWidth = 200;
 
