@@ -78,9 +78,7 @@ export default class Serums extends React.Component {
           serumsLog: response.data.response.logs,
           currentData:this.state.selectSerum
         }));
-        console.log("insidecall:"+JSON.stringify(response.data.response));
-      }else{        console.log("insidecall:"+JSON.stringify(response.data.response));
-
+      }else{
           this.setState(
             {
               failed:true,
@@ -104,14 +102,6 @@ export default class Serums extends React.Component {
         timezone: "Asia/Kolkata"
       };
       return event.toLocaleDateString("en-IN", options);
-    }
-
-    if (this.state.usingSerum) {
-      console.log("modal for use of serum");
-    }
-
-    if (this.state.addingSerum) {
-      console.log("modal for adding serum");
     }
 
     const { anchorEl } = this.state;
