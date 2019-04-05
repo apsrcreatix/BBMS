@@ -71,7 +71,7 @@ export default class UseSerum extends React.Component<UseSerumProps> {
   handleSnackbar=(event:any,reason:any)=>{
     if(reason === 'clickaway') return;
     this.setState({
-      failed: false
+      snackOpen: false
     });
   }
   filterState() {

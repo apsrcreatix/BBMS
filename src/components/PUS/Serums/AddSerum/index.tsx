@@ -62,7 +62,7 @@ export default class AddSerum extends React.Component<AddSerumProps> {
   handleSnackbar=(event:any,reason:any)=>{
     if(reason === 'clickaway') return;
     this.setState({
-      failed: false
+      success: false
     });
   }
 
@@ -98,6 +98,7 @@ export default class AddSerum extends React.Component<AddSerumProps> {
         batchNumber: "",
         expiryDate: ""
           })
+        this.props.onClose(this.props.open);
         }
       })
       .catch(function(error: any) {
@@ -106,9 +107,8 @@ export default class AddSerum extends React.Component<AddSerumProps> {
   }
   handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(JSON.stringify(this.state));
-    this.sendingData();
-    this.props.onClose(this.props.open);
+    const result =  this.sendingData();
+    console.log(result);
   };
 
   handleChange = (name: any) => (event: any) => {
