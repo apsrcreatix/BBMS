@@ -11,7 +11,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import UseSerum from './UseSerum';
 import AddSerum from './AddSerum';
-
+import MySnackbar from "../../MySnackbar";
+import Snackbar from '@material-ui/core/Snackbar';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
@@ -26,6 +27,9 @@ const INITIAL_STATE = {
   addingSerum: false,
   passedData: {},
   anchorEl: null,
+  failed: false,
+  errortext:"",
+  currentData:""
 };
 
 export default class Serums extends React.Component {
@@ -42,15 +46,22 @@ export default class Serums extends React.Component {
   handleClick = (event: any) => {
     this.setState({ anchorEl: event.currentTarget });
   };
-  handleClickOpen = () => {
-    this.setState({ usingSerum: true});
-  };
   handleCloseUseSerum = () => {
     this.setState({ usingSerum: false});
+  }
+  handleCloseAddSerum = () => {
+    this.setState({ addingSerum: false});
   }
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+
+  handleSnackbar=(event:any,reason:any)=>{
+    if(reason === 'clickaway') return;
+    this.setState({
+      failed: false
+    });
+  }
 
   async fetchData() {
     await axios
@@ -61,10 +72,24 @@ export default class Serums extends React.Component {
         }
       })
       .then((response: any) => {
+        if(response.data.success==true 
+          && 
+          response.data.response.stocks.toString()!=""){
          this.setState(() => ({
           serumsData: response.data.response.stocks,
-          serumsLog: response.data.response.logs
+          serumsLog: response.data.response.logs,
+          currentData:this.state.selectSerum
         }));
+        console.log("insidecall:"+JSON.stringify(response.data.response));
+      }else{        console.log("insidecall:"+JSON.stringify(response.data.response));
+
+          this.setState(
+            {
+              failed:true,
+              errortext: "No data found!"
+            }
+          );
+        }
       })
       .catch(function(error: any) {
         console.log(`error in authentication : ${error}`);
@@ -193,6 +218,7 @@ export default class Serums extends React.Component {
           </Tooltip>
         </div>
         <div className="box_table">
+        <h4 style={{color:'maroon'}}>The given data is about {(this.state.currentData!="")?this.state.currentData:"selected serum"}, please select above and apply for any other.</h4>
           <MaterialTable
             columns={[
               { title: "Quantity", field: "quantity" },
@@ -316,7 +342,21 @@ export default class Serums extends React.Component {
                 path={`/serums/add`}
                 component={() => <AddSerum open={this.state.addingSerum} type={this.state.selectSerum} onClose={this.handleCloseUseSerum}/>}
         />
-  
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          open={this.state.failed}
+          autoHideDuration={6000}
+          onClose={this.handleSnackbar}
+        >
+          <MySnackbar
+            onClose={this.handleSnackbar}
+            variant="error"
+            message={this.state.errortext}
+          />
+        </Snackbar>
       </div>
       </Router>
     );
