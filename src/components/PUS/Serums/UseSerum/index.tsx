@@ -71,7 +71,7 @@ export default class UseSerum extends React.Component<UseSerumProps> {
   handleSnackbar=(event:any,reason:any)=>{
     if(reason === 'clickaway') return;
     this.setState({
-      failed: false
+      snackOpen: false
     });
   }
   filterState() {
@@ -116,7 +116,6 @@ export default class UseSerum extends React.Component<UseSerumProps> {
   }
   async sendingData() {
     const data = this.filterState();
-    console.log(`${data}${JSON.stringify(data)}`);
     await axios
       .post(use_serum_url, data, {
         auth: {
@@ -125,7 +124,6 @@ export default class UseSerum extends React.Component<UseSerumProps> {
         }
       })
       .then((response: any) => {
-        console.log(response.data.response);
         if(response.data.success){
           this.setState({
             snackOpen: true,
