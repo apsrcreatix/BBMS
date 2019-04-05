@@ -19,21 +19,19 @@ const password = Config.AUTH.token;
 const base_url = Config.SERVER_URL;
 const getSerums = base_url + Config.PATHS.getSerums;
 
-const INITIAL_STATE = {
-  serumsData: [],
-  serumsLog: [],
-  selectSerum: "",
-  usingSerum: false,
-  addingSerum: false,
-  passedData: {},
-  anchorEl: null,
-  failed: false,
-  errortext:"",
-  currentData:""
-};
-
 export default class Serums extends React.Component {
-  state = INITIAL_STATE;
+  state = {
+    serumsData: [],
+    serumsLog: [],
+    selectSerum: "",
+    usingSerum: false,
+    addingSerum: false,
+    passedData: {},
+    anchorEl: null,
+    failed: false,
+    errortext:"",
+    currentData:""
+  };
 
   constructor(props: any) {
     super(props);
@@ -181,21 +179,6 @@ export default class Serums extends React.Component {
           </Button>
           </span>
         </Tooltip>
-          <br />
-          <Tooltip title="Press clear to reset data." placement="left-start">
-          <span><Button
-            className="inputs"
-            variant="contained"
-            color="default"
-            disabled={this.state.selectSerum==""}
-            onClick={() => {
-              this.setState(INITIAL_STATE);
-            }}
-          >
-            Clear
-          </Button>
-          </span>
-          </Tooltip>
           <br />
           <Tooltip title="Press Add Stock to add data for any serum." placement="left-start">
           <span>
