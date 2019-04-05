@@ -165,6 +165,7 @@ export default class Serums extends React.Component {
               </option>
             ))}
           </TextField>
+          <h4 style={{color:'darkblue'}}>The given data is about {(this.state.currentData!="")?this.state.currentData:"selected serum"}, please select above and apply for any other.</h4>
         </div>
         <div className="box_buttons">
         <Tooltip title="Press apply to load data for selected serum." placement="left-start">
@@ -218,7 +219,7 @@ export default class Serums extends React.Component {
           </Tooltip>
         </div>
         <div className="box_table">
-        <h4 style={{color:'maroon'}}>The given data is about {(this.state.currentData!="")?this.state.currentData:"selected serum"}, please select above and apply for any other.</h4>
+        <h4 style={{color:'maroon'}}>Please click apply after adding or using the data to refresh the data.</h4>
           <MaterialTable
             columns={[
               { title: "Quantity", field: "quantity" },
@@ -272,6 +273,7 @@ export default class Serums extends React.Component {
               }
             }}
           />
+          <br/>
           <MaterialTable
             columns={[
               { title: "Quantity", field: "quantity" },
