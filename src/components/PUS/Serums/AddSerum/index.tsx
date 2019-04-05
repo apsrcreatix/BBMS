@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import Config from "../../../../Config";
+import MySnackbar from "../../../MySnackbar";
+import Snackbar from '@material-ui/core/Snackbar';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
@@ -29,7 +31,8 @@ export default class AddSerum extends React.Component<AddSerumProps> {
     manufacturingDate: "",
     manufacturerName: "",
     batchNumber: "",
-    expiryDate: ""
+    expiryDate: "",
+    success: false
   };
   // TODO
   componentWillReceiveProps(nextProps: any) {
@@ -56,6 +59,13 @@ export default class AddSerum extends React.Component<AddSerumProps> {
     });
   };
 
+  handleSnackbar=(event:any,reason:any)=>{
+    if(reason === 'clickaway') return;
+    this.setState({
+      failed: false
+    });
+  }
+
   async sendingData() {
     const data ={
         "data": {
@@ -77,7 +87,18 @@ export default class AddSerum extends React.Component<AddSerumProps> {
         }
       })
       .then((response: any) => {
-        console.log(response.data.response);
+        if(response.data.success==true){
+          this.setState({
+        success:true,
+        type: this.props.type,
+        quantity: "",
+        purchasedDate: "",
+        manufacturingDate: "",
+        manufacturerName: "",
+        batchNumber: "",
+        expiryDate: ""
+          })
+        }
       })
       .catch(function(error: any) {
         console.log(`error in authentication : ${error}`);
@@ -87,16 +108,6 @@ export default class AddSerum extends React.Component<AddSerumProps> {
     event.preventDefault();
     console.log(JSON.stringify(this.state));
     this.sendingData();
-    this.setState({
-        open: this.props.open,
-        type: this.props.type,
-        quantity: "",
-        purchasedDate: "",
-        manufacturingDate: "",
-        manufacturerName: "",
-        batchNumber: "",
-        expiryDate: ""
-    });
     this.props.onClose(this.props.open);
   };
 
@@ -107,6 +118,7 @@ export default class AddSerum extends React.Component<AddSerumProps> {
   render() {
     const { ...other } = this.props;
     return (
+      <div>
       <Dialog
         disableBackdropClick
         disableEscapeKeyDown
@@ -217,6 +229,22 @@ export default class AddSerum extends React.Component<AddSerumProps> {
           </DialogActions>
         </form>
       </Dialog>
+      <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          open={this.state.success}
+          autoHideDuration={6000}
+          onClose={this.handleSnackbar}
+        >
+          <MySnackbar
+            onClose={this.handleSnackbar}
+            variant="success"
+            message="Successfully added"
+          />
+        </Snackbar>
+      </div>
     );
   }
 }
