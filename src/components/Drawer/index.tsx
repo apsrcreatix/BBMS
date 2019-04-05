@@ -22,6 +22,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Serums from "../PUS/Serums";
 import Kits from "../PUS/Kits";
+import Chemicals from '../PUS/Chemicals';
 
 const drawerWidth = 200;
 
@@ -98,12 +99,20 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         main: () => <Serums />
       },
       {
-        key: 4,
+        key: 5,
         path: "/kits",
         exact: true,
         label: "Kits",
         icon: <AddIcon />,
         main: () => <Kits />
+      },
+      {
+        key: 6,
+        path: '/chemicals',
+        exact: true,
+        label: "Chemicals",
+        icon: <AddIcon />,
+        main: () => <Chemicals />
       }
     ];
 

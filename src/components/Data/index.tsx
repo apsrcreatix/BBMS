@@ -56,7 +56,7 @@ export default class Data {
     o_email: "",
     o_mobile: ""
   };
-  
+
   static TEMP_REG_CENTRE = [
     "Haemcare - Nungambakkam",
     "Rotatory Blood Bank - Nunganallur"
@@ -77,7 +77,20 @@ export default class Data {
     "O_CELLS"
   ];
 
-  static KITS = ["HBSAG_RAPID_KIT"];
+  static KITS = [
+    "HBSAG_RAPID_KIT",
+    "HCV_ELISA_KIT",
+    "HCV_RAPID_KIT",
+    "HIV_1_2_RAPID_KIT",
+    "HIV_ELISA_KIT",
+    "HSS_AG_ELISA_KIT",
+    "VDRL_RAPID_KIT"
+  ];
+
+  static CHEMICALS = [
+    "DISTILLED_WATER",
+    "COPPER_SULPHATE"
+  ]
 
   static STATUS = ["USED", "REJECTED"];
 

@@ -9,22 +9,22 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import UseKit from './UseKit';
-import AddKit from './AddKit';
+import UseChemical from './UseChemical';
+import AddChemical from './AddChemical';
 import MySnackbar from "../../MySnackbar";
 import Snackbar from '@material-ui/core/Snackbar';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
 const base_url = Config.SERVER_URL;
-const getKits = base_url + Config.PATHS.getKits;
+const getChemicals = base_url + Config.PATHS.getChemicals;
 
 const INITIAL_STATE = {
-  kitsData: [],
-  kitsLog: [],
-  selectKit: "",
-  usingKit: false,
-  addingKit: false,
+  chemicalsData: [],
+  chemicalsLog: [],
+  selectChemicals: "",
+  usingChemical: false,
+  addingChemical: false,
   passedData: {},
   anchorEl: null,
   failed: false,
@@ -32,7 +32,7 @@ const INITIAL_STATE = {
   currentData:""
 };
 
-export default class Kits extends React.Component {
+export default class Chemicals extends React.Component {
   state = INITIAL_STATE;
 
   constructor(props: any) {
@@ -46,11 +46,11 @@ export default class Kits extends React.Component {
   handleClick = (event: any) => {
     this.setState({ anchorEl: event.currentTarget });
   };
-  handleCloseUseKit = () => {
-    this.setState({ usingKit: false});
+  handleCloseUseChemical = () => {
+    this.setState({ usingChemical: false});
   }
-  handleCloseAddKit = () => {
-    this.setState({ addingKit: false});
+  handleCloseAddChemical = () => {
+    this.setState({ addingChemical: false});
   }
   handleClose = () => {
     this.setState({ anchorEl: null });
@@ -65,7 +65,7 @@ export default class Kits extends React.Component {
 
   async fetchData() {
     await axios
-      .get(getKits+"?type="+this.state.selectKit, {
+      .get(getChemicals+"?type="+this.state.selectChemicals, {
         auth: {
           username,
           password
@@ -76,9 +76,9 @@ export default class Kits extends React.Component {
           && 
           response.data.response.stocks.toString()!=""){
          this.setState(() => ({
-          kitsData: response.data.response.stocks,
-          kitsLog: response.data.response.logs,
-          currentData:this.state.selectKit
+          chemicalsData: response.data.response.stocks,
+          chemicalsLog: response.data.response.logs,
+          currentData:this.state.selectChemicals
         }));
         console.log("insidecall:"+JSON.stringify(response.data.response));
       }else{        console.log("insidecall:"+JSON.stringify(response.data.response));
@@ -108,12 +108,12 @@ export default class Kits extends React.Component {
       return event.toLocaleDateString("en-IN", options);
     }
 
-    if (this.state.usingKit) {
-      console.log("modal for use of kit");
+    if (this.state.usingChemical) {
+      console.log("modal for use of chemical");
     }
 
-    if (this.state.addingKit) {
-      console.log("modal for adding kit");
+    if (this.state.addingChemical) {
+      console.log("modal for adding chemical");
     }
 
     const { anchorEl } = this.state;
@@ -128,11 +128,11 @@ export default class Kits extends React.Component {
           onClose={this.handleClose}
         >
          
-          <Link key={99} to={"/kits/use"} >
+          <Link key={99} to={"/chemicals/use"} >
           <MenuItem
             onClick={() =>
               this.setState({
-                usingKit: true
+                usingChemical: true
               })
             }
           >
@@ -140,14 +140,14 @@ export default class Kits extends React.Component {
           </MenuItem>
           </Link>
         </Menu>
-        <h1>Kits</h1>
+        <h1>Chemicals</h1>
         <div className="box_options">
           <TextField
             className="inputs"
             select
-            label="Kits Type"
-            value={this.state.selectKit}
-            onChange={this.handleChange("selectKit")}
+            label="Chemical's Type"
+            value={this.state.selectChemicals}
+            onChange={this.handleChange("selectChemicals")}
             SelectProps={{
               native: true
             }}
@@ -159,21 +159,21 @@ export default class Kits extends React.Component {
             margin="normal"
           >
             <option value="">Select a type</option>
-            {Data.SERUMS.map((option: any) => (
+            {Data.CHEMICALS.map((option: any) => (
               <option key={option} value={option}>
                 {option}
               </option>
             ))}
           </TextField>
-          <h4 style={{color:'darkblue'}}>The given data is about {(this.state.currentData!="")?this.state.currentData:"selected kits"}, please select above and apply for any other.</h4>
+          <h4 style={{color:'darkblue'}}>The given data is about {(this.state.currentData!="")?this.state.currentData:"selected chemical"}, please select above and apply for any other.</h4>
         </div>
         <div className="box_buttons">
-        <Tooltip title="Press apply to load data for selected kit." placement="left-start">
+        <Tooltip title="Press apply to load data for selected chemical." placement="left-start">
           <span><Button
             className="inputs"
             variant="contained"
             color="default"
-            disabled={this.state.selectKit==""}
+            disabled={this.state.selectChemicals==""}
             onClick={() => this.fetchData()}
           >
             Apply
@@ -187,7 +187,7 @@ export default class Kits extends React.Component {
             className="inputs"
             variant="contained"
             color="default"
-            disabled={this.state.selectKit==""}
+            disabled={this.state.selectChemicals==""}
             onClick={() => {
               this.setState(INITIAL_STATE);
             }}
@@ -197,17 +197,17 @@ export default class Kits extends React.Component {
           </span>
           </Tooltip>
           <br />
-          <Tooltip title="Press Add Stock to add data for any kit." placement="left-start">
+          <Tooltip title="Press Add Stock to add data for any chemical." placement="left-start">
           <span>
-          <Link key={98} to={"/kits/add"}>
+          <Link key={98} to={"/chemicals/add"}>
           <Button
             className="inputs"
             variant="contained"
             color="primary"
-            disabled={this.state.selectKit==""}
+            disabled={this.state.selectChemicals==""}
             onClick={() => {
               this.setState({
-                  addingKit: true
+                  addingChemical: true
               });
             }}
           >
@@ -244,7 +244,7 @@ export default class Kits extends React.Component {
               { title: "Expiry Date", field: "expiryDate" },
               { title: "Status", field: "status" }
             ]}
-            data={this.state.kitsData}
+            data={this.state.chemicalsData}
             title="Stocks"
             actions={[
               {
@@ -317,7 +317,7 @@ export default class Kits extends React.Component {
               },
               { title: "Technician Name", field: "technicianName" }
             ]}
-            data={this.state.kitsLog}
+            data={this.state.chemicalsLog}
             title="Logs"
             options={{
               loadingType: "linear",
@@ -335,14 +335,14 @@ export default class Kits extends React.Component {
         <Route
                 key={99}
                 exact={true}
-                path={`/kits/use`}
-                component={() => <UseKit open={this.state.usingKit} passed={this.state.passedData} onClose={this.handleCloseUseKit}/>}
+                path={`/chemicals/use`}
+                component={() => <UseChemical open={this.state.usingChemical} passed={this.state.passedData} onClose={this.handleCloseUseChemical}/>}
         />
         <Route
                 key={98}
                 exact={true}
-                path={`/kits/add`}
-                component={() => <AddKit open={this.state.addingKit} type={this.state.selectKit} onClose={this.handleCloseUseKit}/>}
+                path={`/chemicals/add`}
+                component={() => <AddChemical open={this.state.addingChemical} type={this.state.selectChemicals} onClose={this.handleCloseUseChemical}/>}
         />
         <Snackbar
           anchorOrigin={{

@@ -15,7 +15,10 @@ export default {
         useSerums: '/bb/pus/serums/use',
         getKits: '/bb/pus/kits',
         addKits: '/bb/pus/kits/add',
-        useKits: '/bb/pus/kits/use'
+        useKits: '/bb/pus/kits/use',
+        getChemicals: 'bb/pus/chemicals',
+        addChemicals: 'bb/pus/chemicals/add',
+        useChemicals: 'bb/pus/chemicals/use'
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',
