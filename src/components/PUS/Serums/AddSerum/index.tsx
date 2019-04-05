@@ -78,7 +78,6 @@ export default class AddSerum extends React.Component<AddSerumProps> {
             "expiryDate":this.state.expiryDate
           }
     }
-    console.log(`${data}${JSON.stringify(data)}`);
     await axios
       .post(add_serum_url, data, {
         auth: {
