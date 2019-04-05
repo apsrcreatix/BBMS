@@ -76,10 +76,40 @@ export default class Data {
     "COOMBS",
     "O_CELLS"
   ];
+  
+  static CHEMICALS = [
+    "COPPER_SULPHATE",
+    "DISTILLED_WATER",
+    "LEISHMAN_STAIN",
+    "NORMAL_SALINE"
+  ];
 
-  static KITS = ["HBSAG_RAPID_KIT"];
+  static BLOOD_BAG = [
+    "DOUBLE_BLOOD_BAG",
+    "PENTAL_BLOOD_BAG",
+    "QUADRUPLE_BLOOD_BAG",
+    "SINGLE_BLOOD_BAG",
+    "TRANSFER_BLOOD_BAG",
+    "TRIPLE_BLOOD_BAG"
+  ];
 
-  static STATUS = ["USED", "REJECTED"];
+  static KITS = [
+    "HBSAG_RAPID_KIT",
+    "HCV_ELISA_KIT",
+    "HCV_RAPID_KIT",
+    "HIV_1_2_RAPID_KIT",
+    "HIV_ELISA_KIT",
+    "HSS_AG_ELISA_KIT",
+    "VDRL_RAPID_KIT"
+  ];
 
-  static USE = ["DONOR", "PATIENT"];
+  static STATUS = [
+    "USED",
+    "REJECTED"
+  ];
+
+  static USE = [
+    "DONOR",
+    "PATIENT"
+  ];
 }
