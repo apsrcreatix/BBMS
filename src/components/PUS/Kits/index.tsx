@@ -5,7 +5,16 @@ import Button from "@material-ui/core/Button";
 import Config from "src/Config";
 import axios from "axios";
 import MaterialTable from "material-table";
-import Tooltip from '@material-ui/core/Tooltip';
+import "./kits.css";
+import Tooltip from "@material-ui/core/Tooltip";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
@@ -18,10 +27,11 @@ const INITIAL_STATE = {
   selectKit: "",
   usingKit: false,
   addingKit: false,
-  passedData: ""
+  passedData: "",
+  anchorEl: null
 };
 
-export default class Kit extends React.Component {
+export default class Kits extends React.Component {
   state = INITIAL_STATE;
 
   constructor(props: any) {
@@ -35,17 +45,23 @@ export default class Kit extends React.Component {
   handleClick = (event: any) => {
     this.setState({ anchorEl: event.currentTarget });
   };
+  handleClickOpen = () => {
+    this.setState({ usingKit: true });
+  };
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
 
   async fetchData() {
     await axios
-      .get(getKits+"?type="+this.state.selectKit, {
+      .get(getKits + "?type=" + this.state.selectKit, {
         auth: {
           username,
           password
         }
       })
       .then((response: any) => {
-         this.setState(() => ({
+        this.setState(() => ({
           kitsData: response.data.response.stocks,
           kitsLog: response.data.response.logs
         }));
@@ -75,191 +91,291 @@ export default class Kit extends React.Component {
       console.log("modal for adding kit");
     }
 
+    const { anchorEl } = this.state;
+
     return (
-      <div className="lookup-inputs-container container">
-        <h1>Kits</h1>
-        <div className="box_options">
-          <TextField
-            className="inputs"
-            select
-            label="Kits Type"
-            value={this.state.selectKit}
-            onChange={this.handleChange("selectKit")}
-            SelectProps={{
-              native: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            required
-            helperText="Choose one before apply"
-            margin="normal"
+      <Router>
+        <div className="lookup-inputs-container container">
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={this.handleClose}
           >
-            <option value="">Select a type</option>
-            {Data.KITS.map((option: any) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </TextField>
-        </div>
-        <div className="box_buttons">
-        <Tooltip title="Press apply to load data for selected kit." placement="left-start">
-          <span><Button
-            className="inputs"
-            variant="contained"
-            color="default"
-            disabled={this.state.selectKit==""}
-            onClick={() => this.fetchData()}
-          >
-            Apply
-          </Button>
-          </span>
-        </Tooltip>
-          <br />
-          <Tooltip title="Press clear to reset data." placement="left-start">
-          <span><Button
-            className="inputs"
-            variant="contained"
-            color="default"
-            disabled={this.state.selectKit==""}
-            onClick={() => {
-              this.setState(INITIAL_STATE);
-            }}
-          >
-            Clear
-          </Button>
-          </span>
-          </Tooltip>
-          <br />
-          <Tooltip title="Press Add Stock to add data for any kit." placement="left-start">
-          <span><Button
-            className="inputs"
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              this.setState({
-                  usingKit: true
-              });
-            }}
-          >
-            Add Stock
-          </Button>
-          </span>
-          </Tooltip>
-        </div>
-        <div className="box_table">
-          <MaterialTable
-            columns={[
-              { title: "Quantity", field: "quantity" },
-              { title: "Type", field: "type" },
-              {
-                title: "Purchase Date",
-                field: "purchasedDate",
-                render: rowData => {
-                  return humanReadableDate(rowData.purchasedDate);
-                }
-              },
-              { title: "Blood Bank", field: "bloodBank" },
-              {
-                title: "Manufacturing Date",
-                field: "manufacturingDate",
-                render: rowData => {
-                  return humanReadableDate(rowData.manufacturingDate);
-                }
-              },
-              { title: "Manufacturer Name", field: "manufacturerName" },
-              { title: "Batch Number", field: "batchNumber" },
-              { title: "Expiry Date", field: "expiryDate" },
-              { title: "Status", field: "status" }
-            ]}
-            data={this.state.kitsData}
-            title="Stocks"
-            actions={[
-              {
-                icon: "edit",
-                tooltip: "Edit Donor Data",
-                onClick: (event, rowData) => {
+            <Link key={99} to={"bb/kits/use"}>
+              <MenuItem
+                onClick={() =>
                   this.setState({
-                    passedData: rowData
-                  });
-                  this.handleClick(event);
+                    usingKit: true
+                  })
                 }
-              }
-            ]}
-            options={{
-              loadingType: "linear",
-              pageSize: 5,
-              toolbar: true,
-              columnsButton: true
-            }}
-            localization={{
-              body: {
-                emptyDataSourceMessage: "Use apply to search results"
-              },
-              header: {
-                actions: "Actions"
-              }
-            }}
+              >
+                Edit
+              </MenuItem>
+            </Link>
+          </Menu>
+          <h1>Kits</h1>
+          <div className="box_options">
+            <TextField
+              className="inputs"
+              select
+              label="Kit's Type"
+              value={this.state.selectKit}
+              onChange={this.handleChange("selectKit")}
+              SelectProps={{
+                native: true
+              }}
+              InputLabelProps={{
+                shrink: true
+              }}
+              required
+              helperText="Choose one before apply"
+              margin="normal"
+            >
+              <option value="">Select a type</option>
+              {Data.KITS.map((option: any) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </TextField>
+          </div>
+          <div className="box_buttons">
+            <Tooltip
+              title="Press apply to load data for selected kit."
+              placement="left-start"
+            >
+              <span>
+                <Button
+                  className="inputs"
+                  variant="contained"
+                  color="default"
+                  disabled={this.state.selectKit == ""}
+                  onClick={() => console.log(this.fetchData())}
+                >
+                  Apply
+                </Button>
+              </span>
+            </Tooltip>
+            <br />
+            <Tooltip title="Press clear to reset data." placement="left-start">
+              <span>
+                <Button
+                  className="inputs"
+                  variant="contained"
+                  color="default"
+                  disabled={this.state.selectKit == ""}
+                  onClick={() => {
+                    this.setState(INITIAL_STATE);
+                  }}
+                >
+                  Clear
+                </Button>
+              </span>
+            </Tooltip>
+            <br />
+            <Tooltip
+              title="Press Add Stock to add data for any kit."
+              placement="left-start"
+            >
+              <span>
+                <Button
+                  className="inputs"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    this.setState({
+                      usingKit: true
+                    });
+                  }}
+                >
+                  Add Stock
+                </Button>
+              </span>
+            </Tooltip>
+          </div>
+          <div className="box_table">
+            <MaterialTable
+              columns={[
+                { title: "Quantity", field: "quantity" },
+                { title: "Type", field: "type" },
+                {
+                  title: "Purchase Date",
+                  field: "purchasedDate",
+                  render: rowData => {
+                    return humanReadableDate(rowData.purchasedDate);
+                  }
+                },
+                { title: "Blood Bank", field: "bloodBank" },
+                {
+                  title: "Manufacturing Date",
+                  field: "manufacturingDate",
+                  render: rowData => {
+                    return humanReadableDate(rowData.manufacturingDate);
+                  }
+                },
+                { title: "Manufacturer Name", field: "manufacturerName" },
+                { title: "Batch Number", field: "batchNumber" },
+                { title: "Expiry Date", field: "expiryDate" },
+                { title: "Status", field: "status" }
+              ]}
+              data={this.state.kitsData}
+              title="Stocks"
+              actions={[
+                {
+                  icon: "edit",
+                  tooltip: "Edit Donor Data",
+                  // onClick: (event, rowData) => {
+                  //   this.setState({
+                  //     passedData: rowData
+                  //   });
+                  //   this.handleClick(event);
+                  // }
+                  onClick: (event, rowData) => {
+                    event.preventDefault();
+                    this.setState({
+                      passedData: rowData
+                    });
+                    this.handleClickOpen();
+                  }
+                }
+              ]}
+              options={{
+                loadingType: "linear",
+                pageSize: 5,
+                toolbar: true,
+                columnsButton: true
+              }}
+              localization={{
+                body: {
+                  emptyDataSourceMessage: "Use apply to search results"
+                },
+                header: {
+                  actions: "Actions"
+                }
+              }}
+            />
+            <MaterialTable
+              columns={[
+                { title: "Quantity", field: "quantity" },
+                { title: "Type", field: "type" },
+                {
+                  title: "Purchase Date",
+                  field: "purchasedDate",
+                  render: rowData => {
+                    return humanReadableDate(rowData.purchasedDate);
+                  }
+                },
+                { title: "Blood Bank", field: "bloodBank" },
+                {
+                  title: "Manufacturing Date",
+                  field: "manufacturingDate",
+                  render: rowData => {
+                    return humanReadableDate(rowData.manufacturingDate);
+                  }
+                },
+                { title: "Manufacturer Name", field: "manufacturerName" },
+                { title: "Batch Number", field: "batchNumber" },
+                { title: "Expiry Date", field: "expiryDate" },
+                { title: "Status", field: "status" },
+                {
+                  title: "Used Date",
+                  field: "usedDate",
+                  render: rowData => {
+                    return humanReadableDate(rowData.manufacturingDate);
+                  }
+                },
+                { title: "Used for", field: "use" },
+                { title: "Donor ID", field: "donorID" },
+                { title: "Donor Name", field: "donorName" },
+                { title: "Blood Group", field: "bloodGroup" },
+                { title: "Rh Type", field: "rhType" },
+                { title: "Patient Name", field: "patientName" },
+                {
+                  title: "Missed Repeated Count",
+                  field: "missedRepeatedCount",
+                  type: "numeric"
+                },
+                { title: "Technician Name", field: "technicianName" }
+              ]}
+              data={this.state.kitsLog}
+              title="Logs"
+              options={{
+                loadingType: "linear",
+                pageSize: 5,
+                toolbar: true,
+                columnsButton: true
+              }}
+              localization={{
+                body: {
+                  emptyDataSourceMessage: "Use apply to search results"
+                }
+              }}
+            />
+          </div>
+          <Route
+            key={99}
+            exact={true}
+            path={`bb/kits/use`}
+            component={() => (
+              <UseKit
+                open={this.state.usingKit}
+                passedData={this.state.passedData}
+              />
+            )}
           />
-          <MaterialTable
-            columns={[
-              { title: "Quantity", field: "quantity" },
-              { title: "Type", field: "type" },
-              {
-                title: "Purchase Date",
-                field: "purchasedDate",
-                render: rowData => {
-                  return humanReadableDate(rowData.purchasedDate);
-                }
-              },
-              { title: "Blood Bank", field: "bloodBank" },
-              {
-                title: "Manufacturing Date",
-                field: "manufacturingDate",
-                render: rowData => {
-                  return humanReadableDate(rowData.manufacturingDate);
-                }
-              },
-              { title: "Manufacturer Name", field: "manufacturerName" },
-              { title: "Batch Number", field: "batchNumber" },
-              { title: "Expiry Date", field: "expiryDate" },
-              { title: "Status", field: "status" },
-              {
-                title: "Used Date",
-                field: "usedDate",
-                render: rowData => {
-                  return humanReadableDate(rowData.manufacturingDate);
-                }
-              },
-              { title: "Used for", field: "use" },
-              { title: "Donor ID", field: "donorID" },
-              { title: "Donor Name", field: "donorName" },
-              { title: "Blood Group", field: "bloodGroup" },
-              { title: "Rh Type", field: "rhType" },
-              { title: "Patient Name", field: "patientName" },
-              {
-                title: "Missed Repeated Count",
-                field: "missedRepeatedCount",
-                type: "numeric"
-              },
-              { title: "Technician Name", field: "technicianName" }
-            ]}
-            data={this.state.kitsLog}
-            title="Logs"
-            options={{
-              loadingType: "linear",
-              pageSize: 5,
-              toolbar: true,
-              columnsButton: true
-            }}
-            localization={{
-              body: {
-                emptyDataSourceMessage: "Use apply to search results"
-              }
-            }}
+          <UseKit
+            open={this.state.usingKit}
+            passedData={this.state.passedData}
           />
         </div>
+      </Router>
+    );
+  }
+}
+interface UseKitProps {
+  open: boolean;
+  passedData: string;
+}
+
+class UseKit extends React.Component<UseKitProps> {
+  state = {
+    open: this.props.open,
+    passedData: this.props.passedData
+  };
+
+  handleClickOpen = (scroll: any) => () => {
+    this.setState({ open: true, scroll });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  render() {
+    return (
+      <div>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          scroll="paper"
+          aria-labelledby="scroll-dialog-title"
+        >
+          <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <p>{JSON.stringify(this.state.passedData)}</p>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="default">
+              Cancel
+            </Button>
+            <Button onClick={this.handleClose} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
