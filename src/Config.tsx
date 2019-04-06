@@ -16,9 +16,12 @@ export default {
         getKits: '/bb/pus/kits',
         addKits: '/bb/pus/kits/add',
         useKits: '/bb/pus/kits/use',
-        getChemicals: 'bb/pus/chemicals',
-        addChemicals: 'bb/pus/chemicals/add',
-        useChemicals: 'bb/pus/chemicals/use'
+        getChemicals: '/bb/pus/chemicals',
+        addChemicals: '/bb/pus/chemicals/add',
+        useChemicals: '/bb/pus/chemicals/use',
+        getBloodBags: '/bb/pus/bloodbags',
+        addBloodBags: '/bb/pus/bloodbags/add',
+        useBloodBags: '/bb/pus/bloodbags/use'
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',

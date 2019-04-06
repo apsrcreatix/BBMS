@@ -23,7 +23,8 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Serums from "../PUS/Serums";
 import Kits from "../PUS/Kits";
 import Chemicals from '../PUS/Chemicals';
-
+import BloodBags from '../PUS/BloodBag';
+ 
 const drawerWidth = 200;
 
 const styles = (theme: any) => ({
@@ -113,6 +114,14 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         label: "Chemicals",
         icon: <AddIcon />,
         main: () => <Chemicals />
+      },
+      {
+        key: 7,
+        path: '/bloodbags',
+        exact: true,
+        label: "BloodBags",
+        icon: <AddIcon />,
+        main: () => <BloodBags />
       }
     ];
 
