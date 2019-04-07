@@ -19,21 +19,19 @@ const password = Config.AUTH.token;
 const base_url = Config.SERVER_URL;
 const getChemicals = base_url + Config.PATHS.getChemicals;
 
-const INITIAL_STATE = {
-  chemicalsData: [],
-  chemicalsLog: [],
-  selectChemicals: "",
-  usingChemical: false,
-  addingChemical: false,
-  passedData: {},
-  anchorEl: null,
-  failed: false,
-  errortext:"",
-  currentData:""
-};
-
 export default class Chemicals extends React.Component {
-  state = INITIAL_STATE;
+  state = {
+    chemicalsData: [],
+    chemicalsLog: [],
+    selectChemicals: "",
+    usingChemical: false,
+    addingChemical: false,
+    passedData: {},
+    anchorEl: null,
+    failed: false,
+    errortext:"",
+    currentData:""
+  };
 
   constructor(props: any) {
     super(props);
@@ -182,21 +180,6 @@ export default class Chemicals extends React.Component {
           </span>
         </Tooltip>
           <br />
-          <Tooltip title="Press clear to reset data." placement="left-start">
-          <span><Button
-            className="inputs"
-            variant="contained"
-            color="default"
-            disabled={this.state.selectChemicals==""}
-            onClick={() => {
-              this.setState(INITIAL_STATE);
-            }}
-          >
-            Clear
-          </Button>
-          </span>
-          </Tooltip>
-          <br />
           <Tooltip title="Press Add Stock to add data for any chemical." placement="left-start">
           <span>
           <Link key={98} to={"/chemicals/add"}>
@@ -342,7 +325,7 @@ export default class Chemicals extends React.Component {
                 key={98}
                 exact={true}
                 path={`/chemicals/add`}
-                component={() => <AddChemical open={this.state.addingChemical} type={this.state.selectChemicals} onClose={this.handleCloseUseChemical}/>}
+                component={() => <AddChemical open={this.state.addingChemical} type={this.state.selectChemicals} onClose={this.handleCloseAddChemical}/>}
         />
         <Snackbar
           anchorOrigin={{

@@ -78,7 +78,9 @@ export default class Serums extends React.Component {
           serumsLog: response.data.response.logs,
           currentData:this.state.selectSerum
         }));
+        console.log("insidecall:"+JSON.stringify(response.data.response));
       }else{
+        console.log("insidecall:"+JSON.stringify(response.data.response));
           this.setState(
             {
               failed:true,
