@@ -310,11 +310,6 @@ export default class Kits extends React.Component {
               { title: "Blood Group", field: "bloodGroup" },
               { title: "Rh Type", field: "rhType" },
               { title: "Patient Name", field: "patientName" },
-              {
-                title: "Missed Repeated Count",
-                field: "missedRepeatedCount",
-                type: "numeric"
-              },
               { title: "Technician Name", field: "technicianName" }
             ]}
             data={this.state.kitsLog}
