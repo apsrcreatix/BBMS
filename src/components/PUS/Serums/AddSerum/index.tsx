@@ -220,7 +220,7 @@ export default class AddSerum extends React.Component<AddSerumProps> {
               <Link to="/serums">Cancel</Link>
             </Button>
             <Button
-              type="Submit"
+              type="submit"
               color="primary"
             >
               Submit

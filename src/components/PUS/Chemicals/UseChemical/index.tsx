@@ -315,7 +315,7 @@ export default class UseChemical extends React.Component<UseChemicalProps> {
             </Button>
             <Button
               disabled={this.state.status != "" ? false : true}
-              type="Submit"
+              type="submit"
               color="primary"
             >
               Submit

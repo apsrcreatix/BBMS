@@ -221,7 +221,7 @@ export default class AddChemical extends React.Component<AddChemicalProps> {
               <Link to="/chemicals">Cancel</Link>
             </Button>
             <Button
-              type="Submit"
+              type="submit"
               color="primary"
             >
               Submit

@@ -221,7 +221,7 @@ export default class AddKit extends React.Component<AddKitProps> {
               <Link to="/kits">Cancel</Link>
             </Button>
             <Button
-              type="Submit"
+              type="submit"
               color="primary"
             >
               Submit

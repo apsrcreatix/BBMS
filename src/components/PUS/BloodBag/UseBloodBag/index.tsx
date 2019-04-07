@@ -315,7 +315,7 @@ export default class UseBloodBag extends React.Component<UseBloodBagProps> {
             </Button>
             <Button
               disabled={this.state.status != "" ? false : true}
-              type="Submit"
+              type="submit"
               color="primary"
             >
               Submit

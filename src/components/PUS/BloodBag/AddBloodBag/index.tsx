@@ -221,7 +221,7 @@ export default class AddBloodBag extends React.Component<AddBloodBagProps> {
               <Link to="/bloodbags">Cancel</Link>
             </Button>
             <Button
-              type="Submit"
+              type="submit"
               color="primary"
             >
               Submit
