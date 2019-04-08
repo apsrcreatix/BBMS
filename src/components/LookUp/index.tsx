@@ -520,6 +520,7 @@ export default class LookUp extends React.Component {
       <div className="box_table">
         <MaterialTable
           columns={[
+            { title: "Donor ID", field: "_id" },
             { title: "Name", field: "name" },
             {
               title: "Date Of Birth",
