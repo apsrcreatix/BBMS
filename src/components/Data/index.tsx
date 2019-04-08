@@ -112,4 +112,20 @@ export default class Data {
     "DONOR",
     "PATIENT"
   ];
+  
+  static INPUT_BLOOD = [
+    "WHOLE_BLOOD_IP",
+    "PLATLET_CONCENTRATE_USP",
+    "FROZEN_PLASMA",
+    "CONC_RBC_IP"
+  ];
+
+  static INPUT_STOCK = [
+    "CONC_RBC",
+    "WHOLE_BLOOD",
+    "PLATLET_CONC",
+    "FROZEN_PLASMA",
+    "CRYO_PRECIPITATE"
+  ];
+
 }
