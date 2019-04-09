@@ -1,8 +1,8 @@
-@import "https://fonts.googleapis.com/css?family=Roboto:300,400,500";
+@import "https://fonts.googleapis.com/css?family=Lato:300,400,500";
 body {
   margin: 0;
   padding: 0;
-  font-family: Roboto,sans-serif;
+  font-family: Lato,sans-serif;
 }
 .search-container{
   display: grid;
@@ -58,4 +58,21 @@ body {
 }
 .formGroup > *{
   display: inline-block;
+}
+.input-container{
+display: grid;
+grid-template-columns: repeat(4,1fr); 
+grid-template-areas:
+"a a a b";
+}
+.input-inputs{
+grid-area: a;
+}
+.input-buttons{
+grid-area: b;
+justify-content: center;
+align-self: center;
+}
+.something-table{
+  width:800px;
 }
