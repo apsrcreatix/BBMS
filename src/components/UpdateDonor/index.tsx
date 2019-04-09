@@ -8,7 +8,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
-import "./UpdateDonor.css";
+import "./../../index.css";
 import DATA from "../Data";
 import Config from "../../Config";
 import axios from "axios";

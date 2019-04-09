@@ -2,7 +2,7 @@ import MaterialTable from "material-table";
 import * as React from "react";
 import axios from "axios";
 import Config from "../../Config";
-import "./search.css";
+import "./../../index.css";
 import UpdateDonor from "../UpdateDonor";
 import { BrowserRouter as Router } from "react-router-dom";
 import Menu from "@material-ui/core/Menu";

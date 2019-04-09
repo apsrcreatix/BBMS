@@ -7,7 +7,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Snackbar from "@material-ui/core/Snackbar";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
-import "./EntryForm.css";
+import "./../../index.css";
 import DATA from "../Data";
 import axios from "axios";
 import Config from "../../Config";

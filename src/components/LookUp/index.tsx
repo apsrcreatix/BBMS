@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import Data from "../Data";
-import "./LookUp.css";
+import "./../../index.css";
 import axios from "axios";
 import Config from "../../Config";
 
