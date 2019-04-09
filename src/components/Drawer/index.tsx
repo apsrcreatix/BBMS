@@ -24,7 +24,7 @@ import Serums from "../PUS/Serums";
 import Kits from "../PUS/Kits";
 import Chemicals from '../PUS/Chemicals';
 import BloodBags from '../PUS/BloodBag';
- 
+import InputBlood from '../Inputs/Blood';
 const drawerWidth = 200;
 
 const styles = (theme: any) => ({
@@ -55,11 +55,15 @@ interface props{
 }
 class PermanentDrawerLeft extends React.Component<props,{}>{
  state = {
-  open:false
+  openPUS:false,
+  openInputs:false
  };
- handleClick = () => {
-  this.setState(state => ({ open: !this.state.open }));
+
+ handleClick = (name: any) => (event: any) => {
+   if(name=="openPUS") this.setState({openPUS:!this.state.openPUS});
+   if(name=="openInputs") this.setState({openInputs:!this.state.openInputs});
 };
+
   render(){
 
     const ROUTES = [
@@ -125,6 +129,41 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
       }
     ];
 
+
+    const INPUT_OPTIONS = [
+      {
+        key: 8,
+        path: "/input/blood",
+        exact: true,
+        label: "Blood",
+        icon: <AddIcon />,
+        main: () => <InputBlood />
+      },
+      {
+        key: 9,
+        path: "/kits",
+        exact: true,
+        label: "Stocks",
+        icon: <AddIcon />,
+        main: () => <Kits />
+      },
+      {
+        key: 10,
+        path: '/chemicals',
+        exact: true,
+        label: "Screening",
+        icon: <AddIcon />,
+        main: () => <Chemicals />
+      },
+      {
+        key: 11,
+        path: '/bloodbags',
+        exact: true,
+        label: "BloodBags",
+        icon: <AddIcon />,
+        main: () => <BloodBags />
+      }
+    ];
   const { classes } = this.props;
 
     return (
@@ -157,11 +196,11 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                 </Link>
               ))}
               <Divider />
-              <ListItem button onClick={this.handleClick}>
+              <ListItem button onClick={this.handleClick("openPUS")}>
                 <ListItemText inset primary="PUS" />
-                {this.state.open ? <ExpandLess /> : <ExpandMore />}
+                {this.state.openPUS ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
-              <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+              <Collapse in={this.state.openPUS} timeout="auto" unmountOnExit>
                 <List disablePadding>
                   {PUS_OPTIONS.map(options => (
                     <Link key={options.key} to={options.path}>
@@ -172,13 +211,29 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                   ))}
                 </List>
               </Collapse>
+              <Divider />
+              <ListItem button onClick={this.handleClick("openInputs")}>
+                <ListItemText inset primary="Inputs" />
+                {this.state.openInputs ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={this.state.openInputs} timeout="auto" unmountOnExit>
+                <List disablePadding>
+                  {INPUT_OPTIONS.map(options => (
+                    <Link key={options.key} to={options.path}>
+                      <ListItem button className={classes.nested}>
+                        <ListItemText inset primary={options.label} />
+                      </ListItem>
+                    </Link>
+                  ))}
+                </List>
+              </Collapse>
             </List>
-
+            
           </Drawer>
           <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            {[...ROUTES,...PUS_OPTIONS].map((route, index) => (
+            {[...ROUTES,...PUS_OPTIONS,...INPUT_OPTIONS].map((route, index) => (
               <Route
                 key={index}
                 path={route.path}
