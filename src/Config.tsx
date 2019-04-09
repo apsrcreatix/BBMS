@@ -21,7 +21,8 @@ export default {
         useChemicals: '/bb/pus/chemicals/use',
         getBloodBags: '/bb/pus/bloodbags',
         addBloodBags: '/bb/pus/bloodbags/add',
-        useBloodBags: '/bb/pus/bloodbags/use'
+        useBloodBags: '/bb/pus/bloodbags/use',
+        inputBlood: '/bb/input/blood'
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',
