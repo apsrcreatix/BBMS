@@ -128,4 +128,14 @@ export default class Data {
     "CRYO_PRECIPITATE"
   ];
 
+  static REPORT = [
+    "PASS",
+    "FAIL"
+  ];
+
+  static DONOR_ID = [
+    300,
+    301
+  ];
+
 }

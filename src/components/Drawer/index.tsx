@@ -25,6 +25,8 @@ import Kits from "../PUS/Kits";
 import Chemicals from '../PUS/Chemicals';
 import BloodBags from '../PUS/BloodBag';
 import InputBlood from '../Inputs/Blood';
+import InputStock from '../Inputs/Stocks';
+import InputScreen from '../Inputs/Screening';
 const drawerWidth = 200;
 
 const styles = (theme: any) => ({
@@ -141,19 +143,19 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
       },
       {
         key: 9,
-        path: "/kits",
+        path: "/input/stock",
         exact: true,
         label: "Stocks",
         icon: <AddIcon />,
-        main: () => <Kits />
+        main: () => <InputStock />
       },
       {
         key: 10,
-        path: '/chemicals',
+        path: '/input/screening',
         exact: true,
         label: "Screening",
         icon: <AddIcon />,
-        main: () => <Chemicals />
+        main: () => <InputScreen />
       },
       {
         key: 11,

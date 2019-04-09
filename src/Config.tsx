@@ -22,7 +22,9 @@ export default {
         getBloodBags: '/bb/pus/bloodbags',
         addBloodBags: '/bb/pus/bloodbags/add',
         useBloodBags: '/bb/pus/bloodbags/use',
-        inputBlood: '/bb/input/blood'
+        inputBlood: '/bb/input/blood',
+        inputStock: '/bb/input/stock',
+        inputScreening: '/bb/input/screening'
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',
