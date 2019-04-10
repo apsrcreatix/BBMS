@@ -36,7 +36,7 @@ const styles = (theme: any) => ({
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    backgroundColor: "crimson"
+    backgroundColor: "default"
   },
   drawer: {
     width: drawerWidth,
