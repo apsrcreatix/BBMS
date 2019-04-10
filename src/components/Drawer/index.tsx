@@ -27,6 +27,7 @@ import BloodBags from '../PUS/BloodBag';
 import InputBlood from '../Inputs/Blood';
 import InputStock from '../Inputs/Stocks';
 import InputScreen from '../Inputs/Screening';
+import InputDiscard from '../Inputs/Discard';
 const drawerWidth = 200;
 
 const styles = (theme: any) => ({
@@ -171,7 +172,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Discard",
         icon: <AddIcon />,
-        main: () => <BloodBags />
+        main: () => <InputDiscard />
       },
       {
         key: 12,
