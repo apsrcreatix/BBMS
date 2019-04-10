@@ -130,7 +130,7 @@ export default class AddScreening extends React.Component {
                 className="inputs"
                 select
                 label="hiv12"
-                value={this.state.date}
+                value={this.state.hiv12}
                 onChange={this.handleChange("hiv12")}
                 SelectProps={{
                   native: true
