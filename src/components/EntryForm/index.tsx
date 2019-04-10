@@ -172,7 +172,8 @@ class EntryForm extends React.Component<props, {}> {
     this.setState({ open: false });
   };
 
-  onSaveSumbit() {
+  onSaveSumbit = (event:any) => {
+    event.preventDefault();
     let donorData = {
       regDate: this.state.regDate,
       regCenter: this.state.regCenter,
@@ -245,7 +246,7 @@ class EntryForm extends React.Component<props, {}> {
           {/*To be used for errors in the futur*/}
           <Snackbar
             anchorOrigin={{
-              vertical: "top",
+              vertical: "bottom",
               horizontal: "right"
             }}
             open={this.state.open}
@@ -265,9 +266,8 @@ class EntryForm extends React.Component<props, {}> {
         <Divider />
         <form
           className="form"
-          action=""
           autoComplete="off"
-          onSubmit={() => console.log("submtitted")}
+          onSubmit={this.onSaveSumbit}
         >
           <h3>Registration Detail</h3>
           <TextField
@@ -492,7 +492,7 @@ class EntryForm extends React.Component<props, {}> {
                     onChange={() =>
                       this.setState({ wb_check: !this.state.wb_check })
                     }
-                    value={this.state.wb_check}
+                    value={`"${this.state.wb_check}"`}
                   />
                 }
                 label="WB Donor"
@@ -530,13 +530,13 @@ class EntryForm extends React.Component<props, {}> {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={this.state.platlet_check}
+                    value={`"${this.state.platlet_check}"`}
                     onChange={() =>
                       this.setState({
                         platlet_check: !this.state.platlet_check
                       })
                     }
-                    value={this.state.platlet_check}
+                    checked={this.state.platlet_check}
                   />
                 }
                 label="Platelet Donor"
@@ -572,11 +572,11 @@ class EntryForm extends React.Component<props, {}> {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={this.state.plasma_check}
+                    value={`"${this.state.plasma_check}"`}
                     onChange={() =>
                       this.setState({ plasma_check: !this.state.plasma_check })
                     }
-                    value={this.state.plasma_check}
+                    checked={this.state.plasma_check}
                   />
                 }
                 label="Plasma Donor"
@@ -612,11 +612,11 @@ class EntryForm extends React.Component<props, {}> {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={this.state.drc_check}
+                    value={`"${this.state.drc_check}"`}
                     onChange={() =>
                       this.setState({ drc_check: !this.state.drc_check })
                     }
-                    value={this.state.drc_check}
+                    checked={this.state.drc_check}
                   />
                 }
                 label="DRC Donor"
@@ -958,7 +958,7 @@ class EntryForm extends React.Component<props, {}> {
               variant="contained"
               color="default"
               type="submit"
-              onClick={() => this.onSaveSumbit()}
+              
             >
               Save
             </Button>
