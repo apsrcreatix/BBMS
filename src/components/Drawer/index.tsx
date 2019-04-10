@@ -93,7 +93,15 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         label: "New Donor Entry",
         icon: <AddIcon />,
         main: () => <EntryForm />
-      }
+      },
+      {
+        key: 91,
+        path: "/test",
+        exact: true,
+        label: "Testing",
+        icon: <AddIcon />,
+        main: () => <EntryForm />
+      }      
     ];
 
     const PUS_OPTIONS = [
@@ -159,13 +167,46 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
       },
       {
         key: 11,
-        path: '/bloodbags',
+        path: '/input/discard',
         exact: true,
-        label: "BloodBags",
+        label: "Discard",
+        icon: <AddIcon />,
+        main: () => <BloodBags />
+      },
+      {
+        key: 12,
+        path: '/input/grouping',
+        exact: true,
+        label: "Grouping",
+        icon: <AddIcon />,
+        main: () => <BloodBags />
+      },
+      {
+        key: 13,
+        path: '/input/infectious',
+        exact: true,
+        label: "Infectious",
+        icon: <AddIcon />,
+        main: () => <BloodBags />
+      },
+      {
+        key: 14,
+        path: '/input/preparation',
+        exact: true,
+        label: "Preparation",
+        icon: <AddIcon />,
+        main: () => <BloodBags />
+      },
+      {
+        key: 15,
+        path: '/input/reject',
+        exact: true,
+        label: "Reject",
         icon: <AddIcon />,
         main: () => <BloodBags />
       }
     ];
+
   const { classes } = this.props;
 
     return (
