@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2019-04-04T14:41:34.580Z",
+	"__export_date": "2019-04-10T17:38:45.775Z",
 	"__export_source": "insomnia.desktop.app:v6.3.2",
 	"resources": [
 		{
@@ -18,11 +18,11 @@
 			"color": null,
 			"created": 1547804842792,
 			"data": {
-				"base_url": "http://localhost:3200"
+				"base_url": "http://server.reezx.com/api"
 			},
 			"isPrivate": false,
 			"metaSortKey": 1547804842792,
-			"modified": 1554133021487,
+			"modified": 1554917828841,
 			"name": "New Environment",
 			"parentId": "wrk_d7aad1586d0941f6960765f0824100bf",
 			"_type": "environment"
@@ -490,7 +490,7 @@
 			},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"query\": {\n\t\t\"limit\": 10,\n\t\t\"index\": 0,\n\t\t\"filter\": {\n\t\t\t\"onlyElidibleDonor\": true,\n\t\t\t\"name\": \"\",\n\t\t\t\"bloodGroup\": \"B\",\n\t\t\t\"rhType\": \"Positive\",\n\t\t\t\"age\": {\n\t\t\t\t\"max\": 20,\n\t\t\t\t\"min\": 32\n\t\t\t},\n\t\t\t\"gender\": \"Female\",\n\t\t\t\"area\": \"\",\n\t\t\t\"postOffice\": \"\",\n\t\t\t\"address\": \"\",\n\t\t\t\"motivatedBy\": \"\",\n\t\t\t\"dob\": \"03/12/1991\",\n      \"fatherSpouseName\": \"RadhaKrishnan\",\n      \"pincode\": \"640125\",\n\t\t\t\"telephone\": \"\"\n\t\t}\n\t}\n}"
+				"text": "{\n\t\"query\": {\n\t\t\"limit\": 10,\n\t\t\"index\": 0,\n\t\t\"filter\": {\n\t\t\t\"donorID\": 822\n\t\t}\n\t}\n}"
 			},
 			"created": 1550148571838,
 			"description": "",
@@ -504,7 +504,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1550148571838,
 			"method": "POST",
-			"modified": 1554388859744,
+			"modified": 1554736395957,
 			"name": "Get Donors List",
 			"parameters": [],
 			"parentId": "fld_39ed24ed31bc45cab5c00f34307e96d7",
@@ -753,6 +753,61 @@
 			"_type": "request_group"
 		},
 		{
+			"_id": "fld_02329d47d49d4ee093f62e2070433f55",
+			"created": 1554912335826,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1554912335827,
+			"modified": 1554912335826,
+			"name": "Blood Discard",
+			"parentId": "fld_f10f398c2cb64db88d37881d7eb75e3d",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_a5678fee568449f8b4cce1ee33319d7b",
+			"created": 1554912561826,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1554912561826,
+			"modified": 1554912561826,
+			"name": "Blood Grouping",
+			"parentId": "fld_f10f398c2cb64db88d37881d7eb75e3d",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_f2279698716544b5a6dd5a1a41ae2169",
+			"created": 1554913153140,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1554913153140,
+			"modified": 1554913153140,
+			"name": "Infectious Disease",
+			"parentId": "fld_f10f398c2cb64db88d37881d7eb75e3d",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_c511736936c445ebb9626c0a15c9463a",
+			"created": 1554913990827,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1554913990827,
+			"modified": 1554913990827,
+			"name": "Blood Component Preparation",
+			"parentId": "fld_f10f398c2cb64db88d37881d7eb75e3d",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_285026322e764fde9ad848c11443b487",
+			"created": 1554914674525,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1554914674525,
+			"modified": 1554914674525,
+			"name": "Donor Rejection",
+			"parentId": "fld_f10f398c2cb64db88d37881d7eb75e3d",
+			"_type": "request_group"
+		},
+		{
 			"_id": "req_acb87abeff9a4166a2b44822d192a79f",
 			"authentication": {
 				"disabled": false,
@@ -799,7 +854,7 @@
 			},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"data\": {\n\t\t\"_id\": \"5c9ba2f876d5760533b5ea13\",\n\t\t\"type\": \"ANTI_A\",\n\t\t\"usedDate\": \"2019-03-20T16:10:43.558Z\",\n\t\t\"status\": \"USED\",\n\t\t\"use\": \"DONOR\",\n\t\t\"donorID\": 53,\n\t\t\"patientName\": \"XYZ\",\n\t\t\"testCount\": 6,\n\t\t\"missedRepeatedCount\": 2,\n\t\t\"technicianName\": \"Foo\"\n\t}\n}"
+				"text": "{\n\t\"data\": {\n\t\t\"_id\": \"5c9ba2f876d5760533b5ea13\",\n\t\t\"type\": \"ANTI_A\",\n\t\t\"usedDate\": \"2019-03-20T16:10:43.558Z\",\n\t\t\"status\": \"REJECTED\",\n\t\t\"testCount\": 6,\n\t\t\"technicianName\": \"Foo\"\n\t}\n}"
 			},
 			"created": 1553102029238,
 			"description": "",
@@ -813,7 +868,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1553102029238,
 			"method": "POST",
-			"modified": 1553704135081,
+			"modified": 1554487114298,
 			"name": "Use Serums",
 			"parameters": [],
 			"parentId": "fld_8d028a8a504943c4a771ca71beb2472d",
@@ -1395,6 +1450,331 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{ base_url  }}/bb/input/screening",
+			"_type": "request"
+		},
+		{
+			"_id": "req_79f705b5f70646f2bfa387295bbd930f",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"data\": {\n\t\t\"discardDate\": \"2019-03-20T16:10:43.558Z\",\n    \"collectionDate\": \"2019-03-20T16:10:43.558Z\",\n    \"donorID\": 155,\n    \"bagNo\": 134,\n    \"reason\": \"reason here\",\n    \"moName\": \"someone\",\n    \"staffName\": \"XYZ\"\n\t}\n}"
+			},
+			"created": 1554912343493,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_eb09fdfb135048dab94d1ad19a9d4e6b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1554912343493,
+			"method": "POST",
+			"modified": 1554916312021,
+			"name": "Add Blood Discard",
+			"parameters": [],
+			"parentId": "fld_02329d47d49d4ee093f62e2070433f55",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/input/discard",
+			"_type": "request"
+		},
+		{
+			"_id": "req_be51e8d5fc9f4c6eb79adebfb5bd1bed",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1554912351205,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1554912351205,
+			"method": "GET",
+			"modified": 1554916202046,
+			"name": "Get Blood Discard",
+			"parameters": [],
+			"parentId": "fld_02329d47d49d4ee093f62e2070433f55",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/input/discard",
+			"_type": "request"
+		},
+		{
+			"_id": "req_f814f9fcd4354fbebd2ca060cb4ea0a0",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1554912585603,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1554912585603,
+			"method": "GET",
+			"modified": 1554916354070,
+			"name": "Get Grouping",
+			"parameters": [],
+			"parentId": "fld_a5678fee568449f8b4cce1ee33319d7b",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/input/grouping",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b05c3772832844f1a694f564eec4b61c",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"data\": {\n    \"donorID\": 1455,\n    \"date\": \"2019-03-20T16:10:43.558Z\",\n\t\t\"antiA\": \"string\",\n\t\t\"antiB\": \"string\",\n\t\t\"antiAB\": \"string\",\n\t\t\"antiD\": \"string\",\n    \"dTest\": \"string\",\n    \"a1Lectin\": \"string\",\n\t\t\"aCells\": \"string\",\n\t\t\"bCells\": \"string\",\n\t\t\"saline\": \"string\",\n\t\t\"papain\": \"string\",\n    \"staffName\": \"string\"\n\t}\n}"
+			},
+			"created": 1554912592617,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_f1f8f9a292cb4186889ce0f85f33a545",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1554912592617,
+			"method": "POST",
+			"modified": 1554916499297,
+			"name": "Add Grouping",
+			"parameters": [],
+			"parentId": "fld_a5678fee568449f8b4cce1ee33319d7b",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/input/grouping",
+			"_type": "request"
+		},
+		{
+			"_id": "req_94eeace7088f4c93a29c6eba21d451a6",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1554913177848,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1554913177848,
+			"method": "GET",
+			"modified": 1554916539122,
+			"name": "Get Infectious Disease",
+			"parameters": [],
+			"parentId": "fld_f2279698716544b5a6dd5a1a41ae2169",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/input/infectious",
+			"_type": "request"
+		},
+		{
+			"_id": "req_565b80a421bf4b80881c2a9314c678aa",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"data\": {\n\t\t\"date\": \"2019-03-20T16:10:43.558Z\",\n    \"donorID\": 532,\n\t\t\"spotHIV12\": \"str\",\n\t\t\"spotHBsAg\": \"str\",\n\t\t\"spotHCV\": \"str\",\n\t\t\"elisaHIV12\": \"str\",\n\t\t\"elisaHBsAg\": \"str\",\n\t\t\"elisaHCV\": \"str\",\n\t\t\"vdrl\": \"str\",\n\t\t\"malarialParasite\": \"str\",\n\t\t\"microFilaria\": \"str\",\n\t\t\"staffName\": \"XYZ\"\n\t}\n}\n"
+			},
+			"created": 1554916710300,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_c4f4eda2065a4621936342994379c1e9",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1554912735802.75,
+			"method": "POST",
+			"modified": 1554916710300,
+			"name": "Add Infectious Disease (Copy) (Copy)",
+			"parameters": [],
+			"parentId": "fld_f2279698716544b5a6dd5a1a41ae2169",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/input/infectious",
+			"_type": "request"
+		},
+		{
+			"_id": "req_26b649c60d7e47649989b6a24d750616",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1554913995517,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1554913995517,
+			"method": "GET",
+			"modified": 1554917195735,
+			"name": "Get Blood Component Preparation",
+			"parameters": [],
+			"parentId": "fld_c511736936c445ebb9626c0a15c9463a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/input/preparation",
+			"_type": "request"
+		},
+		{
+			"_id": "req_47acdd5c3d374ff68a3fbc34b0a94632",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"data\": {\n\t\t\"donorID\": 1456,\n\t\t\"collectionDate\": \"2019-03-20T16:10:43.558Z\",\n\t\t\"prcPrepDate\": \"str\",\n\t\t\"prcExpDate\": \"str\",\n\t\t\"prcStatusLabel\": \"USED\",\n\t\t\"prcStatusDate\": \"str\",\n\t\t\"pltPrepDate\": \"str\",\n\t\t\"pltExpDate\": \"str\",\n\t\t\"pltStatusLabel\": \"USED\",\n\t\t\"pltStatusDate\": \"str\",\n\t\t\"ffpPrepDate\": \"str\",\n\t\t\"ffpExpDate\": \"str\",\n\t\t\"ffpStatusLabel\": \"USED\",\n\t\t\"ffpStatusDate\": \"str\",\n\t\t\"cryoPrepDate\": \"str\",\n\t\t\"cryoExpDate\": \"str\",\n\t\t\"cryoStatusLabel\": \"USED\",\n\t\t\"cryoStatusDate\": \"str\",\n\t\t\"wbPrepDate\": \"str\",\n\t\t\"wbExpDate\": \"str\",\n\t\t\"wbStatusLabel\": \"USED\",\n\t\t\"wbStatusDate\": \"str\",\n    \"staffName\": \"xyz\"\n\t}\n}"
+			},
+			"created": 1554914007703,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_90be5820c3914fd1ad56aad43fd0b76a",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1554914007703,
+			"method": "POST",
+			"modified": 1554917655535,
+			"name": "Add Blood Component Preparation",
+			"parameters": [],
+			"parentId": "fld_c511736936c445ebb9626c0a15c9463a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/input/preparation",
+			"_type": "request"
+		},
+		{
+			"_id": "req_749cf5b1cad2495b8deded7bfd42b1c1",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1554914682598,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1554914682598,
+			"method": "GET",
+			"modified": 1554916835963,
+			"name": "Get Rejected Donor",
+			"parameters": [],
+			"parentId": "fld_285026322e764fde9ad848c11443b487",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/input/reject",
+			"_type": "request"
+		},
+		{
+			"_id": "req_57c8f591d90d4baaaff07c074fd25bf4",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"data\": {\n\t\t\"place\": \"Chennai\",\n    \"name\": \"XYZ\",\n    \"dob\": \"2019-03-20T16:10:43.558Z\",\n    \"date\": \"2019-03-20T16:10:43.558Z\",\n    \"address\": \"xyz - wfef\",\n    \"phone\": 820431313,\n\t\t\"deferDuration\": \"PERMANENTLY\",\n\t\t\"deferReason\": \"my bank, my rules\"\n\t}\n}"
+			},
+			"created": 1554914689547,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_e6b680badab74d36bcb7488e2c1f6278",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1554914689547,
+			"method": "POST",
+			"modified": 1554917087588,
+			"name": "Add Rejected Donor",
+			"parameters": [],
+			"parentId": "fld_285026322e764fde9ad848c11443b487",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/input/reject",
 			"_type": "request"
 		}
 	]
