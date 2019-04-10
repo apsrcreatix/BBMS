@@ -24,7 +24,12 @@ export default {
         useBloodBags: '/bb/pus/bloodbags/use',
         inputBlood: '/bb/input/blood',
         inputStock: '/bb/input/stock',
-        inputScreening: '/bb/input/screening'
+        inputScreening: '/bb/input/screening',
+        inputDiscard: '/bb/input/discard',
+        inputGrouping: '/bb/input/grouping',
+        inputInfectious: '/bb/input/infectious',
+        inputPreparation: '/bb/input/preparation',
+        inputReject: '/bb/input/reject'
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',
