@@ -1,8 +1,8 @@
-@import "https://fonts.googleapis.com/css?family=Lato:300,400,500";
+@import "https://fonts.googleapis.com/css?family=Roboto:300,400,500";
 body {
   margin: 0;
   padding: 0;
-  font-family: Lato,sans-serif;
+  font-family: Roboto,sans-serif;
 }
 .search-container{
   display: grid;
@@ -75,4 +75,7 @@ align-self: center;
 }
 .something-table{
   width:800px;
+}
+a{
+  text-decoration: none;
 }
