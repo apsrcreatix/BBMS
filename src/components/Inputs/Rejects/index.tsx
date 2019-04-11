@@ -4,14 +4,14 @@ import Divider from "@material-ui/core/Divider";
 import Config from "../../../Config";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
-import AddScreening from "./AddScreening";
+import AddReject from './AddRejects';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
 const base_url = Config.SERVER_URL;
-const session_url = base_url + Config.PATHS.inputScreening;
+const session_url = base_url + Config.PATHS.inputReject;
 
-export default class InputsScreening extends React.Component {
+export default class Rejects extends React.Component {
   constructor(props: any){
     super(props);
     axios
@@ -23,16 +23,16 @@ export default class InputsScreening extends React.Component {
     })
     .then((response: any) => {
       this.setState({
-        screeningData: response.data.response.stocks
+        rejectData: response.data.response.stocks
       });
-      console.log(this.state.screeningData+""+response.data.response.success);
+      console.log(this.state.rejectData+""+response.data.response.success);
     })
     .catch(function(error: any) {
       console.log(`error in authentication : ${error}`);
     });
   }
   state = {
-    screeningData: []
+    rejectData: []
     };
 
   async fetchData() {
@@ -45,9 +45,9 @@ export default class InputsScreening extends React.Component {
       })
       .then((response: any) => {
         this.setState({
-          screeningData: response.data.response.tests
+          rejectData: response.data.respons.stocks
         });
-        console.log(this.state.screeningData+""+response.data.response.success);
+        console.log(this.state.rejectData+""+response.data.response.success);
       })
       .catch(function(error: any) {
         console.log(`error in authentication : ${error}`);
@@ -57,11 +57,21 @@ export default class InputsScreening extends React.Component {
     this.setState({ [name]: event.target.value });
   };
   render() {
+    function humanReadableDate(value: any) {
+        let event = new Date(value);
+        let options = {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+          timezone: "Asia/Kolkata"
+        };
+        return event.toLocaleDateString("en-IN", options);
+    }
     return (
       <div>
         <div>
           <div>
-            <AddScreening />
+            <AddReject />
           </div>
           <Divider />
           <div className="input-container">
@@ -81,27 +91,31 @@ export default class InputsScreening extends React.Component {
           </div>
           <div className="something-table">
             <MaterialTable
-              title="Screening Data"
+              title="Infectious Data"
               columns={[
-                {title: "Donor ID", field: "donorID", type: "numeric"},
+                { title: "Place", field: "place", type: "string"},
+                { title: "Name", field: "name", type: "string"},
                 {
-                  title: "Staff Name",
-                  field: "staffName",
-                  type: "string"
+                    title: "Date of Birth",
+                    field: "dob",
+                    render: rowData => {
+                      return humanReadableDate(rowData.dob);
+                    }
                 },
-                { title: "HIV 12", field: "hiv12", type: "string" },
-                { title: "HSBAG", field: "hsbag", type: "string" },
-                { title: "HCV", field: "hcv", type: "string" },
-                { title: "VDRL", field: "vdrl", type: "string" },
-                { title: "Malarial Parasite", field: "malarialParasite", type: "string" },
-                { title: "Micro Filaria", field: "microFilaria", type: "string" },
-                { title: "Staff Name", field: "staffName", type: "string" },
+                {
+                    title: "Date",
+                    field: "date",
+                    render: rowData => {
+                      return humanReadableDate(rowData.date);
+                    }
+                },
+                { title: "Address", field: "address", type: "string"},
+                { title: "Phone", field: "phone", type: "numeric"},
+                { title: "Defer Duration", field: "defer.duration", type: "string"},
+                { title: "Defer Reason", field: "defer.reason", type: "string"},          
                 { title: "Blood Bank", field: "bloodBank", type: "string" },
-                { title: "Donor Name", field: "donorName", type: "string" },
-                { title: "Blood Group", field: "bloodGroup", type: "string" },
-                { title: "RH Type", field: "rhType", type: "string" }
               ]}
-              data={this.state.screeningData}
+              data={this.state.rejectData}
               options={{
                 loadingType: "linear",
                 pageSize: 5,

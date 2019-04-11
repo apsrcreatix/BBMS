@@ -28,6 +28,10 @@ import InputBlood from '../Inputs/Blood';
 import InputStock from '../Inputs/Stocks';
 import InputScreen from '../Inputs/Screening';
 import InputDiscard from '../Inputs/Discard';
+import InputGrouping from '../Inputs/Grouping';
+import InputInfectious from '../Inputs/Infectious';
+import InputPreparation from '../Inputs/Preparation';
+import InputReject from '../Inputs/Rejects';
 const drawerWidth = 200;
 
 const styles = (theme: any) => ({
@@ -180,7 +184,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Grouping",
         icon: <AddIcon />,
-        main: () => <BloodBags />
+        main: () => <InputGrouping />
       },
       {
         key: 13,
@@ -188,7 +192,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Infectious",
         icon: <AddIcon />,
-        main: () => <BloodBags />
+        main: () => <InputInfectious />
       },
       {
         key: 14,
@@ -196,7 +200,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Preparation",
         icon: <AddIcon />,
-        main: () => <BloodBags />
+        main: () => <InputPreparation />
       },
       {
         key: 15,
@@ -204,7 +208,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Reject",
         icon: <AddIcon />,
-        main: () => <BloodBags />
+        main: () => <InputReject />
       }
     ];
 

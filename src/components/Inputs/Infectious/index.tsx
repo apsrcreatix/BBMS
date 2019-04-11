@@ -4,14 +4,14 @@ import Divider from "@material-ui/core/Divider";
 import Config from "../../../Config";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
-import AddScreening from "./AddScreening";
+import AddInfectious from './AddInfectious';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
 const base_url = Config.SERVER_URL;
-const session_url = base_url + Config.PATHS.inputScreening;
+const session_url = base_url + Config.PATHS.inputInfectious;
 
-export default class InputsScreening extends React.Component {
+export default class Infectious extends React.Component {
   constructor(props: any){
     super(props);
     axios
@@ -23,16 +23,16 @@ export default class InputsScreening extends React.Component {
     })
     .then((response: any) => {
       this.setState({
-        screeningData: response.data.response.stocks
+        infectiousData: response.data.response.stocks
       });
-      console.log(this.state.screeningData+""+response.data.response.success);
+      console.log(this.state.infectiousData+""+response.data.response.success);
     })
     .catch(function(error: any) {
       console.log(`error in authentication : ${error}`);
     });
   }
   state = {
-    screeningData: []
+    infectiousData: []
     };
 
   async fetchData() {
@@ -45,9 +45,9 @@ export default class InputsScreening extends React.Component {
       })
       .then((response: any) => {
         this.setState({
-          screeningData: response.data.response.tests
+          infectiousData: response.data.respons.stocks
         });
-        console.log(this.state.screeningData+""+response.data.response.success);
+        console.log(this.state.infectiousData+""+response.data.response.success);
       })
       .catch(function(error: any) {
         console.log(`error in authentication : ${error}`);
@@ -57,11 +57,21 @@ export default class InputsScreening extends React.Component {
     this.setState({ [name]: event.target.value });
   };
   render() {
+    function humanReadableDate(value: any) {
+        let event = new Date(value);
+        let options = {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+          timezone: "Asia/Kolkata"
+        };
+        return event.toLocaleDateString("en-IN", options);
+    }
     return (
       <div>
         <div>
           <div>
-            <AddScreening />
+            <AddInfectious />
           </div>
           <Divider />
           <div className="input-container">
@@ -81,18 +91,23 @@ export default class InputsScreening extends React.Component {
           </div>
           <div className="something-table">
             <MaterialTable
-              title="Screening Data"
+              title="Infectious Data"
               columns={[
-                {title: "Donor ID", field: "donorID", type: "numeric"},
+                { title: "Donor ID", field: "donorID", type: "numeric"},
                 {
-                  title: "Staff Name",
-                  field: "staffName",
-                  type: "string"
+                    title: "Date",
+                    field: "date",
+                    render: rowData => {
+                      return humanReadableDate(rowData.date);
+                    }
                 },
-                { title: "HIV 12", field: "hiv12", type: "string" },
-                { title: "HSBAG", field: "hsbag", type: "string" },
-                { title: "HCV", field: "hcv", type: "string" },
-                { title: "VDRL", field: "vdrl", type: "string" },
+                { title: "Spot HIV 12", field: "spotResult.HIV12", type: "string"},
+                { title: "Spot HBsAG", field: "spotResult.HBsAg", type: "string" },
+                { title: "Spot HCV", field: "spotResult.HCV", type: "string" },
+                { title: "Elias HIV 12", field: "elisaResult.HIV12", type: "string" },
+                { title: "Elias HBSAG", field: "elisaResult.HBsAg", type: "string" },
+                { title: "Elias HCV", field: "elisaResult.HCV", type: "string" },
+                { title: "VDRL", field: "VDRL", type: "string" },
                 { title: "Malarial Parasite", field: "malarialParasite", type: "string" },
                 { title: "Micro Filaria", field: "microFilaria", type: "string" },
                 { title: "Staff Name", field: "staffName", type: "string" },
@@ -101,7 +116,7 @@ export default class InputsScreening extends React.Component {
                 { title: "Blood Group", field: "bloodGroup", type: "string" },
                 { title: "RH Type", field: "rhType", type: "string" }
               ]}
-              data={this.state.screeningData}
+              data={this.state.infectiousData}
               options={{
                 loadingType: "linear",
                 pageSize: 5,
