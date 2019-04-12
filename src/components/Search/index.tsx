@@ -21,24 +21,9 @@ let password = Config.AUTH.token;
 let base_url = Config.SERVER_URL;
 let session_url = base_url + Config.PATHS.getDonors;
 
-interface state {
-  data: object[];
-  setData: any;
-  redirectTo: boolean;
-  anchorEl: any;
-  name: string;
-  dob: string;
-  fatherSpouseName: string;
-  donor_id: string;
-  mobile: string;
-  telephone: string;
-  pincode: string;
-  open: boolean;
-}
-export default class TableWithContent extends React.Component<{}, state> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
+export default class TableWithContent extends React.Component {
+
+ state = {
       data: [],
       setData: "",
       redirectTo: false,
@@ -52,11 +37,10 @@ export default class TableWithContent extends React.Component<{}, state> {
       telephone:"",
       open: false
     };
-    this.handleChange = this.handleChange.bind(this);
-  }
+   
 
   handleChange = (name: any) => (event: any) => {
-    this.setState({ name: event.target.value });
+    this.setState({ [name]: event.target.value });
   };
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -330,9 +314,9 @@ export default class TableWithContent extends React.Component<{}, state> {
               label="Donor ID"
               className="inputs"
               type="number"
-              value={this.state.name}
+              value={this.state.donor_id}
               placeholder="ID Number"
-              onChange={this.handleChange("name")}
+              onChange={this.handleChange("donor_id")}
               helperText="Please enter valid ID"
               margin="normal"
               InputLabelProps={{
