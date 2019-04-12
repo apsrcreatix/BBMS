@@ -22,7 +22,7 @@ class Area extends Component {
     };
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>Area-wise Blood Donation</h1>
         <Bar data={this.state.chartData} options={{
             scales:{

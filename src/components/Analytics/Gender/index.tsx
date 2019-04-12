@@ -14,7 +14,7 @@ class Gender extends Component {
         };
     render() {
         return (
-            <div>
+            <div className="container">
                 <h1> Male / Female Blood Donation Ratio </h1>
                 <Pie data={this.state.chartData}
                     options={
