@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2019-04-10T17:38:45.775Z",
+	"__export_date": "2019-04-11T20:22:28.225Z",
 	"__export_source": "insomnia.desktop.app:v6.3.2",
 	"resources": [
 		{
@@ -18,11 +18,11 @@
 			"color": null,
 			"created": 1547804842792,
 			"data": {
-				"base_url": "http://server.reezx.com/api"
+				"base_url": "http://127.0.0.1:3200"
 			},
 			"isPrivate": false,
 			"metaSortKey": 1547804842792,
-			"modified": 1554917828841,
+			"modified": 1554989729750,
 			"name": "New Environment",
 			"parentId": "wrk_d7aad1586d0941f6960765f0824100bf",
 			"_type": "environment"
@@ -369,6 +369,17 @@
 			"_type": "request_group"
 		},
 		{
+			"_id": "fld_5e09d2c79c3342ec83eb6e46bae2b5f0",
+			"created": 1555011792885,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1555011792886,
+			"modified": 1555011792885,
+			"name": "Output",
+			"parentId": "fld_79fe11a3ad794380af426a83342ffdad",
+			"_type": "request_group"
+		},
+		{
 			"_id": "req_5a1d83a015c2417f8e006004cd89478a",
 			"authentication": {
 				"disabled": false,
@@ -383,7 +394,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1550896845038,
 			"method": "GET",
-			"modified": 1550896980861,
+			"modified": 1554989702896,
 			"name": "Get Motivators",
 			"parameters": [],
 			"parentId": "fld_79fe11a3ad794380af426a83342ffdad",
@@ -394,6 +405,34 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{ base_url  }}/bb/motivators",
+			"_type": "request"
+		},
+		{
+			"_id": "req_22edcfbc36714aaeb1581680c1af96e3",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1554989508318,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1550897223349,
+			"method": "GET",
+			"modified": 1554989715624,
+			"name": "Analytics",
+			"parameters": [],
+			"parentId": "fld_79fe11a3ad794380af426a83342ffdad",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/analytics",
 			"_type": "request"
 		},
 		{
@@ -805,6 +844,61 @@
 			"modified": 1554914674525,
 			"name": "Donor Rejection",
 			"parentId": "fld_f10f398c2cb64db88d37881d7eb75e3d",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_7d39c5b79ba2467e826aa012f60841ae",
+			"created": 1555011801571,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1555011801571,
+			"modified": 1555011801571,
+			"name": "Blood Output",
+			"parentId": "fld_5e09d2c79c3342ec83eb6e46bae2b5f0",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_da29c68caaf5465bb80d9a238e1eb4b7",
+			"created": 1555012456789,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1555012456789,
+			"modified": 1555012456789,
+			"name": "Blood Master Record",
+			"parentId": "fld_5e09d2c79c3342ec83eb6e46bae2b5f0",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_5953946d324942b884546fdbb56313ff",
+			"created": 1555013095186,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1555013095186,
+			"modified": 1555013095186,
+			"name": "Cross Matching",
+			"parentId": "fld_5e09d2c79c3342ec83eb6e46bae2b5f0",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_9bc846a0894f425ca5fbbdbcb1c12369",
+			"created": 1555013310459,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1555013310459,
+			"modified": 1555013310459,
+			"name": "Patient Grouping",
+			"parentId": "fld_5e09d2c79c3342ec83eb6e46bae2b5f0",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_65ab1ada0911460e9e046b1c9dcd8253",
+			"created": 1555013573789,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1555013573789,
+			"modified": 1555013573789,
+			"name": "7 Day Preservation",
+			"parentId": "fld_5e09d2c79c3342ec83eb6e46bae2b5f0",
 			"_type": "request_group"
 		},
 		{
@@ -1775,6 +1869,337 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{ base_url  }}/bb/input/reject",
+			"_type": "request"
+		},
+		{
+			"_id": "req_f7ffe9f5eaf5438faf77677883d50454",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"data\": {\n\t\t\"type\": \"PLATLET_CONCENTRATE_USP\",\n    \"serialNo\": 121,\n    \"bagNo\": 12,\n    \"issueDate\": \"2019-03-20T16:10:43.558Z\",\n    \"collectionDate\": \"2019-03-20T16:10:43.558Z\",\n    \"expiryDate\": \"2019-03-20T16:10:43.558Z\",\n    \"quantity\": 10,\n    \"name\": \"patientName\",\n    \"address\": \"add\",\n    \"age\": 23,\n    \"sex\": \"Male\",\n    \"hospital\": \"XAZ\",\n    \"salineMajor\": \"axf\",\n    \"salineMinor\": \"axf\",\n    \"bsaMajor\": \"axf\",\n    \"bsaMinor\": \"axf\",\n    \"coombsSeraMajor\": \"axf\",\n    \"coombsSeraMinor\": \"axf\",\n    \"prophylactic\": \"axf\",\n    \"therapeutic\": \"axf\",\n    \"donorID\": 211,\n    \"staffName\": \"XYZ\"\n\t}\n}"
+			},
+			"created": 1555011811871,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_ebfc5deb550146d6922330a685c53657",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1555011811872,
+			"method": "POST",
+			"modified": 1555012416696,
+			"name": "Add Blood Output",
+			"parameters": [],
+			"parentId": "fld_7d39c5b79ba2467e826aa012f60841ae",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/output/blood",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a24b841c6f164ca8934b3d8a05dd3862",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1555011821030,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1555011821030,
+			"method": "GET",
+			"modified": 1555011870135,
+			"name": "List Blood Output",
+			"parameters": [
+				{
+					"id": "pair_661ab272fb38497a99aebb28685328b1",
+					"name": "type",
+					"value": "PLATLET_CONCENTRATE_USP"
+				}
+			],
+			"parentId": "fld_7d39c5b79ba2467e826aa012f60841ae",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/output/blood",
+			"_type": "request"
+		},
+		{
+			"_id": "req_2fd67eed02f748d1b7d0a8b1cd52078e",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"data\": {\n\t\t\"donorID\": 1212,\n\t\t\"collectionDate\": \"XYZ\",\n\t\t\"preparationDate\": \"XYZ\",\n\t\t\"quantity\": 10,\n\t\t\"hiv12\": \"XYZ\",\n\t\t\"hbsag\": \"XYZ\",\n\t\t\"vdrl\": \"XYZ\",\n\t\t\"microFilaria\": \"XYZ\",\n\t\t\"irregularAntibody\": \"XYZ\",\n\t\t\"prcQuantity\": \"XYZ\",\n\t\t\"prcExpiryDate\": \"XYZ\",\n\t\t\"prcPatientName\": \"XYZ\",\n\t\t\"prcHospital\": \"XYZ\",\n\t\t\"prcLabel\": \"DISCARD\",\n\t\t\"prcDate\": \"XYZ\",\n\t\t\"pltQuantity\": \"XYZ\",\n\t\t\"pltExpiryDate\": \"XYZ\",\n\t\t\"pltPatientName\": \"XYZ\",\n\t\t\"pltHospital\": \"XYZ\",\n\t\t\"pltLabel\": \"DISCARD\",\n\t\t\"pltDate\": \"XYZ\",\n\t\t\"ffpQuantity\": \"XYZ\",\n\t\t\"ffpExpiryDate\": \"XYZ\",\n\t\t\"ffpPatientName\": \"XYZ\",\n\t\t\"ffpHospital\": \"XYZ\",\n\t\t\"ffpLabel\": \"USED\",\n\t\t\"ffpDate\": \"XYZ\",\n\t\t\"wbQuantity\": \"XYZ\",\n\t\t\"wbExpiryDate\": \"XYZ\",\n\t\t\"wbPatientName\": \"XYZ\",\n\t\t\"wbHospital\": \"XYZ\",\n\t\t\"wbLabel\": \"USED\",\n\t\t\"wbDate\": \"XYZ\",\n\t\t\"cryoQuantity\": \"XYZ\",\n\t\t\"cryoExpiryDate\": \"XYZ\",\n\t\t\"cryoPatientName\": \"XYZ\",\n\t\t\"cryoHospital\": \"XYZ\",\n\t\t\"cryoLabel\": \"USED\",\n\t\t\"cryoDate\": \"XYZ\"\n\t}\n}"
+			},
+			"created": 1555012462993,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_9126651d68c4487b912bdc0a502b9ab3",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1555012462993,
+			"method": "POST",
+			"modified": 1555012749714,
+			"name": "Add BMR",
+			"parameters": [],
+			"parentId": "fld_da29c68caaf5465bb80d9a238e1eb4b7",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/output/bmr",
+			"_type": "request"
+		},
+		{
+			"_id": "req_3713e5c0a7e6452490f5bde672274315",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1555012469332,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1555012469332,
+			"method": "GET",
+			"modified": 1555012491786,
+			"name": "Get BMR",
+			"parameters": [],
+			"parentId": "fld_da29c68caaf5465bb80d9a238e1eb4b7",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/output/bmr",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a6ce4cc0538e43f59d8440c2d0f80289",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"data\": {\n\t\t\"donorID\": 322,\n\t\t\"usedDate\": \"2019-03-20T16:10:43.558Z\",\n\t\t\"name\": \"XYZ\",\n\t\t\"age\": \"XYZ\",\n\t\t\"sex\": \"XYZ\",\n\t\t\"patientBloodGroup\": \"XYZ\",\n\t\t\"patientRhType\": \"XYZ\",\n\t\t\"hospitalName\": \"XYZ\",\n\t\t\"component\": \"XYZ\",\n\t\t\"salineMajor\": \"XYZ\",\n\t\t\"salineMinor\": \"XYZ\",\n\t\t\"bsaMajor\": \"XYZ\",\n\t\t\"bsaMinor\": \"XYZ\",\n\t\t\"coombsSeraMajor\": \"XYZ\",\n\t\t\"coombsSeraMinor\": \"XYZ\",\n\t\t\"compatible\": \"XYZ\",\n\t\t\"staffName\": \"XYZ\"\n\t}\n}"
+			},
+			"created": 1555013103512,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_3487d84a93da4409a34ac056cb39f250",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1555013103512,
+			"method": "POST",
+			"modified": 1555013264930,
+			"name": "Add Cross Matching",
+			"parameters": [],
+			"parentId": "fld_5953946d324942b884546fdbb56313ff",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/output/matching",
+			"_type": "request"
+		},
+		{
+			"_id": "req_2bca94a388374c968179ffe5d87a74e3",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1555013114337,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1555013114337,
+			"method": "GET",
+			"modified": 1555013141120,
+			"name": "Get Cross Matching",
+			"parameters": [],
+			"parentId": "fld_5953946d324942b884546fdbb56313ff",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/output/matching",
+			"_type": "request"
+		},
+		{
+			"_id": "req_549b60dfdc184d87a25546a583186ae5",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1555013321542,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1555013321542,
+			"method": "GET",
+			"modified": 1555013356118,
+			"name": "Add Patient Grouping",
+			"parameters": [],
+			"parentId": "fld_9bc846a0894f425ca5fbbdbcb1c12369",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/output/grouping",
+			"_type": "request"
+		},
+		{
+			"_id": "req_da3e6c00b18f436fb96177c041491499",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"data\": {\t\n\t\t\"patient\": \"XYZ\",\n\t\t\"age\": \"XYZ\",\n\t\t\"sex\": \"XYZ\",\n\t\t\"hospital\": \"XYZ\",\n\t\t\"antiA\": \"XYZ\",\n\t\t\"antiB\": \"XYZ\",\n\t\t\"antiAB\": \"XYZ\",\n\t\t\"antiD\": \"XYZ\",\n\t\t\"dTest\": \"XYZ\",\n\t\t\"a1Lectin\": \"XYZ\",\n\t\t\"aCells\": \"XYZ\",\n\t\t\"bCells\": \"XYZ\",\n\t\t\"saline\": \"XYZ\",\n\t\t\"papain\": \"XYZ\",\n\t\t\"staffName\": \"XYZ\",\n\t\t\"bloodGroup\": \"XYZ\",\n\t\t\"rhType\": \"XYZ\"\n\t}\n}"
+			},
+			"created": 1555013334125,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a6a4672a66294f6999a0242f6f58edbf",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1555013334125,
+			"method": "POST",
+			"modified": 1555013470963,
+			"name": "Get Patient Grouping",
+			"parameters": [],
+			"parentId": "fld_9bc846a0894f425ca5fbbdbcb1c12369",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/output/grouping",
+			"_type": "request"
+		},
+		{
+			"_id": "req_52f657100ae34e6989a0ba5cf84d32c3",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"data\": {\n\t\t\"name\": \"XYZ\",\n\t\t\"hospital\": \"XYZ\",\n\t\t\"donorID\": 3457,\n\t\t\"sample\": \"XYZ\",\n\t\t\"second\": \"XYZ\",\n\t\t\"third\": \"XYZ\",\n\t\t\"fourth\": \"XYZ\",\n\t\t\"fifth\": \"XYZ\",\n\t\t\"sixth\": \"XYZ\",\n\t\t\"seventh\": \"XYZ\",\n\t\t\"discard\": \"XYZ\"\n\t}\n}"
+			},
+			"created": 1555013581090,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_97a0ab7670cb4cdb9dacafca60624651",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1555013581090,
+			"method": "POST",
+			"modified": 1555014113634,
+			"name": "Add 7 Day Preservation",
+			"parameters": [],
+			"parentId": "fld_65ab1ada0911460e9e046b1c9dcd8253",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/output/preservation",
+			"_type": "request"
+		},
+		{
+			"_id": "req_2c9e68cec3f1456d903a999f8d46dd79",
+			"authentication": {
+				"disabled": false,
+				"password": "{{ token  }}",
+				"type": "basic",
+				"username": "{{ username  }}"
+			},
+			"body": {},
+			"created": 1555013588367,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1555013588367,
+			"method": "GET",
+			"modified": 1555013668702,
+			"name": "Get 7 Day Preservation",
+			"parameters": [],
+			"parentId": "fld_65ab1ada0911460e9e046b1c9dcd8253",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/bb/output/preservation",
 			"_type": "request"
 		}
 	]
