@@ -239,7 +239,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         key: 18,
         path: "/analytics/blood",
         exact: true,
-        label: "Age",
+        label: "BloodGroup",
         icon: <AddIcon />,
         main: () => <Blood />
       },
@@ -247,7 +247,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         key: 19,
         path: "/analytics/areawise",
         exact: true,
-        label: "Age",
+        label: "Area Wise",
         icon: <AddIcon />,
         main: () => <Areawise />
       }
