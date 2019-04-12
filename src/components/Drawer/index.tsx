@@ -32,6 +32,10 @@ import InputGrouping from '../Inputs/Grouping';
 import InputInfectious from '../Inputs/Infectious';
 import InputPreparation from '../Inputs/Preparation';
 import InputReject from '../Inputs/Rejects';
+import Gender from '../Analytics/Gender';
+import Age from '../Analytics/Age';
+import Blood from '../Analytics/BloodGroup';
+import Areawise from '../Analytics/AreaWise';
 const drawerWidth = 200;
 
 const styles = (theme: any) => ({
@@ -63,12 +67,14 @@ interface props{
 class PermanentDrawerLeft extends React.Component<props,{}>{
  state = {
   openPUS:false,
-  openInputs:false
+  openInputs:false,
+  openAnalytics:false
  };
 
  handleClick = (name: any) => (event: any) => {
    if(name=="openPUS") this.setState({openPUS:!this.state.openPUS});
    if(name=="openInputs") this.setState({openInputs:!this.state.openInputs});
+   if(name=="openAnalytics") this.setState({openAnalytics:!this.state.openAnalytics});
 };
 
   render(){
@@ -212,6 +218,41 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
       }
     ];
 
+    const ANALYTICS = [
+      {
+        key: 16,
+        path: "/analytics/gender",
+        exact: true,
+        label: "Gender",
+        icon: <AddIcon />,
+        main: () => <Gender />
+      },
+      {
+        key: 17,
+        path: "/analytics/age",
+        exact: true,
+        label: "Age",
+        icon: <AddIcon />,
+        main: () => <Age />
+      },
+      {
+        key: 18,
+        path: "/analytics/blood",
+        exact: true,
+        label: "Age",
+        icon: <AddIcon />,
+        main: () => <Blood />
+      },
+      {
+        key: 19,
+        path: "/analytics/areawise",
+        exact: true,
+        label: "Age",
+        icon: <AddIcon />,
+        main: () => <Areawise />
+      }
+    ];
+
   const { classes } = this.props;
 
     return (
@@ -275,13 +316,28 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                   ))}
                 </List>
               </Collapse>
+              <ListItem button onClick={this.handleClick("openAnalytics")}>
+                <ListItemText inset primary="Analytics" />
+                {this.state.openAnalytics ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={this.state.openAnalytics} timeout="auto" unmountOnExit>
+                <List disablePadding>
+                  {ANALYTICS.map(options => (
+                    <Link key={options.key} to={options.path}>
+                      <ListItem button className={classes.nested}>
+                        <ListItemText inset primary={options.label} />
+                      </ListItem>
+                    </Link>
+                  ))}
+                </List>
+              </Collapse>
             </List>
             
           </Drawer>
           <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            {[...ROUTES,...PUS_OPTIONS,...INPUT_OPTIONS].map((route, index) => (
+            {[...ROUTES,...PUS_OPTIONS,...INPUT_OPTIONS,...ANALYTICS].map((route, index) => (
               <Route
                 key={index}
                 path={route.path}
