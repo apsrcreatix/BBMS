@@ -339,7 +339,7 @@ export default class UpdateForm extends React.Component<any, any> {
                     onChange={() =>
                       this.setState({ wb_check: !this.state.wb_check })
                     }
-                    value={this.state.wb_check}
+                    value={`"${this.state.wb_check}`}
                   />
                 }
                 label="WB Donor"
@@ -383,7 +383,7 @@ export default class UpdateForm extends React.Component<any, any> {
                         platlet_check: !this.state.platlet_check
                       })
                     }
-                    value={this.state.plasma_check}
+                    value={`"${this.state.plasma_check}"`}
                   />
                 }
                 label="Platelet Donor"
@@ -423,7 +423,7 @@ export default class UpdateForm extends React.Component<any, any> {
                     onChange={() =>
                       this.setState({ plasma_check: !this.state.plasma_check })
                     }
-                    value={this.state.plasma_check}
+                    value={`"${this.state.plasma_check}"`}
                   />
                 }
                 label="Plasma Donor"
@@ -463,7 +463,7 @@ export default class UpdateForm extends React.Component<any, any> {
                     onChange={() =>
                       this.setState({ drc_check: !this.state.drc_check })
                     }
-                    value={this.state.drc_check}
+                    value={`"${this.state.drc_check}"`}
                   />
                 }
                 label="DRC Donor"
