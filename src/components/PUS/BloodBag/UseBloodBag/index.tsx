@@ -8,21 +8,19 @@ import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import Config from "../../../../Config";
-import MySnackbar from "../../../MySnackbar";
-import Snackbar from '@material-ui/core/Snackbar';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
 const base_url = Config.SERVER_URL;
-const use_serum_url = base_url + Config.PATHS.useSerums;
+const use_bloodbag_url = base_url + Config.PATHS.useBloodBags;
 
-interface UseSerumProps {
+interface UseBloodBagProps {
   open: boolean;
   passed: any;
   onClose: any;
 }
 
-export default class UseSerum extends React.Component<UseSerumProps> {
+export default class UseBloodBag extends React.Component<UseBloodBagProps> {
   state = {
     open: this.props.open,
     passedData: this.props.passed,
@@ -35,10 +33,7 @@ export default class UseSerum extends React.Component<UseSerumProps> {
     patientName: "",
     testCount: "",
     missedRepeatedCount: "",
-    technicianName: "",
-    snackOpen: false,
-    snackVariant: "",
-    snackMessage: ""
+    technicianName: ""
   };
   // TODO
   componentWillReceiveProps(nextProps: any) {
@@ -68,12 +63,7 @@ export default class UseSerum extends React.Component<UseSerumProps> {
       technicianName: ""
     });
   };
-  handleSnackbar=(event:any,reason:any)=>{
-    if(reason === 'clickaway') return;
-    this.setState({
-      snackOpen: false
-    });
-  }
+
   filterState() {
     var data = {
       data: {}
@@ -85,10 +75,9 @@ export default class UseSerum extends React.Component<UseSerumProps> {
     if (this.state.status == "REJECTED") {
       filter = Object.assign(filter, {
         status: "REJECTED",
-        testCount: parseInt(this.state.testCount,10),
-        usedDate: this.state.usedDate,
-        technicianName: this.state.technicianName
-            });
+        testCount: parseInt(this.props.passed.quantity,10),
+        use: "PATIENT"
+      });
     } else if (this.state.status == "USED") {
       filter = Object.assign(filter, {
         usedDate: this.state.usedDate,
@@ -116,52 +105,40 @@ export default class UseSerum extends React.Component<UseSerumProps> {
   }
   async sendingData() {
     const data = this.filterState();
+    console.log(`${data}${JSON.stringify(data)}`);
     await axios
-      .post(use_serum_url, data, {
+      .post(use_bloodbag_url, data, {
         auth: {
           username,
           password
         }
       })
       .then((response: any) => {
-        if(response.data.success){
-          this.setState({
-            snackOpen: true,
-            snackVariant: "success",
-            snackMessage: "Success! Please click apply again."
-          });
-          this.setState({
-            open: this.props.open,
-            passedData: this.props.passed,
-            _id: this.props.passed._id,
-            type: this.props.passed.type,
-            usedDate: "",
-            status: "",
-            use: "",
-            donorID: "",
-            patientName: "",
-            testCount: "",
-            missedRepeatedCount: "",
-            technicianName: ""
-          });
-          this.props.onClose(this.props.open);
-        }else{
-          this.setState({
-            snackOpen: true,
-            snackVariant: "error",
-            snackMessage: response.data.response
-          });
-        }
+        console.log(response.data.response);
       })
       .catch(function(error: any) {
         console.log(`error in authentication : ${error}`);
       });
-      return true;
   }
- handleSubmit = (event: any) => {
+  handleSubmit = (event: any) => {
     event.preventDefault();
-    const result =  this.sendingData();
-    console.log(result);
+    console.log(JSON.stringify(this.state));
+    this.sendingData();
+    this.setState({
+      open: this.props.open,
+      passedData: this.props.passed,
+      _id: this.props.passed._id,
+      type: this.props.passed.type,
+      usedDate: "",
+      status: "",
+      use: "",
+      donorID: "",
+      patientName: "",
+      testCount: "",
+      missedRepeatedCount: "",
+      technicianName: ""
+    });
+    this.props.onClose(this.props.open);
   };
 
   handleChange = (name: any) => (event: any) => {
@@ -171,8 +148,6 @@ export default class UseSerum extends React.Component<UseSerumProps> {
   render() {
     const { ...other } = this.props;
     return (
-      <div>
-         
       <Dialog
         disableBackdropClick
         disableEscapeKeyDown
@@ -182,7 +157,7 @@ export default class UseSerum extends React.Component<UseSerumProps> {
         {...other}
       >
         <form onSubmit={this.handleSubmit}>
-          <DialogTitle id="confirmation-dialog-title">Use Serums</DialogTitle>
+          <DialogTitle id="confirmation-dialog-title">Use BloodBags</DialogTitle>
           <DialogContent>
             <div>
               <p>
@@ -194,7 +169,7 @@ export default class UseSerum extends React.Component<UseSerumProps> {
             <TextField
               className="inputs"
               select
-              label="Status"
+              label="Eligibilty"
               value={this.state.status}
               onChange={this.handleChange("status")}
               SelectProps={{
@@ -276,6 +251,7 @@ export default class UseSerum extends React.Component<UseSerumProps> {
               className="inputs"
               label="Test Count"
               required
+              disabled={this.state.status == "USED" ? false : true}
               type="number"
               value={this.state.testCount}
               onChange={this.handleChange("testCount")}
@@ -303,6 +279,7 @@ export default class UseSerum extends React.Component<UseSerumProps> {
               className="inputs"
               label="Used date"
               required
+              disabled={this.state.status == "USED" ? false : true}
               type="date"
               value={this.state.usedDate}
               onChange={this.handleChange("usedDate")}
@@ -316,6 +293,11 @@ export default class UseSerum extends React.Component<UseSerumProps> {
               className="inputs"
               label="Technician Name"
               required
+              disabled={
+                this.state.status == "USED" && this.state.use == "DONOR"
+                  ? false
+                  : true
+              }
               type="text"
               value={this.state.technicianName}
               onChange={this.handleChange("technicianName")}
@@ -329,7 +311,7 @@ export default class UseSerum extends React.Component<UseSerumProps> {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleCancel} color="default">
-              <Link to="/serums">Cancel</Link>
+              <Link to="/bloodbags">Cancel</Link>
             </Button>
             <Button
               disabled={this.state.status != "" ? false : true}
@@ -341,22 +323,6 @@ export default class UseSerum extends React.Component<UseSerumProps> {
           </DialogActions>
         </form>
       </Dialog>
-      <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-          open={this.state.snackOpen}
-          autoHideDuration={6000}
-          onClose={this.handleSnackbar}
-        >
-          <MySnackbar
-            onClose={this.handleSnackbar}
-            variant={this.state.snackVariant}
-            message={this.state.snackMessage}
-          />
-        </Snackbar>
-      </div>
     );
   }
 }

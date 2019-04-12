@@ -9,23 +9,23 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import UseSerum from './UseSerum';
-import AddSerum from './AddSerum';
+import UseBloodBag from './UseBloodBag';
+import AddBloodBag from './AddBloodBag';
 import MySnackbar from "../../MySnackbar";
 import Snackbar from '@material-ui/core/Snackbar';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
 const base_url = Config.SERVER_URL;
-const getSerums = base_url + Config.PATHS.getSerums;
+const getBloodBags = base_url + Config.PATHS.getBloodBags;
 
-export default class Serums extends React.Component {
+export default class BloodBags extends React.Component {
   state = {
-    serumsData: [],
-    serumsLog: [],
-    selectSerum: "",
-    usingSerum: false,
-    addingSerum: false,
+    bloodBagsData: [],
+    bloodBagsLog: [],
+    selectBloodBag: "",
+    usingBloodBag: false,
+    addingBloodBag: false,
     passedData: {},
     anchorEl: null,
     failed: false,
@@ -44,11 +44,11 @@ export default class Serums extends React.Component {
   handleClick = (event: any) => {
     this.setState({ anchorEl: event.currentTarget });
   };
-  handleCloseUseSerum = () => {
-    this.setState({ usingSerum: false});
+  handleCloseUseBloodBag = () => {
+    this.setState({ usingBloodBag: false});
   }
-  handleCloseAddSerum = () => {
-    this.setState({ addingSerum: false});
+  handleCloseAddBloodBag = () => {
+    this.setState({ addingBloodBag: false});
   }
   handleClose = () => {
     this.setState({ anchorEl: null });
@@ -63,7 +63,7 @@ export default class Serums extends React.Component {
 
   async fetchData() {
     await axios
-      .get(getSerums+"?type="+this.state.selectSerum, {
+      .get(getBloodBags+"?type="+this.state.selectBloodBag, {
         auth: {
           username,
           password
@@ -74,13 +74,11 @@ export default class Serums extends React.Component {
           && 
           response.data.response.stocks.toString()!=""){
          this.setState(() => ({
-          serumsData: response.data.response.stocks,
-          serumsLog: response.data.response.logs,
-          currentData:this.state.selectSerum
+          bloodBagsData: response.data.response.stocks,
+          bloodBagsLog: response.data.response.logs,
+          currentData:this.state.selectBloodBag
         }));
-        console.log("insidecall:"+JSON.stringify(response.data.response));
       }else{
-        console.log("insidecall:"+JSON.stringify(response.data.response));
           this.setState(
             {
               failed:true,
@@ -118,11 +116,11 @@ export default class Serums extends React.Component {
           onClose={this.handleClose}
         >
          
-          <Link key={99} to={"/serums/use"} >
+          <Link key={99} to={"/bloodbags/use"} >
           <MenuItem
             onClick={() =>
               this.setState({
-                usingSerum: true
+                usingBloodBag: true
               })
             }
           >
@@ -130,14 +128,14 @@ export default class Serums extends React.Component {
           </MenuItem>
           </Link>
         </Menu>
-        <h1>Serums</h1>
+        <h1>BloodBags</h1>
         <div className="box_options">
           <TextField
             className="inputs"
             select
-            label="Serum's Type"
-            value={this.state.selectSerum}
-            onChange={this.handleChange("selectSerum")}
+            label="BloodBag's Type"
+            value={this.state.selectBloodBag}
+            onChange={this.handleChange("selectBloodBag")}
             SelectProps={{
               native: true
             }}
@@ -149,21 +147,21 @@ export default class Serums extends React.Component {
             margin="normal"
           >
             <option value="">Select a type</option>
-            {Data.SERUMS.map((option: any) => (
+            {Data.BLOOD_BAG.map((option: any) => (
               <option key={option} value={option}>
                 {option}
               </option>
             ))}
           </TextField>
-          <h4 style={{color:'darkblue'}}>The given data is about {(this.state.currentData!="")?this.state.currentData:"selected serum"}, please select above and apply for any other.</h4>
+          <h4 style={{color:'darkblue'}}>The given data is about {(this.state.currentData!="")?this.state.currentData:"selected bloodbag"}, please select above and apply for any other.</h4>
         </div>
         <div className="box_buttons">
-        <Tooltip title="Press apply to load data for selected serum." placement="left-start">
+        <Tooltip title="Press apply to load data for selected bloodbag." placement="left-start">
           <span><Button
             className="inputs"
             variant="contained"
             color="default"
-            disabled={this.state.selectSerum==""}
+            disabled={this.state.selectBloodBag==""}
             onClick={() => this.fetchData()}
           >
             Apply
@@ -172,17 +170,17 @@ export default class Serums extends React.Component {
           </span>
         </Tooltip>
           <br />
-          <Tooltip title="Press Add Stock to add data for any serum." placement="left-start">
+          <Tooltip title="Press Add Stock to add data for any bllodbag." placement="left-start">
           <span>
-          <Link key={98} to={"/serums/add"}>
+          <Link key={98} to={"/bloodbags/add"}>
           <Button
             className="inputs"
             variant="contained"
             color="primary"
-            disabled={this.state.selectSerum==""}
+            disabled={this.state.selectBloodBag==""}
             onClick={() => {
               this.setState({
-                  addingSerum: true
+                  addingBloodBag: true
               });
             }}
           >
@@ -219,7 +217,7 @@ export default class Serums extends React.Component {
               { title: "Expiry Date", field: "expiryDate" },
               { title: "Status", field: "status" }
             ]}
-            data={this.state.serumsData}
+            data={this.state.bloodBagsData}
             title="Stocks"
             actions={[
               {
@@ -292,7 +290,7 @@ export default class Serums extends React.Component {
               },
               { title: "Technician Name", field: "technicianName" }
             ]}
-            data={this.state.serumsLog}
+            data={this.state.bloodBagsLog}
             title="Logs"
             options={{
               loadingType: "linear",
@@ -310,14 +308,14 @@ export default class Serums extends React.Component {
         <Route
                 key={99}
                 exact={true}
-                path={`/serums/use`}
-                component={() => <UseSerum open={this.state.usingSerum} passed={this.state.passedData} onClose={this.handleCloseUseSerum}/>}
+                path={`/bloodbags/use`}
+                component={() => <UseBloodBag open={this.state.usingBloodBag} passed={this.state.passedData} onClose={this.handleCloseUseBloodBag}/>}
         />
         <Route
                 key={98}
                 exact={true}
-                path={`/serums/add`}
-                component={() => <AddSerum open={this.state.addingSerum} type={this.state.selectSerum} onClose={this.handleCloseUseSerum}/>}
+                path={`/bloodbags/add`}
+                component={() => <AddBloodBag open={this.state.addingBloodBag} type={this.state.selectBloodBag} onClose={this.handleCloseAddBloodBag}/>}
         />
         <Snackbar
           anchorOrigin={{

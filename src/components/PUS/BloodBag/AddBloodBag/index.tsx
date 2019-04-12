@@ -14,15 +14,15 @@ import Snackbar from '@material-ui/core/Snackbar';
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
 const base_url = Config.SERVER_URL;
-const add_serum_url = base_url + Config.PATHS.addSerums;
+const add_bloodbags_url = base_url + Config.PATHS.addBloodBags;
 
-interface AddSerumProps {
+interface AddBloodBagProps {
   open: boolean;
   type: any;
   onClose: any;
 }
 
-export default class AddSerum extends React.Component<AddSerumProps> {
+export default class AddBloodBag extends React.Component<AddBloodBagProps> {
   state = {
     open: this.props.open,
     type: this.props.type,
@@ -62,7 +62,7 @@ export default class AddSerum extends React.Component<AddSerumProps> {
   handleSnackbar=(event:any,reason:any)=>{
     if(reason === 'clickaway') return;
     this.setState({
-      success: false
+      failed: false
     });
   }
 
@@ -78,8 +78,9 @@ export default class AddSerum extends React.Component<AddSerumProps> {
             "expiryDate":this.state.expiryDate
           }
     }
+    console.log(`${data}${JSON.stringify(data)}`);
     await axios
-      .post(add_serum_url, data, {
+      .post(add_bloodbags_url, data, {
         auth: {
           username,
           password
@@ -97,7 +98,6 @@ export default class AddSerum extends React.Component<AddSerumProps> {
         batchNumber: "",
         expiryDate: ""
           })
-        this.props.onClose(this.props.open);
         }
       })
       .catch(function(error: any) {
@@ -106,8 +106,9 @@ export default class AddSerum extends React.Component<AddSerumProps> {
   }
   handleSubmit = (event: any) => {
     event.preventDefault();
-    const result =  this.sendingData();
-    console.log(result);
+    console.log(JSON.stringify(this.state));
+    this.sendingData();
+    this.props.onClose(this.props.open);
   };
 
   handleChange = (name: any) => (event: any) => {
@@ -127,7 +128,7 @@ export default class AddSerum extends React.Component<AddSerumProps> {
         {...other}
       >
         <form onSubmit={this.handleSubmit}>
-          <DialogTitle id="confirmation-dialog-title">Use Serums</DialogTitle>
+          <DialogTitle id="confirmation-dialog-title">Use BloodBags</DialogTitle>
           <DialogContent>
             <div>
               <p>
@@ -217,7 +218,7 @@ export default class AddSerum extends React.Component<AddSerumProps> {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleCancel} color="default">
-              <Link to="/serums">Cancel</Link>
+              <Link to="/bloodbags">Cancel</Link>
             </Button>
             <Button
               type="submit"

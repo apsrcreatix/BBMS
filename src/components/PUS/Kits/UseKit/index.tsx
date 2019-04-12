@@ -315,7 +315,7 @@ export default class UseKit extends React.Component<UseKitProps> {
             </Button>
             <Button
               disabled={this.state.status != "" ? false : true}
-              type="Submit"
+              type="submit"
               color="primary"
             >
               Submit

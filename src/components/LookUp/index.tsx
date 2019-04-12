@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import Data from "../Data";
-import "./LookUp.css";
+import "./../../index.css";
 import axios from "axios";
 import Config from "../../Config";
 
@@ -520,6 +520,7 @@ export default class LookUp extends React.Component {
       <div className="box_table">
         <MaterialTable
           columns={[
+            { title: "Donor ID", field: "_id" },
             { title: "Name", field: "name" },
             {
               title: "Date Of Birth",

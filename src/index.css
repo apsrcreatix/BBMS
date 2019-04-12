@@ -4,3 +4,78 @@ body {
   padding: 0;
   font-family: Roboto,sans-serif;
 }
+.search-container{
+  display: grid;
+  grid-auto-columns: 2fr 1fr;
+  grid-gap: 10px;
+}
+.search-inputs-box{
+  grid-column-start:1;
+  grid-column-end: 2; 
+}
+.search-buttons-box{
+  margin-top:20px; 
+  grid-column-start: 2;
+  grid-column-end:3;
+  width: 200px;
+}
+.inputs{
+  margin-left: 15px !important;
+  margin-right:15px !important;
+  width: 200px !important;
+  margin-bottom: 10px !important;
+}
+
+.lookup-inputs-container{
+  display: grid;
+  grid-auto-columns: 3fr 1fr;
+  grid-gap: 10px;
+}
+.box_options{
+  grid-column-start:1;
+  grid-column-end: 2; 
+}
+.box_buttons{
+  margin-top:20px; 
+  grid-column-start: 2;
+  grid-column-end:3;
+  width: 200px;
+}
+.box_table{
+  min-width:800px;
+  max-width: auto;
+  grid-column: 1 / -1;
+}
+.container{
+  margin-top:-100px !important;
+}
+.multiline{
+  height: 300px !important;
+}
+.center{
+  justify-content:center;
+  text-align:center;
+}
+.formGroup > *{
+  display: inline-block;
+}
+.input-container{
+display: grid;
+grid-template-columns: repeat(4,1fr); 
+grid-template-areas:
+"a a a b";
+}
+.input-inputs{
+grid-area: a;
+}
+.input-buttons{
+grid-area: b;
+justify-content: center;
+align-self: center;
+}
+.something-table{
+  width:800px;
+}
+a{
+  text-decoration: none;
+}

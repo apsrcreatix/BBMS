@@ -22,7 +22,16 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Serums from "../PUS/Serums";
 import Kits from "../PUS/Kits";
-
+import Chemicals from '../PUS/Chemicals';
+import BloodBags from '../PUS/BloodBag';
+import InputBlood from '../Inputs/Blood';
+import InputStock from '../Inputs/Stocks';
+import InputScreen from '../Inputs/Screening';
+import InputDiscard from '../Inputs/Discard';
+import InputGrouping from '../Inputs/Grouping';
+import InputInfectious from '../Inputs/Infectious';
+import InputPreparation from '../Inputs/Preparation';
+import InputReject from '../Inputs/Rejects';
 const drawerWidth = 200;
 
 const styles = (theme: any) => ({
@@ -32,7 +41,7 @@ const styles = (theme: any) => ({
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    backgroundColor: "crimson"
+    backgroundColor: "default"
   },
   drawer: {
     width: drawerWidth,
@@ -53,11 +62,15 @@ interface props{
 }
 class PermanentDrawerLeft extends React.Component<props,{}>{
  state = {
-  open:false
+  openPUS:false,
+  openInputs:false
  };
- handleClick = () => {
-  this.setState(state => ({ open: !this.state.open }));
+
+ handleClick = (name: any) => (event: any) => {
+   if(name=="openPUS") this.setState({openPUS:!this.state.openPUS});
+   if(name=="openInputs") this.setState({openInputs:!this.state.openInputs});
 };
+
   render(){
 
     const ROUTES = [
@@ -85,7 +98,15 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         label: "New Donor Entry",
         icon: <AddIcon />,
         main: () => <EntryForm />
-      }
+      },
+      {
+        key: 91,
+        path: "/test",
+        exact: true,
+        label: "Testing",
+        icon: <AddIcon />,
+        main: () => <EntryForm />
+      }      
     ];
 
     const PUS_OPTIONS = [
@@ -98,12 +119,96 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         main: () => <Serums />
       },
       {
-        key: 4,
+        key: 5,
         path: "/kits",
         exact: true,
         label: "Kits",
         icon: <AddIcon />,
         main: () => <Kits />
+      },
+      {
+        key: 6,
+        path: '/chemicals',
+        exact: true,
+        label: "Chemicals",
+        icon: <AddIcon />,
+        main: () => <Chemicals />
+      },
+      {
+        key: 7,
+        path: '/bloodbags',
+        exact: true,
+        label: "BloodBags",
+        icon: <AddIcon />,
+        main: () => <BloodBags />
+      }
+    ];
+
+
+    const INPUT_OPTIONS = [
+      {
+        key: 8,
+        path: "/input/blood",
+        exact: true,
+        label: "Blood",
+        icon: <AddIcon />,
+        main: () => <InputBlood />
+      },
+      {
+        key: 9,
+        path: "/input/stock",
+        exact: true,
+        label: "Stocks",
+        icon: <AddIcon />,
+        main: () => <InputStock />
+      },
+      {
+        key: 10,
+        path: '/input/screening',
+        exact: true,
+        label: "Screening",
+        icon: <AddIcon />,
+        main: () => <InputScreen />
+      },
+      {
+        key: 11,
+        path: '/input/discard',
+        exact: true,
+        label: "Discard",
+        icon: <AddIcon />,
+        main: () => <InputDiscard />
+      },
+      {
+        key: 12,
+        path: '/input/grouping',
+        exact: true,
+        label: "Grouping",
+        icon: <AddIcon />,
+        main: () => <InputGrouping />
+      },
+      {
+        key: 13,
+        path: '/input/infectious',
+        exact: true,
+        label: "Infectious",
+        icon: <AddIcon />,
+        main: () => <InputInfectious />
+      },
+      {
+        key: 14,
+        path: '/input/preparation',
+        exact: true,
+        label: "Preparation",
+        icon: <AddIcon />,
+        main: () => <InputPreparation />
+      },
+      {
+        key: 15,
+        path: '/input/reject',
+        exact: true,
+        label: "Reject",
+        icon: <AddIcon />,
+        main: () => <InputReject />
       }
     ];
 
@@ -139,11 +244,11 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                 </Link>
               ))}
               <Divider />
-              <ListItem button onClick={this.handleClick}>
+              <ListItem button onClick={this.handleClick("openPUS")}>
                 <ListItemText inset primary="PUS" />
-                {this.state.open ? <ExpandLess /> : <ExpandMore />}
+                {this.state.openPUS ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
-              <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+              <Collapse in={this.state.openPUS} timeout="auto" unmountOnExit>
                 <List disablePadding>
                   {PUS_OPTIONS.map(options => (
                     <Link key={options.key} to={options.path}>
@@ -154,13 +259,29 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                   ))}
                 </List>
               </Collapse>
+              <Divider />
+              <ListItem button onClick={this.handleClick("openInputs")}>
+                <ListItemText inset primary="Inputs" />
+                {this.state.openInputs ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={this.state.openInputs} timeout="auto" unmountOnExit>
+                <List disablePadding>
+                  {INPUT_OPTIONS.map(options => (
+                    <Link key={options.key} to={options.path}>
+                      <ListItem button className={classes.nested}>
+                        <ListItemText inset primary={options.label} />
+                      </ListItem>
+                    </Link>
+                  ))}
+                </List>
+              </Collapse>
             </List>
-
+            
           </Drawer>
           <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            {[...ROUTES,...PUS_OPTIONS].map((route, index) => (
+            {[...ROUTES,...PUS_OPTIONS,...INPUT_OPTIONS].map((route, index) => (
               <Route
                 key={index}
                 path={route.path}

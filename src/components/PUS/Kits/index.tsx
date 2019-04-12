@@ -9,10 +9,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import UseKit from './UseKit';
+import AddKit from './AddKit';
 import MySnackbar from "../../MySnackbar";
 import Snackbar from '@material-ui/core/Snackbar';
-import AddKit from './AddKit';
-import UseKit from './UseKit';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
@@ -88,7 +88,7 @@ export default class Kits extends React.Component {
               failed:true,
               errortext: "No data found!"
             }
-          )
+          );
         }
       })
       .catch(function(error: any) {
@@ -165,6 +165,7 @@ export default class Kits extends React.Component {
               </option>
             ))}
           </TextField>
+          <h4 style={{color:'darkblue'}}>The given data is about {(this.state.currentData!="")?this.state.currentData:"selected kits"}, please select above and apply for any other.</h4>
         </div>
         <div className="box_buttons">
         <Tooltip title="Press apply to load data for selected kit." placement="left-start">
@@ -218,7 +219,7 @@ export default class Kits extends React.Component {
           </Tooltip>
         </div>
         <div className="box_table">
-        <h4 style={{color:'maroon'}}>The given data is about {(this.state.currentData!="")?this.state.currentData:"selected kit"}, please select above and apply for any other.</h4>
+        <h4 style={{color:'maroon'}}>Please click apply after adding or using the data to refresh the data.</h4>
           <MaterialTable
             columns={[
               { title: "Quantity", field: "quantity" },
@@ -272,6 +273,7 @@ export default class Kits extends React.Component {
               }
             }}
           />
+          <br/>
           <MaterialTable
             columns={[
               { title: "Quantity", field: "quantity" },
@@ -308,11 +310,6 @@ export default class Kits extends React.Component {
               { title: "Blood Group", field: "bloodGroup" },
               { title: "Rh Type", field: "rhType" },
               { title: "Patient Name", field: "patientName" },
-              {
-                title: "Missed Repeated Count",
-                field: "missedRepeatedCount",
-                type: "numeric"
-              },
               { title: "Technician Name", field: "technicianName" }
             ]}
             data={this.state.kitsLog}
