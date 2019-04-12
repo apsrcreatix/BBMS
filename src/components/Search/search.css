@@ -1,15 +1,38 @@
 .search-container{
     display: grid;
-    grid-auto-columns: 2fr 1fr;
+    height: 100%;
+    margin-top: -90px;
+    grid-template-columns: repeat(4,200px);
     grid-gap: 10px;
+    grid-template-areas: 
+    "b o d s"
 }
 .search-inputs-box{
-    grid-column-start:1;
-    grid-column-end: 2; 
+grid-area: b;
+justify-content: center;
+align-content: center;
+text-align: center;
+}
+.search-donor-id{
+    grid-area: d;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+.span-text{
+    grid-area: o;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
 }
 .search-buttons-box{
-    margin-top:20px; 
-    grid-column-start: 2;
-    grid-column-end:3;
-    width: 200px;
+    margin-top:200px; 
+    grid-area: s;
+    justify-content: right;
+    align-content: right;
+    text-align: right;
+}
+.search-box_table{
+    min-width:800px;
+    max-width: 1000px;
 }

@@ -10,6 +10,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { Redirect, Route, Switch } from "react-router";
 import TextField from "@material-ui/core/TextField";
 import { Button } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 let username = Config.AUTH.username;
 let password = Config.AUTH.token;
@@ -22,14 +27,13 @@ interface state {
   redirectTo: boolean;
   anchorEl: any;
   name: string;
-  r_mobile: string;
-  o_mobile: string;
-  r_phone: string;
-  o_phone: string;
   dob: string;
   fatherSpouseName: string;
-  o_pincode: string;
-  r_pincode: string;
+  donor_id: string;
+  mobile: string;
+  telephone: string;
+  pincode: string;
+  open: boolean;
 }
 export default class TableWithContent extends React.Component<{}, state> {
   constructor(props: any) {
@@ -39,15 +43,14 @@ export default class TableWithContent extends React.Component<{}, state> {
       setData: "",
       redirectTo: false,
       anchorEl: null,
-      name: " ",
-      r_mobile: " ",
-      o_mobile: " ",
-      r_phone: " ",
-      o_phone: " ",
-      dob: " ",
-      fatherSpouseName: " ",
-      o_pincode: " ",
-      r_pincode: " "
+      name: "",
+      dob: "",
+      fatherSpouseName: "",
+      donor_id: "",
+      pincode:"",
+      mobile:"",
+      telephone:"",
+      open: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -55,7 +58,13 @@ export default class TableWithContent extends React.Component<{}, state> {
   handleChange = (name: any) => (event: any) => {
     this.setState({ name: event.target.value });
   };
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
 
+  handleClickClose = () => {
+    this.setState({ open: false });
+  };
   handleClick = (event: any) => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -67,33 +76,32 @@ export default class TableWithContent extends React.Component<{}, state> {
   filterState(){
     var log = {
       query: {
-        limit: 200,
+        limit: 600,
         index: 0
       }
     };
     var filter = {
      onlyEligibleDonor: false
     };
-     
      if( this.state.name != ""){
        filter = Object.assign(filter,{
          name: this.state.name
        })
      }
-     if( this.state.o_mobile != ""){
+     if( this.state.mobile != ""){
        filter = Object.assign(filter,{
-         o_mobile: this.state.o_mobile
+         mobile: this.state.mobile
        })
      }
-     if( this.state.o_phone != ""){
+     if( this.state.telephone != ""){
        filter = Object.assign(filter,{
-         o_phone: this.state.o_phone
+         telephone: this.state.telephone
        })
      }
      
-     if(this.state.o_pincode != ""){
+     if(this.state.pincode != ""){
        filter = Object.assign(filter,{
-         o_pincode: this.state.o_pincode
+         pincode: this.state.pincode
        })
      }
      if(this.state.fatherSpouseName != ""){
@@ -106,14 +114,9 @@ export default class TableWithContent extends React.Component<{}, state> {
          dob: this.state.dob
        })
      }
-     if(this.state.r_mobile != ""){
-       filter = Object.assign(filter,{
-         r_mobile: this.state.r_mobile
-       })
-     }
      Object.assign(log,{
        query: {
-         limit: 200,
+         limit: 900,
          index: 0,
          filter: filter
        }
@@ -187,7 +190,29 @@ export default class TableWithContent extends React.Component<{}, state> {
     const { anchorEl } = this.state;
 
     return (
-      <div className="search-container container">
+      <div>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Want to a add new donor?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+             We are not able to find the donor related to the information you have provided. Would you like to add a new donor data ?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              No
+            </Button>
+            <Button onClick={this.handleClickClose} color="primary" autoFocus>
+              Yes
+            </Button>
+          </DialogActions>
+        </Dialog>
+      <div className="search-container">
         <Router>
           <Switch>
             <Route
@@ -217,55 +242,6 @@ export default class TableWithContent extends React.Component<{}, state> {
         </Menu>
          <div className="search-inputs-box">
             <TextField
-              label="Mobile Number"
-              className="inputs"
-              type="number"
-              value={this.state.r_mobile}
-              onChange={this.handleChange("r_mobile")}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
-            <TextField
-              className="inputs"
-              id="dob"
-              label="Date of birth"
-              value={this.state.dob}
-              onChange={this.handleChange("dob")}
-              required
-              type="date"
-              helperText="Fill Date/Month/Year"
-              InputLabelProps={{
-                shrink: true
-              }}
-              margin="normal"
-            />
-            <TextField
-              label="Landline"
-              className="inputs"
-              type="number"
-              value={this.state.r_phone}
-              onChange={this.handleChange("r_phone")}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
-            <TextField
-              label="Pincode"
-              className="inputs"
-              placeholder="pincode"
-              value={this.state.o_pincode}
-              onChange={this.handleChange("o_pincode")}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true
-              }}
-              helperText="Enter 6 digit pincode."
-              required
-            />
-            <TextField
               label="Name"
               className="inputs"
               type="text"
@@ -288,7 +264,80 @@ export default class TableWithContent extends React.Component<{}, state> {
               InputLabelProps={{
                 shrink: true
               }}
-              helperText="Fill father's or spouce's name"
+              helperText="Father's or Spouce's full name."
+              required
+            />
+            <TextField
+              className="inputs"
+              id="dob"
+              label="Date of birth"
+              value={this.state.dob}
+              onChange={this.handleChange("dob")}
+              required
+              type="date"
+              helperText="Date/Month/Year as DD/MM/YYYY"
+              InputLabelProps={{
+                shrink: true
+              }}
+              margin="normal"
+            />
+            <p style={{color:'royalblue'}}>You can fill these for donor's office or residence.</p>
+            <TextField
+              label="Landline"
+              className="inputs"
+              type="number"
+              value={this.state.telephone}
+              onChange={this.handleChange("telephone")}
+              placeholder="1234123456"
+              helperText="STD code with Telephone number without space."
+              margin="normal"
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+             <TextField
+              label="Mobile Number"
+              className="inputs"
+              type="number"
+              value={this.state.mobile}
+              onChange={this.handleChange("mobile")}
+              placeholder="9876543210"
+              margin="normal"
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+            <TextField
+              label="Pincode"
+              className="inputs"
+              placeholder="123456"
+              value={this.state.pincode}
+              onChange={this.handleChange("pincode")}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true
+              }}
+              helperText="Enter 6 digit pincode."
+              required
+            />
+          </div>
+          <div className="span-text">
+          <h1 style={{color:'royalblue'}}> OR </h1>
+          <p style={{color:'royalblue'}}>(Choose one)</p>
+          </div>
+          <div className="search-donor-id">
+          <TextField
+              label="Donor ID"
+              className="inputs"
+              type="number"
+              value={this.state.name}
+              placeholder="ID Number"
+              onChange={this.handleChange("name")}
+              helperText="Please enter valid ID"
+              margin="normal"
+              InputLabelProps={{
+                shrink: true
+              }}
               required
             />
           </div>
@@ -296,10 +345,10 @@ export default class TableWithContent extends React.Component<{}, state> {
           <Button
         className="inputs"
         variant="contained"
-        color="default"
+        color="primary"
         onClick={() =>this.fetchDonorList()}
         >
-          Apply
+          Search
         </Button>
         <br/>
         <Button
@@ -308,11 +357,20 @@ export default class TableWithContent extends React.Component<{}, state> {
           color="default"
           onClick={() => {console.log("button pressed")}}
         >
-          Clear
+          Reset
+        </Button>
+        <Button
+          className="inputs"
+          variant="contained"
+          color="secondary"
+          onClick={this.handleClickOpen}
+        >
+          Add Donor
         </Button>
         <br/>
         </div>
-        <div className="box_table">
+       </div>
+       <div className="search-box_table">
         <MaterialTable
           columns={[
             { title: "Name", field: "name" },
@@ -414,7 +472,6 @@ export default class TableWithContent extends React.Component<{}, state> {
             }
           ]}
           options={{
-            filtering: true,
             searchable: true,
             loadingType: "linear",
             pageSize: 5,
@@ -431,7 +488,6 @@ export default class TableWithContent extends React.Component<{}, state> {
           }}
         />
         </div>
-       
       </div>
     );
   }
