@@ -30,7 +30,8 @@ export default {
         inputInfectious: '/bb/input/infectious',
         inputPreparation: '/bb/input/preparation',
         inputReject: '/bb/input/reject',
-        outputBlood: '/bb/output/blood'
+        outputBlood: '/bb/output/blood',
+        outputBMR: '/bb/output/bmr'
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',
