@@ -29,7 +29,8 @@ export default {
         inputGrouping: '/bb/input/grouping',
         inputInfectious: '/bb/input/infectious',
         inputPreparation: '/bb/input/preparation',
-        inputReject: '/bb/input/reject'
+        inputReject: '/bb/input/reject',
+        outputBlood: '/bb/output/blood'
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',

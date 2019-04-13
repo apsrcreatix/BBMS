@@ -36,6 +36,8 @@ import Gender from '../Analytics/Gender';
 import Age from '../Analytics/Age';
 import Blood from '../Analytics/BloodGroup';
 import Areawise from '../Analytics/AreaWise';
+import OutputBlood from '../Output/Blood';
+
 const drawerWidth = 200;
 
 const styles = (theme: any) => ({
@@ -68,14 +70,16 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
  state = {
   openPUS:false,
   openInputs:false,
-  openAnalytics:false
+  openAnalytics:false,
+  openOutput:false
  };
 
  handleClick = (name: any) => (event: any) => {
    if(name=="openPUS") this.setState({openPUS:!this.state.openPUS});
    if(name=="openInputs") this.setState({openInputs:!this.state.openInputs});
    if(name=="openAnalytics") this.setState({openAnalytics:!this.state.openAnalytics});
-};
+   if(name=="openOutput") this.setState({openOutput:!this.state.openOutput});
+  };
 
   render(){
 
@@ -253,6 +257,49 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
       }
     ];
 
+    const OUTPUT = [
+      {
+        key: 20,
+        path: "/output/blood",
+        exact: true,
+        label: "Blood",
+        icon: <AddIcon />,
+        main: () => <OutputBlood />
+      },
+      {
+        key: 21,
+        path: "/output/blood-master-record",
+        exact: true,
+        label: "Blood Master Record",
+        icon: <AddIcon />,
+        main: () => <Age />
+      },
+      {
+        key: 22,
+        path: "/output/cross-matching",
+        exact: true,
+        label: "Cross Matching",
+        icon: <AddIcon />,
+        main: () => <Blood />
+      },
+      {
+        key: 23,
+        path: "/output/patient-grouping",
+        exact: true,
+        label: "Patient Grouping",
+        icon: <AddIcon />,
+        main: () => <Areawise />
+      },
+      {
+        key: 24,
+        path: "/output/sample-preservation",
+        exact: true,
+        label: "Sample Preservation",
+        icon: <AddIcon />,
+        main: () => <Areawise />
+      }
+    ];
+
   const { classes } = this.props;
 
     return (
@@ -316,6 +363,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                   ))}
                 </List>
               </Collapse>
+              <Divider />
               <ListItem button onClick={this.handleClick("openAnalytics")}>
                 <ListItemText inset primary="Analytics" />
                 {this.state.openAnalytics ? <ExpandLess /> : <ExpandMore />}
@@ -331,13 +379,30 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                   ))}
                 </List>
               </Collapse>
+              <Divider />
+              <ListItem button onClick={this.handleClick("openOutput")}>
+                <ListItemText inset primary="Output" />
+                {this.state.openOutput ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={this.state.openOutput} timeout="auto" unmountOnExit>
+                <List disablePadding>
+                  {OUTPUT.map(options => (
+                    <Link key={options.key} to={options.path}>
+                      <ListItem button className={classes.nested}>
+                        <ListItemText inset primary={options.label} />
+                      </ListItem>
+                    </Link>
+                  ))}
+                </List>
+              </Collapse>
+              <Divider />
             </List>
             
           </Drawer>
           <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            {[...ROUTES,...PUS_OPTIONS,...INPUT_OPTIONS,...ANALYTICS].map((route, index) => (
+            {[...ROUTES,...PUS_OPTIONS,...INPUT_OPTIONS,...ANALYTICS,...OUTPUT].map((route, index) => (
               <Route
                 key={index}
                 path={route.path}
