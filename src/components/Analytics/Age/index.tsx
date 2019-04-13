@@ -20,8 +20,8 @@ class Age extends Component {
     };
   render() {
     return (
-      <div className="container">
-        <h1>Age-wise Blood Donation</h1>
+      <div>
+        <h5>Age-wise Blood Donation</h5>
         <Line
           data={this.state.chartData}
         />

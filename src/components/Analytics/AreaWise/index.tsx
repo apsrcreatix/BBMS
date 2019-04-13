@@ -22,8 +22,8 @@ class Area extends Component {
     };
   render() {
     return (
-      <div className="container">
-        <h1>Area-wise Blood Donation</h1>
+      <div>
+        <h5>Area-wise Blood Donation</h5>
         <Bar data={this.state.chartData} options={{
             scales:{
                 yAxes:[{

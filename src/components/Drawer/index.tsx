@@ -32,10 +32,7 @@ import InputGrouping from '../Inputs/Grouping';
 import InputInfectious from '../Inputs/Infectious';
 import InputPreparation from '../Inputs/Preparation';
 import InputReject from '../Inputs/Rejects';
-import Gender from '../Analytics/Gender';
-import Age from '../Analytics/Age';
-import Blood from '../Analytics/BloodGroup';
-import Areawise from '../Analytics/AreaWise';
+import Analytics from '../Analytics';
 import OutputBlood from '../Output/Blood';
 
 const drawerWidth = 200;
@@ -111,11 +108,11 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
       },
       {
         key: 91,
-        path: "/test",
+        path: "/analytics",
         exact: true,
-        label: "Testing",
+        label: "Analytics",
         icon: <AddIcon />,
-        main: () => <EntryForm />
+        main: () => <Analytics />
       }      
     ];
 
@@ -222,41 +219,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
       }
     ];
 
-    const ANALYTICS = [
-      {
-        key: 16,
-        path: "/analytics/gender",
-        exact: true,
-        label: "Gender",
-        icon: <AddIcon />,
-        main: () => <Gender />
-      },
-      {
-        key: 17,
-        path: "/analytics/age",
-        exact: true,
-        label: "Age",
-        icon: <AddIcon />,
-        main: () => <Age />
-      },
-      {
-        key: 18,
-        path: "/analytics/blood",
-        exact: true,
-        label: "BloodGroup",
-        icon: <AddIcon />,
-        main: () => <Blood />
-      },
-      {
-        key: 19,
-        path: "/analytics/areawise",
-        exact: true,
-        label: "Area Wise",
-        icon: <AddIcon />,
-        main: () => <Areawise />
-      }
-    ];
-
+    
     const OUTPUT = [
       {
         key: 20,
@@ -272,7 +235,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Blood Master Record",
         icon: <AddIcon />,
-        main: () => <Age />
+        main: () => <OutputBlood />
       },
       {
         key: 22,
@@ -280,7 +243,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Cross Matching",
         icon: <AddIcon />,
-        main: () => <Blood />
+        main: () => <OutputBlood />
       },
       {
         key: 23,
@@ -288,7 +251,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Patient Grouping",
         icon: <AddIcon />,
-        main: () => <Areawise />
+        main: () => <OutputBlood />
       },
       {
         key: 24,
@@ -296,7 +259,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Sample Preservation",
         icon: <AddIcon />,
-        main: () => <Areawise />
+        main: () => <OutputBlood />
       }
     ];
 
@@ -322,10 +285,10 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
             anchor="left"
           >
             <div className={classes.toolbar} />
-            <Divider />
             <List>
               {ROUTES.map(routes => (
                 <Link key={routes.key} to={routes.path}>
+                <Divider/>
                   <ListItem button key={routes.key}>
                     <ListItemText primary={routes.label} />
                   </ListItem>
@@ -364,22 +327,6 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                 </List>
               </Collapse>
               <Divider />
-              <ListItem button onClick={this.handleClick("openAnalytics")}>
-                <ListItemText inset primary="Analytics" />
-                {this.state.openAnalytics ? <ExpandLess /> : <ExpandMore />}
-              </ListItem>
-              <Collapse in={this.state.openAnalytics} timeout="auto" unmountOnExit>
-                <List disablePadding>
-                  {ANALYTICS.map(options => (
-                    <Link key={options.key} to={options.path}>
-                      <ListItem button className={classes.nested}>
-                        <ListItemText inset primary={options.label} />
-                      </ListItem>
-                    </Link>
-                  ))}
-                </List>
-              </Collapse>
-              <Divider />
               <ListItem button onClick={this.handleClick("openOutput")}>
                 <ListItemText inset primary="Output" />
                 {this.state.openOutput ? <ExpandLess /> : <ExpandMore />}
@@ -402,7 +349,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
           <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            {[...ROUTES,...PUS_OPTIONS,...INPUT_OPTIONS,...ANALYTICS,...OUTPUT].map((route, index) => (
+            {[...ROUTES,...PUS_OPTIONS,...INPUT_OPTIONS,...OUTPUT].map((route, index) => (
               <Route
                 key={index}
                 path={route.path}

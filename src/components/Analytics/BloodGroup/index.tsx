@@ -26,8 +26,8 @@ state = {
 
   render() {
     return (
-      <div className="container">
-        <h1>Blood Group</h1>
+      <div>
+        <h5>Blood Group</h5>
         <Bar data={this.state.chartData} options={{}} />
       </div>
     );
