@@ -347,8 +347,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
             
           </Drawer>
           <main className={classes.content}>
-            <div className={classes.toolbar} />
-
+            <div className={classes.toolbar}>
             {[...ROUTES,...PUS_OPTIONS,...INPUT_OPTIONS,...OUTPUT].map((route, index) => (
               <Route
                 key={index}
@@ -357,6 +356,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                 component={route.main}
               />
             ))}
+            </div>
           </main>
         </div>
       </Router>

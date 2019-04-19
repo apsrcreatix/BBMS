@@ -21,7 +21,7 @@ class Age extends Component {
   render() {
     return (
       <div>
-        <h5>Age-wise Blood Donation</h5>
+        <h5 className="style-chart-title">Age-wise Blood Donation</h5>
         <Line
           data={this.state.chartData}
         />

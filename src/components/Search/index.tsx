@@ -265,7 +265,9 @@ export default class TableWithContent extends React.Component {
               }}
               margin="normal"
             />
-            <p style={{color:'royalblue'}}>You can fill these for donor's office or residence.</p>
+            </div>
+            <div className="search-half-input">
+           
             <TextField
               label="Landline"
               className="inputs"
@@ -304,10 +306,11 @@ export default class TableWithContent extends React.Component {
               helperText="Enter 6 digit pincode."
               required
             />
+             <p>You can fill these for donor's office or residence.</p>
           </div>
           <div className="span-text">
-          <h1 style={{color:'royalblue'}}> OR </h1>
-          <p style={{color:'royalblue'}}>(Choose one)</p>
+          <h1> OR </h1>
+          <p>(Choose one)</p>
           </div>
           <div className="search-donor-id">
           <TextField
@@ -329,7 +332,7 @@ export default class TableWithContent extends React.Component {
           <Button
         className="inputs"
         variant="contained"
-        color="primary"
+        color="default"
         onClick={() =>this.fetchDonorList()}
         >
           Search
