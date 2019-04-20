@@ -1,39 +1,17 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:300,400,500";
+/* TIP: Search by name of component */
 body {
   margin: 0;
   padding: 0;
   font-family: Roboto,sans-serif;
 }
 
+/* General */
 .inputs{
   margin-left: 15px !important;
   margin-right:15px !important;
   width: 200px !important;
   margin-bottom: 10px !important;
-}
-
-.lookup-inputs-container{
-  display: grid;
-  grid-auto-columns: 3fr 1fr;
-  grid-gap: 10px;
-}
-.box_options{
-  grid-column-start:1;
-  grid-column-end: 2; 
-}
-.box_buttons{
-  margin-top:20px; 
-  grid-column-start: 2;
-  grid-column-end:3;
-  width: 200px;
-}
-.box_table{
-  min-width:800px;
-  max-width: auto;
-  grid-column: 1 / -1;
-}
-.container{
-  /* for debugging */
 }
 .multiline{
   height: 300px !important;
@@ -66,14 +44,39 @@ align-self: center;
 a{
   text-decoration: none;
 }
+/* Look up section */
+.lookup-inputs-container{
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(5,1fr);
+  grid-gap: 10px;
+  grid-template-areas: 
+  "i i i i b"
+  "t t t t t"
+}
+.box_options{
+  grid-area: i;
+}
+.box_buttons{
+  grid-area: b;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+.box_table{
+  grid-area: t;
+  min-width:800px;
+}
 
+/* Search Section */
 .search-container{
   display: grid;
   height: 100%;
-  grid-template-columns: repeat(5,200px);
+  grid-template-columns: repeat(5,1fr);
   grid-gap: 10px;
   grid-template-areas: 
   "b h o d s"
+  "t t t t t"
 }
 .search-half-input{
   grid-area: h;
@@ -100,24 +103,37 @@ text-align: center;
   text-align: center;
 }
 .search-buttons-box{
-  margin-top:200px; 
   grid-area: s;
   justify-content: right;
   align-content: right;
   text-align: right;
 }
 .search-box_table{
-  min-width:800px;
-  max-width: 1000px;
+  grid-area: t;
 }
+/* Anaalytics Section */
 .charts-container{
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  grid-template-rows: repeat(2,1fr);
   grid-gap: 25px;
   margin:0 10% 10% 10%;
 }
 .style-chart-title{
 text-transform: uppercase;
 letter-spacing: 2px;
+}
+.overview-cards{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  padding: 10px;
+  background: slategray;
+  color: whitesmoke;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+.overview-container{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 25px;
+  margin: 2% 10%;
 }
