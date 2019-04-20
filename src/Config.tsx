@@ -8,6 +8,7 @@ export default {
         getPostoffice: '/bb/areas/postoffices',
         getAreas: '/bb/areas/',
         getPincodeDetails: '/bb/areas/pincode/',
+        getTotalDonors: '/bb/donors/count',
         addDonor: '/bb/donors/new',
         updateDonor: '/bb/donors/',
         getSerums: '/bb/pus/serums',
