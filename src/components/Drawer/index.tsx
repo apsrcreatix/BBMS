@@ -11,9 +11,11 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import SearchIcon from "@material-ui/icons/Search";
 import LookUpIcon from "@material-ui/icons/FindInPage";
+import Dashboard from "@material-ui/icons/Assessment";
+import Assignment from "@material-ui/icons/Assignment";
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import AddIcon from "@material-ui/icons/NoteAdd";
 import TableWithContent from "../Search";
-import EntryForm from '../EntryForm';
 import LookUp from '../LookUp';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Config from "../../Config";
@@ -35,7 +37,7 @@ import InputReject from '../Inputs/Rejects';
 import Analytics from '../Analytics';
 import OutputBlood from '../Output/Blood';
 
-const drawerWidth = 200;
+const drawerWidth = 250;
 
 const styles = (theme: any) => ({
   root: {
@@ -44,14 +46,17 @@ const styles = (theme: any) => ({
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    backgroundColor: "default"
+    backgroundColor: "white",
+    color:"#333333"
+
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
+    backgroundColor: "white"
   },
   toolbar: theme.mixins.toolbar,
   content: {
@@ -85,7 +90,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         key: 1,
         path: "/",
         exact: true,
-        label: "Donor Directory Search",
+        label: "Directory Search",
         icon: <SearchIcon />,
         main: () => <TableWithContent />
       },
@@ -93,25 +98,17 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         key: 2,
         path: "/directory-lookup",
         exact: true,
-        label: "Donor Directory Lookup",
+        label: "Directory Lookup",
         icon: <LookUpIcon />,
         main: () =><LookUp />
         
       },
       {
         key: 3,
-        path: "/registerDonor",
+        path: "/dashboard",
         exact: true,
-        label: "New Donor Entry",
-        icon: <AddIcon />,
-        main: () => <EntryForm />
-      },
-      {
-        key: 91,
-        path: "/analytics",
-        exact: true,
-        label: "Analytics",
-        icon: <AddIcon />,
+        label: "Dashboard",
+        icon: <Dashboard />,
         main: () => <Analytics />
       }      
     ];
@@ -290,12 +287,14 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                 <Link key={routes.key} to={routes.path}>
                 <Divider/>
                   <ListItem button key={routes.key}>
+                  <ListItemIcon>{routes.icon}</ListItemIcon>
                     <ListItemText primary={routes.label} />
                   </ListItem>
                 </Link>
               ))}
               <Divider />
               <ListItem button onClick={this.handleClick("openPUS")}>
+              <ListItemIcon><Assignment/></ListItemIcon>
                 <ListItemText inset primary="PUS" />
                 {this.state.openPUS ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
@@ -304,6 +303,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                   {PUS_OPTIONS.map(options => (
                     <Link key={options.key} to={options.path}>
                       <ListItem button className={classes.nested}>
+                        <ListItemIcon>{options.icon}</ListItemIcon>
                         <ListItemText inset primary={options.label} />
                       </ListItem>
                     </Link>
@@ -312,6 +312,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
               </Collapse>
               <Divider />
               <ListItem button onClick={this.handleClick("openInputs")}>
+              <ListItemIcon><Assignment/></ListItemIcon>
                 <ListItemText inset primary="Inputs" />
                 {this.state.openInputs ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
@@ -320,6 +321,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                   {INPUT_OPTIONS.map(options => (
                     <Link key={options.key} to={options.path}>
                       <ListItem button className={classes.nested}>
+                      <ListItemIcon>{options.icon}</ListItemIcon>
                         <ListItemText inset primary={options.label} />
                       </ListItem>
                     </Link>
@@ -328,6 +330,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
               </Collapse>
               <Divider />
               <ListItem button onClick={this.handleClick("openOutput")}>
+              <ListItemIcon><Assignment/></ListItemIcon>
                 <ListItemText inset primary="Output" />
                 {this.state.openOutput ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
@@ -336,6 +339,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
                   {OUTPUT.map(options => (
                     <Link key={options.key} to={options.path}>
                       <ListItem button className={classes.nested}>
+                      <ListItemIcon>{options.icon}</ListItemIcon>
                         <ListItemText inset primary={options.label} />
                       </ListItem>
                     </Link>
