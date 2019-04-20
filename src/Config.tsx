@@ -9,6 +9,7 @@ export default {
         getAreas: '/bb/areas/',
         getPincodeDetails: '/bb/areas/pincode/',
         getTotalDonors: '/bb/donors/count',
+        getAnalytics: '/bb/analytics',
         addDonor: '/bb/donors/new',
         updateDonor: '/bb/donors/',
         getSerums: '/bb/pus/serums',
