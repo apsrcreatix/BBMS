@@ -11,38 +11,37 @@ export default class AnalyticsDashboard extends React.Component {
   render() {
     return (
         <div>
-              <div className="overview-container">
-          
+             
+        <div className="charts-container">
+        <div className="overview-container oc">
           <Card>
             <CardContent>
               <Overview />
             </CardContent>
           </Card>
         </div>
-        <div className="charts-container">
-      
-        <div>
+        <div className="abd">
           <Card>
             <CardContent>
               <Area />
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className="bg">
           <Card>
             <CardContent>
               <Blood />
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className="awbd">
           <Card>
             <CardContent>
               <Motivators />
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className="mfbdr">
           <Card>
             <CardContent>
               <Gender />

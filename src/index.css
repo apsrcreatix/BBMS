@@ -114,26 +114,41 @@ text-align: center;
 /* Anaalytics Section */
 .charts-container{
   display: grid;
-  grid-template-columns: repeat(2,1fr);
-  grid-gap: 25px;
-  margin:0 10% 10% 10%;
+  grid-template-columns: repeat(6,1fr);
+  grid-gap: 10px;
+  grid-template-areas: 
+  "e e b b b b"
+  "e e d d d d"
+  "c c d d d d"
+  "a a a a a a"  
+  ;
+}
+.abd{
+  grid-area: a;
+}
+.bg{
+  grid-area: b;
+}
+.awbd{
+  grid-area: d;
+}
+.mfbdr{
+  grid-area: c;
 }
 .style-chart-title{
 text-transform: uppercase;
 letter-spacing: 2px;
 }
 .overview-cards{
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   padding: 10px;
-  background: slategray;
   color: whitesmoke;
   justify-content: center;
   align-content: center;
   text-align: center;
+  border-radius: 10px;
+  margin: 15px;
 }
 .overview-container{
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  grid-gap: 25px;
-  margin: 2% 10%;
+  width: 100%;
+  grid-area: e;
 }

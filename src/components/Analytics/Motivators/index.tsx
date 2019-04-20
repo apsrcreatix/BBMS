@@ -50,7 +50,7 @@ class Motivator extends Component {
   render() {
     return (
       <div>
-        <h5 className="style-chart-title">Area-wise Blood Donation</h5>
+        <h5 className="style-chart-title">Motivators</h5>
         <Bar data={this.state.chartData} options={{
           scales: {
             yAxes: [{
