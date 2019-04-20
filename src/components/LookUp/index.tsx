@@ -7,6 +7,8 @@ import Data from "../Data";
 import "./../../index.css";
 import axios from "axios";
 import Config from "../../Config";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
@@ -242,7 +244,10 @@ export default class LookUp extends React.Component {
   
   render() {
     return (
-      <div className="lookup-inputs-container container">
+      <div >
+      <Card>
+        <CardContent>
+          <div className="lookup-inputs-container">
       <div className="box_options">
         <form className="form" noValidate autoComplete="off" />
         <TextField
@@ -554,11 +559,15 @@ export default class LookUp extends React.Component {
           }}
         />
    </div>
+   </div>
+   </CardContent>
+      </Card>
         <iframe id="ifmcontentstoprint" style={{
                         height: '0px',
                         width: '0px',
                         position: 'absolute'
-                    }}></iframe>    
+                    }}></iframe>
+                    
   </div>
     );
   }
