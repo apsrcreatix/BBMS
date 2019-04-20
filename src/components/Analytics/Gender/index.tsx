@@ -29,7 +29,7 @@ class Gender extends Component {
                     }
                 this.setState({
                     chartData:  {
-                        labels: tags,
+                        labels: ["Male", "Female"],
                         datasets: [{
                             data: values,
                             backgroundColor: ["#FF6384", "#36A2EB"],

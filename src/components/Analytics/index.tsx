@@ -1,6 +1,6 @@
-import Age from "./Age";
+import Area from "./Area";
 import Blood from "./BloodGroup";
-import Areawise from "./AreaWise";
+import Motivators from "./Motivators";
 import Gender from "./Gender";
 import Overview from "./Overview";
 import * as React from "react";
@@ -24,7 +24,7 @@ export default class AnalyticsDashboard extends React.Component {
         <div>
           <Card>
             <CardContent>
-              <Age />
+              <Area />
             </CardContent>
           </Card>
         </div>
@@ -38,7 +38,7 @@ export default class AnalyticsDashboard extends React.Component {
         <div>
           <Card>
             <CardContent>
-              <Areawise />
+              <Motivators />
             </CardContent>
           </Card>
         </div>
