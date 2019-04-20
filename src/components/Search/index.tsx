@@ -4,6 +4,7 @@ import axios from "axios";
 import Config from "../../Config";
 import "./../../index.css";
 import UpdateDonor from "../UpdateDonor";
+import EntryForm from "../EntryForm";
 import { BrowserRouter as Router } from "react-router-dom";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -15,6 +16,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 let username = Config.AUTH.username;
 let password = Config.AUTH.token;
@@ -26,7 +29,8 @@ export default class TableWithContent extends React.Component {
  state = {
       data: [],
       setData: "",
-      redirectTo: false,
+      redirectToUpdate: false,
+      redirectToAdd: false,
       anchorEl: null,
       name: "",
       dob: "",
@@ -67,6 +71,20 @@ export default class TableWithContent extends React.Component {
     var filter = {
      onlyEligibleDonor: false
     };
+     if( this.state.donor_id != ""){
+      filter = Object.assign(filter,{
+        donorID: parseInt(this.state.donor_id,10)
+      });
+      Object.assign(log,{
+        query: {
+          limit: 900,
+          index: 0,
+          filter: filter
+        }
+      })
+      console.log(JSON.stringify(log));
+      return log;
+     }
      if( this.state.name != ""){
        filter = Object.assign(filter,{
          name: this.state.name
@@ -124,9 +142,16 @@ export default class TableWithContent extends React.Component {
       }
     )
       .then((response: any) => {
-        this.setState(() => ({
-          data: response.data.response
-        }));
+        if(response.data.success==true 
+          && 
+          response.data.response.toString()!=""){
+            this.setState(() => ({
+              data: response.data.response
+            }));
+          }else{
+            this.setState({open:true});
+          }
+        
       })
       .catch(function (error: any) {
         console.log(`error in authentication : ${error}`);
@@ -156,7 +181,7 @@ export default class TableWithContent extends React.Component {
       return event.toLocaleDateString("en-IN", options);
     }
 
-    if (this.state.redirectTo) {
+    if (this.state.redirectToUpdate) {
       return (
         <Router>
           <Switch>
@@ -170,6 +195,21 @@ export default class TableWithContent extends React.Component {
         </Router>
       );
     }
+    if (this.state.redirectToAdd) {
+      return (
+        <Router>
+          <Switch>
+            <Route
+              path={"/registerDonor"}
+              exact={true}
+              component={() => <EntryForm/>}
+            />
+            <Redirect push to="/registerDonor" />
+          </Switch>
+        </Router>
+      );
+    }
+
 
     const { anchorEl } = this.state;
 
@@ -188,14 +228,16 @@ export default class TableWithContent extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClickClose} color="secondary">
               No
             </Button>
-            <Button onClick={this.handleClickClose} color="primary" autoFocus>
+            <Button onClick={()=>this.setState({redirectToAdd:true})} color="primary" autoFocus>
               Yes
             </Button>
           </DialogActions>
         </Dialog>
+        <Card>
+          <CardContent>
       <div className="search-container">
         <Router>
           <Switch>
@@ -216,7 +258,7 @@ export default class TableWithContent extends React.Component {
           <MenuItem
             onClick={() =>
               this.setState({
-                redirectTo: true
+                redirectToUpdate: true
               })
             }
           >
@@ -342,24 +384,32 @@ export default class TableWithContent extends React.Component {
           className="inputs"
           variant="contained"
           color="default"
-          onClick={() => {console.log("button pressed")}}
-        >
-          Reset
-        </Button>
-        <Button
-          className="inputs"
-          variant="contained"
-          color="secondary"
-          onClick={this.handleClickOpen}
-        >
-          Add Donor
+              onClick={() => {
+                this.setState({
+                  data: [],
+                  setData: "",
+                  redirectTo: false,
+                  anchorEl: null,
+                  name: "",
+                  dob: "",
+                  fatherSpouseName: "",
+                  donor_id: "",
+                  pincode: "",
+                  mobile: "",
+                  telephone: "",
+                  open: false
+                })
+              }}
+            >
+          Clear
         </Button>
         <br/>
         </div>
-       </div>
+       
        <div className="search-box_table">
         <MaterialTable
           columns={[
+            { title: "Donor ID", field: "_id" },
             { title: "Name", field: "name" },
             { title: "Gender", field: "gender" },
             { title: "Father/Spouse", field: "fatherSpouseName" },
@@ -467,7 +517,7 @@ export default class TableWithContent extends React.Component {
           }}
           localization={{
             body: {
-              emptyDataSourceMessage: "Loading ... This may take a while ..."
+              emptyDataSourceMessage: "No data present right now."
             },
             header: {
               actions: "Edit"
@@ -475,6 +525,9 @@ export default class TableWithContent extends React.Component {
           }}
         />
         </div>
+        </div>
+        </CardContent>
+        </Card>
       </div>
     );
   }
