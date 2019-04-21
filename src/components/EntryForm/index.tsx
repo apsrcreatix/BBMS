@@ -13,6 +13,8 @@ import axios from "axios";
 import Config from "../../Config";
 import MySnackbarContentWrapper from "../MySnackbar";
 import { withStyles } from "@material-ui/core/styles";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
@@ -20,6 +22,7 @@ const base_url = Config.SERVER_URL;
 const session_url = base_url + Config.PATHS.getPincodeDetails;
 const postOffice = base_url + Config.PATHS.getPostoffice;
 const motivators = base_url + Config.PATHS.getMotivators;
+const addDonor = base_url + Config.PATHS.addDonor;
 
 const RHTYPE = DATA.RH_TYPE;
 const BLOOD = DATA.BLOOD_GROUP;
@@ -91,8 +94,8 @@ class EntryForm extends React.Component<props, {}> {
     postOfficeList: [],
     motivatedByList: [],
     open: false,
-    error: false,
-    success: false
+    variant: "",
+    message: ""
   };
 
   constructor(props: any) {
@@ -175,75 +178,101 @@ class EntryForm extends React.Component<props, {}> {
   onSaveSumbit = (event:any) => {
     event.preventDefault();
     let donorData = {
-      regDate: this.state.regDate,
-      regCenter: this.state.regCenter,
-      motivatedBy: this.state.motivatedBy,
-      name: this.state.name,
-      dob: this.state.dob,
-      gender: this.state.gender,
-      bloodGroup: this.state.bloodGroup,
-      rhType: this.state.rhType,
-      fatherSpouseName: this.state.fatherSpouseName,
-      education: this.state.education,
-      occupation: this.state.occupation,
-      wbDonor: {
-        lastDonation: this.state.wbDonor_lastDonation,
-        nextDonation: this.state.wbDonor_nextDonation
-      },
-      platletDonor: {
-        lastDonation: this.state.platletDonor_lastDonation,
-        nextDonation: this.state.platletDonor_nextDonation
-      },
-      plasmaDonor: {
-        lastDonation: this.state.plasmaDonor_lastDonation,
-        nextDonation: this.state.plasmaDonor_nextDonation
-      },
-      drcDonor: {
-        lastDonation: this.state.drcDonor_lastDonation,
-        nextDonation: this.state.drcDonor_nextDonation
-      },
-      lastDonated: {
-        type: this.state.lastDonated_type,
-        lastDonation: this.state.lastDonated_lastDonation,
-        nextDonation: this.state.lastDonated_nextDonation
-      },
-      residentialAddress: {
-        address: this.state.r_address,
-        pincode: this.state.r_pincode,
-        door: this.state.r_door,
-        buildingName: this.state.r_buildingName,
-        city: this.state.r_city,
-        postOffice: this.state.r_postOffice,
-        area: this.state.r_area,
-        taluk: this.state.r_taluk,
-        district: this.state.r_district,
-        mobile: this.state.r_mobile,
-        email: this.state.r_email,
-        phone: this.state.r_phone
-      },
-      officeAddress: {
-        address: this.state.o_address,
-        pincode: this.state.o_pincode,
-        door: this.state.o_door,
-        buildingName: this.state.o_buildingName,
-        city: this.state.o_city,
-        postOffice: this.state.o_postOffice,
-        area: this.state.o_area,
-        taluk: this.state.o_taluk,
-        district: this.state.o_district,
-        phone: this.state.o_phone,
-        email: this.state.o_email,
-        mobile: this.state.o_mobile
+      donor: {
+        regDate: this.state.regDate,
+        regCenter: this.state.regCenter,
+        motivatedBy: this.state.motivatedBy,
+        name: this.state.name,
+        dob: this.state.dob,
+        gender: this.state.gender,
+        bloodGroup: this.state.bloodGroup,
+        rhType: this.state.rhType,
+        fatherSpouseName: this.state.fatherSpouseName,
+        education: this.state.education,
+        occupation: this.state.occupation,
+        wbDonor: {
+          lastDonation: this.state.wbDonor_lastDonation,
+          nextDonation: this.state.wbDonor_nextDonation
+        },
+        platletDonor: {
+          lastDonation: this.state.platletDonor_lastDonation,
+          nextDonation: this.state.platletDonor_nextDonation
+        },
+        plasmaDonor: {
+          lastDonation: this.state.plasmaDonor_lastDonation,
+          nextDonation: this.state.plasmaDonor_nextDonation
+        },
+        drcDonor: {
+          lastDonation: this.state.drcDonor_lastDonation,
+          nextDonation: this.state.drcDonor_nextDonation
+        },
+        lastDonated: {
+          type: this.state.lastDonated_type,
+          lastDonation: this.state.lastDonated_lastDonation,
+          nextDonation: this.state.lastDonated_nextDonation
+        },
+        residentialAddress: {
+          address: this.state.r_address,
+          pincode: this.state.r_pincode,
+          door: this.state.r_door,
+          buildingName: this.state.r_buildingName,
+          city: this.state.r_city,
+          postOffice: this.state.r_postOffice,
+          area: this.state.r_area,
+          taluk: this.state.r_taluk,
+          district: this.state.r_district,
+          mobile: this.state.r_mobile,
+          email: this.state.r_email,
+          phone: this.state.r_phone
+        },
+        officeAddress: {
+          address: this.state.o_address,
+          pincode: this.state.o_pincode,
+          door: this.state.o_door,
+          buildingName: this.state.o_buildingName,
+          city: this.state.o_city,
+          postOffice: this.state.o_postOffice,
+          area: this.state.o_area,
+          taluk: this.state.o_taluk,
+          district: this.state.o_district,
+          phone: this.state.o_phone,
+          email: this.state.o_email,
+          mobile: this.state.o_mobile
+        }
       }
     };
     console.log(JSON.stringify(donorData));
+    axios
+      .post(addDonor, donorData, {
+        auth: {
+          username,
+          password
+        }
+      })
+      .then((response: any) => {
+        if (response.data.success == true){
+          this.setState(DATA.D_DETAILS_BLANK);
+                this.setState({ open: true,
+                variant: "success",
+                message: `Successfully added as ${response.data.response.id}`
+                });
+        }else{
+          this.setState({
+            open: true,
+                variant: "error",
+                message: `${response.data.response}`
+          })
+        }
+      })
+      .catch(function(error: any) {
+        console.log(`error in authentication : ${error}`);
+      });
   }
 
   render() {
     return (
       <div className="container">
         <div>
-          {/*To be used for errors in the futur*/}
           <Snackbar
             anchorOrigin={{
               vertical: "bottom",
@@ -255,20 +284,21 @@ class EntryForm extends React.Component<props, {}> {
           >
             <MySnackbarContentWrapper
               onClose={this.handleClose}
-              variant="info"
-              message="Cleared!"
+              variant={this.state.variant}
+              message={this.state.message}
             />
           </Snackbar>
         </div>
 
-        <h1>Add New Donor</h1>
-        <br />
-        <Divider />
+        <h1>Donor Registration</h1>
+        <p>Please fill all the required (*) information properly, we care about data.</p>
         <form
           className="form"
           autoComplete="off"
           onSubmit={this.onSaveSumbit}
         >
+        <Card>
+          <CardContent>
           <h3>Registration Detail</h3>
           <TextField
             className="inputs"
@@ -284,7 +314,6 @@ class EntryForm extends React.Component<props, {}> {
             }}
             margin="normal"
           />
-
           <TextField
             className="inputs"
             select
@@ -301,13 +330,15 @@ class EntryForm extends React.Component<props, {}> {
             helperText="Please select registration centre"
             margin="normal"
           >
+          <option  value="">
+                select
+              </option>
             {REG_CENTRE.map(option => (
               <option key={option} value={option}>
                 {option}
               </option>
             ))}
           </TextField>
-
           <FormControl>
             <TextField
               className="inputs"
@@ -324,6 +355,9 @@ class EntryForm extends React.Component<props, {}> {
               helperText="Select motivator from list"
               margin="normal"
             >
+            <option  value="">
+                select
+              </option>
               {this.state.motivatedByList.map(option => (
                 <option key={option} value={option}>
                   {option}
@@ -345,7 +379,9 @@ class EntryForm extends React.Component<props, {}> {
               }}
             />
           </FormControl>
+          <br/>
           <Divider />
+          <br/>
           <h3>Basic Information</h3>
           <TextField
             label="Name"
@@ -390,6 +426,9 @@ class EntryForm extends React.Component<props, {}> {
             helperText="Please select Gender"
             margin="normal"
           >
+          <option  value="">
+                select
+              </option>
             {GENDER.map((option: string) => (
               <option key={option} value={option}>
                 {option}
@@ -412,6 +451,9 @@ class EntryForm extends React.Component<props, {}> {
             helperText="Please select Blood Group"
             margin="normal"
           >
+          <option  value="">
+                select
+              </option>
             {BLOOD.map(option => (
               <option key={option} value={option}>
                 {option}
@@ -434,6 +476,9 @@ class EntryForm extends React.Component<props, {}> {
             helperText="Please select Rh Type"
             margin="normal"
           >
+          <option  value="">
+                select
+              </option>
             {RHTYPE.map(option => (
               <option key={option} value={option}>
                 {option}
@@ -479,10 +524,14 @@ class EntryForm extends React.Component<props, {}> {
             helperText="Fill about occupation"
             required
           />
+          <br/>
           <Divider />
+          <br/>
           <h3>Blood Donation</h3>
-
+          <p>It is mendatory to select WB for first time donor.</p>
           <FormControl error={false} component="div">
+            <div className="fourInLine">
+
             <FormGroup className="formGroup">
               <FormControlLabel
                 control={
@@ -648,10 +697,11 @@ class EntryForm extends React.Component<props, {}> {
                 margin="normal"
               />
             </FormGroup>
+            </div>
           </FormControl>
-
+          <br/>
           <Divider />
-
+          <br/>
           <h3>Residence</h3>
           <TextField
             label="Pincode"
@@ -746,6 +796,9 @@ class EntryForm extends React.Component<props, {}> {
             helperText="Please select Post Office"
             margin="normal"
           >
+          <option  value="">
+                select
+              </option>
             {this.state.postOfficeList.map((option: string) => (
               <option key={option} value={option}>
                 {option}
@@ -800,8 +853,9 @@ class EntryForm extends React.Component<props, {}> {
               shrink: true
             }}
           />
+          <br/>
           <Divider />
-
+          <br/>             
           <h3>Office</h3>
           <TextField
             label="Pincode"
@@ -896,6 +950,9 @@ class EntryForm extends React.Component<props, {}> {
             helperText="Please select Post Office"
             margin="normal"
           >
+          <option  value="">
+          select
+        </option>
             {this.state.postOfficeList.map((option: string) => (
               <option key={option} value={option}>
                 {option}
@@ -950,15 +1007,19 @@ class EntryForm extends React.Component<props, {}> {
               shrink: true
             }}
           />
+           </CardContent>
+          </Card>
+          <br />
           <Divider />
           <br />
+          <Card>
+            <CardContent>
           <div className="center">
             <Button
               className="inputs"
               variant="contained"
               color="default"
-              type="submit"
-              
+              type="submit"            
             >
               Save
             </Button>
@@ -968,12 +1029,17 @@ class EntryForm extends React.Component<props, {}> {
               color="default"
               onClick={() => {
                 this.setState(DATA.D_DETAILS_BLANK);
-                this.setState({ open: true });
+                this.setState({ open: true,
+                variant: "info",
+                message: "All data cleared!"
+                });
               }}
             >
               Reset
             </Button>
-          </div>
+          </div> 
+          </CardContent>
+          </Card>
         </form>
       </div>
     );

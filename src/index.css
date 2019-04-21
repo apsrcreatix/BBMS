@@ -7,6 +7,12 @@ body {
 }
 
 /* General */
+.fourInLine{
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 10px;
+}
 .inputs{
   margin-left: 15px !important;
   margin-right:15px !important;
