@@ -92,7 +92,7 @@ export default class TableWithContent extends React.Component {
      }
      if( this.state.mobile != ""){
        filter = Object.assign(filter,{
-         mobile: this.state.mobile
+         mobile: "+91"+this.state.mobile
        })
      }
      if( this.state.telephone != ""){
@@ -123,7 +123,7 @@ export default class TableWithContent extends React.Component {
          filter: filter
        }
      })
- 
+ console.log(JSON.stringify(log));
      return  log;
      }
 
@@ -278,7 +278,7 @@ export default class TableWithContent extends React.Component {
               InputLabelProps={{
                 shrink: true
               }}
-              required
+              
             />
             <TextField
               label="Father's/Spouse's Name"
@@ -291,7 +291,7 @@ export default class TableWithContent extends React.Component {
                 shrink: true
               }}
               helperText="Father's or Spouce's full name."
-              required
+              
             />
             <TextField
               className="inputs"
@@ -299,7 +299,7 @@ export default class TableWithContent extends React.Component {
               label="Date of birth"
               value={this.state.dob}
               onChange={this.handleChange("dob")}
-              required
+              
               type="date"
               helperText="Date/Month/Year as DD/MM/YYYY"
               InputLabelProps={{
@@ -329,7 +329,7 @@ export default class TableWithContent extends React.Component {
               type="number"
               value={this.state.mobile}
               onChange={this.handleChange("mobile")}
-              placeholder="9876543210"
+              placeholder="1234567890"
               margin="normal"
               InputLabelProps={{
                 shrink: true
@@ -346,7 +346,7 @@ export default class TableWithContent extends React.Component {
                 shrink: true
               }}
               helperText="Enter 6 digit pincode."
-              required
+              
             />
              <p>You can fill these for donor's office or residence.</p>
           </div>
@@ -367,7 +367,7 @@ export default class TableWithContent extends React.Component {
               InputLabelProps={{
                 shrink: true
               }}
-              required
+              
             />
           </div>
           <div className="search-buttons-box">
