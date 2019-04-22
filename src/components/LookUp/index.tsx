@@ -140,9 +140,11 @@ export default class LookUp extends React.Component {
   }
 
   handleAge = (name: any) => (event: any) =>{
+    var numbers = event.target.value.match(/\d+/g).map(Number);
     this.setState({
-      age_max: event.target.value[1],
-      age_min: event.target.value[0]
+      ageGroup: `${numbers[0]}-${numbers[1]}`,
+      age_max: numbers[1],
+      age_min: numbers[0]
     })
   }
 
@@ -214,7 +216,7 @@ export default class LookUp extends React.Component {
         filter: filter
       }
     })
-
+    console.log(JSON.stringify(log))
     return  log;
     }
 
@@ -328,7 +330,7 @@ export default class LookUp extends React.Component {
           className="inputs"
           select
           label="Age Group"
-          value={`${this.state.age_min} - ${this.state.age_max}`}
+          value={this.state.ageGroup}
           onChange={this.handleAge("age_min")}
           SelectProps={{
             native: true
