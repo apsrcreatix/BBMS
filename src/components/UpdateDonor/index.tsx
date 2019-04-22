@@ -2,34 +2,49 @@ import * as React from "react";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Divider from "@material-ui/core/Divider";
-import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
+import Snackbar from "@material-ui/core/Snackbar";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import "./../../index.css";
 import DATA from "../Data";
-import Config from "../../Config";
 import axios from "axios";
+import Config from "../../Config";
+import MySnackbarContentWrapper from "../MySnackbar";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
-const INITIAL_STATE = DATA.D_DETAILS_BLANK;
+
+const username = Config.AUTH.username;
+const password = Config.AUTH.token;
+const base_url = Config.SERVER_URL;
+const session_url = base_url + Config.PATHS.getPincodeDetails;
+const motivators = base_url + Config.PATHS.getMotivators;
+const updateDonor = base_url + Config.PATHS.updateDonor;
+
 const RHTYPE = DATA.RH_TYPE;
 const BLOOD = DATA.BLOOD_GROUP;
 const GENDER = DATA.GENDER;
 const REG_CENTRE = DATA.TEMP_REG_CENTRE;
-const username = Config.AUTH.username;
-const password = Config.AUTH.token;
-const base_url = Config.SERVER_URL;
-const motivators = base_url + Config.PATHS.getMotivators;
+function formatDate(date: any) {
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [year, month, day].join('-');
+}
 
 export default class UpdateForm extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     const { data } = this.props;
     this.state = {
-      motivatedByList:[],
-      regDate: data.regDate,
+      regDate: formatDate(data.regDate),
       regCenter: data.regCenter,
       motivatedBy: data.motivatedBy,
       name: data.name,
@@ -78,8 +93,13 @@ export default class UpdateForm extends React.Component<any, any> {
       o_district: data.officeAddress.district,
       o_phone: data.officeAddress.phone,
       o_email: data.officeAddress.email,
-      o_mobile: data.officeAddress.mobile
+      o_mobile: data.officeAddress.mobile,
+      motivatedByList: [],
+      open: false,
+      variant: "",
+      message: ""
     };
+    
     axios
       .get(`${motivators}`, {
         auth: {
@@ -95,21 +115,178 @@ export default class UpdateForm extends React.Component<any, any> {
       .catch(function(error: any) {
         console.log(`error in authentication : ${error}`);
       });
+      
   }
 
-  handleChange = (name: any) => (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    event.preventDefault();
+  handleChange = (name: any) => (event: any) => {
     this.setState({ [name]: event.target.value });
   };
+  
+  async fetchPincode(pincode: any, type: string) {
+    await axios
+      .get(session_url + pincode, {
+        auth: {
+          username,
+          password
+        }
+      })
+      .then((response: any) => {
+        if (type == "residence") {
+          this.setState({
+            r_district: response.data.response.district,
+            r_taluk: response.data.response.taluk,
+            r_postOffice: response.data.response.postOffice
+          });
+        }
+        if (type == "office") {
+          this.setState({
+            o_district: response.data.response.district,
+            o_taluk: response.data.response.taluk,
+            o_postOffice: response.data.response.postOffice
+          });
+        }
+        console.log(JSON.stringify(response.data.response));
+      })
+      .catch(function(error: any) {
+        console.log(`error in authentication : ${error}`);
+      });
+  }
+
+  handleClick = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = (event: any, reason: any) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    this.setState({ open: false });
+  };
+
+  onSaveSumbit = (event:any) => {
+    event.preventDefault();
+    let donorData = {
+      donor: {
+        regDate: this.state.regDate,
+        regCenter: this.state.regCenter,
+        motivatedBy: this.state.motivatedBy,
+        name: this.state.name,
+        dob: this.state.dob,
+        gender: this.state.gender,
+        bloodGroup: this.state.bloodGroup,
+        rhType: this.state.rhType,
+        fatherSpouseName: this.state.fatherSpouseName,
+        education: this.state.education,
+        occupation: this.state.occupation,
+        wbDonor: {
+          lastDonation: this.state.wbDonor_lastDonation,
+          nextDonation: this.state.wbDonor_nextDonation
+        },
+        platletDonor: {
+          lastDonation: this.state.platletDonor_lastDonation,
+          nextDonation: this.state.platletDonor_nextDonation
+        },
+        plasmaDonor: {
+          lastDonation: this.state.plasmaDonor_lastDonation,
+          nextDonation: this.state.plasmaDonor_nextDonation
+        },
+        drcDonor: {
+          lastDonation: this.state.drcDonor_lastDonation,
+          nextDonation: this.state.drcDonor_nextDonation
+        },
+        lastDonated: {
+          type: this.state.lastDonated_type,
+          lastDonation: this.state.lastDonated_lastDonation,
+          nextDonation: this.state.lastDonated_nextDonation
+        },
+        residentialAddress: {
+          address: this.state.r_address,
+          pincode: this.state.r_pincode,
+          door: this.state.r_door,
+          buildingName: this.state.r_buildingName,
+          city: this.state.r_city,
+          postOffice: this.state.r_postOffice,
+          area: this.state.r_area,
+          taluk: this.state.r_taluk,
+          district: this.state.r_district,
+          mobile: this.state.r_mobile,
+          email: this.state.r_email,
+          phone: this.state.r_phone
+        },
+        officeAddress: {
+          address: this.state.o_address,
+          pincode: this.state.o_pincode,
+          door: this.state.o_door,
+          buildingName: this.state.o_buildingName,
+          city: this.state.o_city,
+          postOffice: this.state.o_postOffice,
+          area: this.state.o_area,
+          taluk: this.state.o_taluk,
+          district: this.state.o_district,
+          phone: this.state.o_phone,
+          email: this.state.o_email,
+          mobile: this.state.o_mobile
+        }
+      }
+    };
+    console.log(JSON.stringify(donorData));
+    axios
+      .patch(`${updateDonor}${this.props.data._id}`, donorData, {
+        auth: {
+          username,
+          password
+        }
+      })
+      .then((response: any) => {
+        if (response.data.success == true){
+          this.setState(DATA.D_DETAILS_BLANK);
+                this.setState({ open: true,
+                variant: "success",
+                message: `Successfully added as ${response.data.response.id}`
+                });
+        }else{
+          this.setState({
+            open: true,
+                variant: "error",
+                message: `${response.data.response}`
+          })
+        }
+      })
+      .catch(function(error: any) {
+        console.log(`error in authentication : ${error}`);
+      });
+  }
+
   render() {
     return (
       <div className="container">
-        <h1>Update Donor</h1>
-        <br />
-        <Divider />
-        <form className="form" noValidate autoComplete="off">
+        <div>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right"
+            }}
+            open={this.state.open}
+            autoHideDuration={6000}
+            onClose={this.handleClose}
+          >
+            <MySnackbarContentWrapper
+              onClose={this.handleClose}
+              variant={this.state.variant}
+              message={this.state.message}
+            />
+          </Snackbar>
+        </div>
+
+        <h1>Donor Registration</h1>
+        <p>Please fill all the required (*) information properly, we care about data.</p>
+        <form
+          className="form"
+          autoComplete="off"
+          onSubmit={this.onSaveSumbit}
+        >
+        <Card>
+          <CardContent>
           <h3>Registration Detail</h3>
           <TextField
             className="inputs"
@@ -125,7 +302,6 @@ export default class UpdateForm extends React.Component<any, any> {
             }}
             margin="normal"
           />
-
           <TextField
             className="inputs"
             select
@@ -142,13 +318,15 @@ export default class UpdateForm extends React.Component<any, any> {
             helperText="Please select registration centre"
             margin="normal"
           >
+          <option  value="">
+                select
+              </option>
             {REG_CENTRE.map(option => (
               <option key={option} value={option}>
                 {option}
               </option>
             ))}
           </TextField>
-
           <FormControl>
             <TextField
               className="inputs"
@@ -165,11 +343,14 @@ export default class UpdateForm extends React.Component<any, any> {
               helperText="Select motivator from list"
               margin="normal"
             >
-            {this.state.motivatedByList.map((option:any) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
+            <option  value="">
+                select
+              </option>
+              {this.state.motivatedByList.map((option: any) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
             </TextField>
             <h5>OR</h5>
             <TextField
@@ -186,7 +367,9 @@ export default class UpdateForm extends React.Component<any, any> {
               }}
             />
           </FormControl>
+          <br/>
           <Divider />
+          <br/>
           <h3>Basic Information</h3>
           <TextField
             label="Name"
@@ -231,6 +414,9 @@ export default class UpdateForm extends React.Component<any, any> {
             helperText="Please select Gender"
             margin="normal"
           >
+          <option  value="">
+                select
+              </option>
             {GENDER.map((option: string) => (
               <option key={option} value={option}>
                 {option}
@@ -253,6 +439,9 @@ export default class UpdateForm extends React.Component<any, any> {
             helperText="Please select Blood Group"
             margin="normal"
           >
+          <option  value="">
+                select
+              </option>
             {BLOOD.map(option => (
               <option key={option} value={option}>
                 {option}
@@ -275,6 +464,9 @@ export default class UpdateForm extends React.Component<any, any> {
             helperText="Please select Rh Type"
             margin="normal"
           >
+          <option  value="">
+                select
+              </option>
             {RHTYPE.map(option => (
               <option key={option} value={option}>
                 {option}
@@ -320,17 +512,15 @@ export default class UpdateForm extends React.Component<any, any> {
             helperText="Fill about occupation"
             required
           />
+          <br/>
           <Divider />
+          <br/>
           <h3>Blood Donation</h3>
-
+          <p>It is mendatory to select WB for first time donor.</p>
           <FormControl error={false} component="div">
-            <FormLabel component={"caption"}>
-              <FormHelperText>
-                Please choose whatever applies to donation details
-              </FormHelperText>
-            </FormLabel>
+            <div className="fourInLine">
 
-            <FormGroup>
+            <FormGroup className="formGroup">
               <FormControlLabel
                 control={
                   <Checkbox
@@ -339,7 +529,7 @@ export default class UpdateForm extends React.Component<any, any> {
                     onChange={() =>
                       this.setState({ wb_check: !this.state.wb_check })
                     }
-                    value={`"${this.state.wb_check}`}
+                    value={`"${this.state.wb_check}"`}
                   />
                 }
                 label="WB Donor"
@@ -373,17 +563,17 @@ export default class UpdateForm extends React.Component<any, any> {
                 margin="normal"
               />
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="formGroup">
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={this.state.platlet_check}
+                    value={`"${this.state.platlet_check}"`}
                     onChange={() =>
                       this.setState({
                         platlet_check: !this.state.platlet_check
                       })
                     }
-                    value={`"${this.state.plasma_check}"`}
+                    checked={this.state.platlet_check}
                   />
                 }
                 label="Platelet Donor"
@@ -415,15 +605,15 @@ export default class UpdateForm extends React.Component<any, any> {
                 margin="normal"
               />
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="formGroup">
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={this.state.plasma_check}
+                    value={`"${this.state.plasma_check}"`}
                     onChange={() =>
                       this.setState({ plasma_check: !this.state.plasma_check })
                     }
-                    value={`"${this.state.plasma_check}"`}
+                    checked={this.state.plasma_check}
                   />
                 }
                 label="Plasma Donor"
@@ -459,11 +649,11 @@ export default class UpdateForm extends React.Component<any, any> {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={this.state.drc_check}
+                    value={`"${this.state.drc_check}"`}
                     onChange={() =>
                       this.setState({ drc_check: !this.state.drc_check })
                     }
-                    value={`"${this.state.drc_check}"`}
+                    checked={this.state.drc_check}
                   />
                 }
                 label="DRC Donor"
@@ -495,10 +685,11 @@ export default class UpdateForm extends React.Component<any, any> {
                 margin="normal"
               />
             </FormGroup>
+            </div>
           </FormControl>
-
+          <br/>
           <Divider />
-
+          <br/>
           <h3>Residence</h3>
           <TextField
             label="Pincode"
@@ -513,7 +704,12 @@ export default class UpdateForm extends React.Component<any, any> {
             helperText="Enter 6 digit pincode."
             required
           />
-          <Button variant="contained">...</Button>
+          <Button
+            variant="contained"
+            onClick={() => this.fetchPincode(this.state.r_pincode, "residence")}
+          >
+            ...
+          </Button>
           <TextField
             label="Door No, Street/Road"
             className="inputs"
@@ -574,8 +770,9 @@ export default class UpdateForm extends React.Component<any, any> {
           />
           <TextField
             className="inputs"
-            select
             label="Post Office"
+            type="text"
+            disabled={true}
             value={this.state.r_postOffice}
             onChange={this.handleChange("r_postOffice")}
             SelectProps={{
@@ -585,15 +782,9 @@ export default class UpdateForm extends React.Component<any, any> {
               shrink: true
             }}
             required
-            helperText="Please select Post Office"
+            helperText="This will be added from pincode."
             margin="normal"
-          >
-            {GENDER.map((option: string) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </TextField>
+          />
           <TextField
             label="District"
             className="inputs"
@@ -642,8 +833,9 @@ export default class UpdateForm extends React.Component<any, any> {
               shrink: true
             }}
           />
+          <br/>
           <Divider />
-
+          <br/>             
           <h3>Office</h3>
           <TextField
             label="Pincode"
@@ -658,7 +850,12 @@ export default class UpdateForm extends React.Component<any, any> {
             helperText="Enter 6 digit pincode."
             required
           />
-          <Button variant="contained">...</Button>
+          <Button
+            variant="contained"
+            onClick={() => this.fetchPincode(this.state.r_pincode, "office")}
+          >
+            ...
+          </Button>
           <TextField
             label="Door No, Street/Road"
             className="inputs"
@@ -719,8 +916,9 @@ export default class UpdateForm extends React.Component<any, any> {
           />
           <TextField
             className="inputs"
-            select
             label="Post Office"
+            type="text"
+            disabled={true}
             value={this.state.o_postOffice}
             onChange={this.handleChange("o_postOffice")}
             SelectProps={{
@@ -730,15 +928,9 @@ export default class UpdateForm extends React.Component<any, any> {
               shrink: true
             }}
             required
-            helperText="Please select Post Office"
+            helperText="This will be added from pincode."
             margin="normal"
-          >
-            {GENDER.map((option: string) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </TextField>
+          />
           <TextField
             label="District"
             className="inputs"
@@ -787,26 +979,39 @@ export default class UpdateForm extends React.Component<any, any> {
               shrink: true
             }}
           />
+           </CardContent>
+          </Card>
+          <br />
           <Divider />
           <br />
+          <Card>
+            <CardContent>
           <div className="center">
             <Button
               className="inputs"
               variant="contained"
-              color="primary"
-              type="submit"
+              color="default"
+              type="submit"            
             >
               Save
             </Button>
             <Button
               className="inputs"
               variant="contained"
-              color="secondary"
-              onClick={() => this.setState(INITIAL_STATE)}
+              color="default"
+              onClick={() => {
+                this.setState(DATA.D_DETAILS_BLANK);
+                this.setState({ open: true,
+                variant: "info",
+                message: "All data cleared!"
+                });
+              }}
             >
               Reset
             </Button>
-          </div>
+          </div> 
+          </CardContent>
+          </Card>
         </form>
       </div>
     );
