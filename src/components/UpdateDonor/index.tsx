@@ -242,7 +242,7 @@ export default class UpdateForm extends React.Component<any, any> {
           this.setState(DATA.D_DETAILS_BLANK);
                 this.setState({ open: true,
                 variant: "success",
-                message: `Successfully added as ${response.data.response.id}`
+                message: `Successfully updated`
                 });
         }else{
           this.setState({
