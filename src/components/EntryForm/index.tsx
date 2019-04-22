@@ -12,7 +12,6 @@ import DATA from "../Data";
 import axios from "axios";
 import Config from "../../Config";
 import MySnackbarContentWrapper from "../MySnackbar";
-import { withStyles } from "@material-ui/core/styles";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
@@ -29,17 +28,8 @@ const BLOOD = DATA.BLOOD_GROUP;
 const GENDER = DATA.GENDER;
 const REG_CENTRE = DATA.TEMP_REG_CENTRE;
 
-interface props {
-  classes: any;
-}
 
-const styles2 = (theme: any) => ({
-  margin: {
-    margin: theme.spacing.unit
-  }
-});
-
-class EntryForm extends React.Component<props, {}> {
+class EntryForm extends React.Component {
   state = {
     regDate: "",
     regCenter: "",
@@ -148,13 +138,15 @@ class EntryForm extends React.Component<props, {}> {
         if (type == "residence") {
           this.setState({
             r_district: response.data.response.district,
-            r_taluk: response.data.response.taluk
+            r_taluk: response.data.response.taluk,
+            r_postOffice: response.data.response.postOffice
           });
         }
         if (type == "office") {
           this.setState({
             o_district: response.data.response.district,
-            o_taluk: response.data.response.taluk
+            o_taluk: response.data.response.taluk,
+            o_postOffice: response.data.response.postOffice
           });
         }
         console.log(JSON.stringify(response.data.response));
@@ -782,7 +774,8 @@ class EntryForm extends React.Component<props, {}> {
           />
           <TextField
             className="inputs"
-            select
+            disabled={true}
+            type="text"
             label="Post Office"
             value={this.state.r_postOffice}
             onChange={this.handleChange("r_postOffice")}
@@ -793,18 +786,10 @@ class EntryForm extends React.Component<props, {}> {
               shrink: true
             }}
             required
-            helperText="Please select Post Office"
+            helperText="This will be added from pincode."
             margin="normal"
-          >
-          <option  value="">
-                select
-              </option>
-            {this.state.postOfficeList.map((option: string) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </TextField>
+          />
+          
           <TextField
             label="District"
             className="inputs"
@@ -936,7 +921,8 @@ class EntryForm extends React.Component<props, {}> {
           />
           <TextField
             className="inputs"
-            select
+            disabled={true}
+            type="text"
             label="Post Office"
             value={this.state.o_postOffice}
             onChange={this.handleChange("o_postOffice")}
@@ -947,18 +933,9 @@ class EntryForm extends React.Component<props, {}> {
               shrink: true
             }}
             required
-            helperText="Please select Post Office"
+            helperText="This will be added from pincode."
             margin="normal"
-          >
-          <option  value="">
-          select
-        </option>
-            {this.state.postOfficeList.map((option: string) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </TextField>
+          />
           <TextField
             label="District"
             className="inputs"
@@ -1046,4 +1023,4 @@ class EntryForm extends React.Component<props, {}> {
   }
 }
 
-export default withStyles(styles2)(EntryForm);
+export default EntryForm;
