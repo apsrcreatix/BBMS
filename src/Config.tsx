@@ -1,5 +1,5 @@
 export default {
-    SERVER_URL: 'http://server.reezx.com/api',
+    SERVER_URL: 'https://server.reezx.com/api',
     PATHS: {
         getBloodBanks: '/bloodbanks',
         getDonors: '/bb/donors',
