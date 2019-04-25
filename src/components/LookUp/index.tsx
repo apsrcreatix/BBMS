@@ -15,7 +15,6 @@ const password = Config.AUTH.token;
 const base_url = Config.SERVER_URL;
 const session_url = base_url + Config.PATHS.getDonors;
 const areas = base_url + Config.PATHS.getAreas;
-const postOffice = base_url + Config.PATHS.getPostoffice;
 const motivators = base_url + Config.PATHS.getMotivators;
 
 let log  = {
@@ -85,24 +84,7 @@ export default class LookUp extends React.Component {
     .catch(function (error: any) {
       console.log(`error in authentication : ${error}`);
     });
-  axios
-    .get(
-      `${postOffice}`,
-      {
-        auth: {
-          username,
-          password
-        }
-      }
-    )
-    .then((response:any)=>{
-      this.setState({
-        postOfficeList: response.data.response
-      });
-    })
-    .catch(function (error: any) {
-      console.log(`error in authentication : ${error}`);
-    });
+  
    axios
     .get(
       `${motivators}`,
@@ -445,7 +427,7 @@ export default class LookUp extends React.Component {
          <option value="">
               All
             </option>
-          {this.state.postOfficeList.map((option: any) => (
+          {Data.POST_OFFICE.map((option: any) => (
             <option key={option} value={option}>
               {option}
             </option>
