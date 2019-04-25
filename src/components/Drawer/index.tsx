@@ -39,6 +39,7 @@ import OutputBlood from '../Output/Blood';
 import OutputBMR from '../Output/BMR';
 import OutputCM from '../Output/CrossMatching';
 import OutputPG from '../Output/PatientGrouping';
+import OutputSP from '../Output/SamplePreservation';
 
 const drawerWidth = 250;
 
@@ -262,7 +263,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Sample Preservation",
         icon: <AddIcon />,
-        main: () => <OutputBlood />
+        main: () => <OutputSP />
       }
     ];
 

@@ -35,21 +35,21 @@ export default class AddSP extends React.Component {
     async sendingData() {
         const data = {
             data: {
-                donorID: this.state.donorID,
-                bloodBank: "",
-                donorName: "",
-                bloodGroup: "",
-                rhType: "",
-                name: "",
-                hospital: "",
-                sample: "",
-                second: "",
-                third: "",
-                fourth: "",
-                fifth: "",
-                sixth: "",
-                seventh: "",
-                discard: ""
+                donorID: parseInt(this.state.donorID,10),
+                bloodBank: this.state.bloodBank,
+                donorName: this.state.donorName,
+                bloodGroup: this.state.bloodGroup,
+                rhType: this.state.rhType,
+                name: this.state.name,
+                hospital: this.state.hospital,
+                sample: this.state.sample,
+                second: this.state.second,
+                third: this.state.third,
+                fourth: this.state.fourth,
+                fifth: this.state.fifth,
+                sixth: this.state.sixth,
+                seventh: this.state.seventh,
+                discard: this.state.discard
             }
         };
         console.log(`${data}${JSON.stringify(data)}`);
@@ -117,42 +117,42 @@ export default class AddSP extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className="input-container container">
                         <div className="input-inputs">
-                            <h3>Input Grouping Record</h3>
+                            <h3>Input Preservation Record</h3>
                             <TextField
                                 className="inputs"
-                                label="Patient"
+                                label="Donor ID"
                                 required
-                                type="text"
-                                value={this.state.patient}
-                                onChange={this.handleChange("patient")}
+                                type="numeric"
+                                value={this.state.donorID}
+                                onChange={this.handleChange("donorID")}
                                 margin="normal"
-                                helperText="Patient"
+                                helperText="Donor ID"
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
                             <TextField
                                 className="inputs"
-                                label="Age"
+                                label="Blood Bank"
                                 required
-                                type="number"
-                                value={this.state.age}
-                                onChange={this.handleChange("age")}
+                                type="text"
                                 margin="normal"
-                                helperText="Age"
+                                value={this.state.bloodBank}
+                                helperText="Enter Blood Bank"
+                                onChange={this.handleChange("bloodBank")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
                             <TextField
                                 className="inputs"
-                                label="Sex"
+                                label="Donor Name"
                                 required
                                 type="text"
-                                value={this.state.sex}
-                                onChange={this.handleChange("sex")}
                                 margin="normal"
-                                helperText="Enter Sex"
+                                value={this.state.donorName}
+                                helperText="Enter Donor Name"
+                                onChange={this.handleChange("donorName")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
@@ -164,7 +164,7 @@ export default class AddSP extends React.Component {
                                 type="text"
                                 margin="normal"
                                 value={this.state.bloodGroup}
-                                helperText="Enter Blood Group."
+                                helperText="Enter Blood Group"
                                 onChange={this.handleChange("bloodGroup")}
                                 InputLabelProps={{
                                     shrink: true
@@ -172,12 +172,12 @@ export default class AddSP extends React.Component {
                             />
                             <TextField
                                 className="inputs"
-                                label="rhType"
+                                label="Rh Type"
                                 required
                                 type="text"
                                 margin="normal"
                                 value={this.state.rhType}
-                                helperText="Enter vdrl."
+                                helperText="Enter Rh Type"
                                 onChange={this.handleChange("rhType")}
                                 InputLabelProps={{
                                     shrink: true
@@ -198,147 +198,121 @@ export default class AddSP extends React.Component {
                             />
                             <TextField
                                 className="inputs"
-                                label="anti A"
+                                label="Name"
                                 required
                                 type="text"
                                 margin="normal"
-                                value={this.state.antiA}
-                                helperText="Anti A"
-                                onChange={this.handleChange("antiA")}
+                                value={this.state.name}
+                                helperText="Enter Name"
+                                onChange={this.handleChange("name")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
                             <TextField
                                 className="inputs"
-                                label="anti B"
+                                label="Sample Date"
                                 required
-                                type="text"
+                                type="date"
                                 margin="normal"
-                                value={this.state.antiB}
-                                helperText="Anti B"
-                                onChange={this.handleChange("antiB")}
+                                value={this.state.sample}
+                                helperText="Enter Sample Date"
+                                onChange={this.handleChange("sample")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
                             <TextField
                                 className="inputs"
-                                label="anti AB"
+                                label="Second Date"
                                 required
-                                type="text"
+                                type="date"
                                 margin="normal"
-                                value={this.state.antiAB}
-                                helperText="Anti AB"
-                                onChange={this.handleChange("antiAB")}
+                                value={this.state.second}
+                                helperText="Enter Second Date"
+                                onChange={this.handleChange("second")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
                             <TextField
                                 className="inputs"
-                                label="anti D"
+                                label="Third Date"
                                 required
-                                type="text"
+                                type="date"
                                 margin="normal"
-                                value={this.state.antiD}
-                                helperText="Anti D"
-                                onChange={this.handleChange("antiD")}
+                                value={this.state.third}
+                                helperText="Enter Third Date"
+                                onChange={this.handleChange("third")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
                             <TextField
                                 className="inputs"
-                                label="dTest"
+                                label="Fourth Date"
                                 required
-                                type="text"
+                                type="date"
                                 margin="normal"
-                                value={this.state.dTest}
-                                helperText="d Test"
-                                onChange={this.handleChange("dTest")}
+                                value={this.state.fourth}
+                                helperText="Enter Fourth Date"
+                                onChange={this.handleChange("fourth")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
                             <TextField
                                 className="inputs"
-                                label="a1Lactin"
+                                label="Fifth Date"
                                 required
-                                type="text"
+                                type="date"
                                 margin="normal"
-                                value={this.state.a1Lectin}
-                                helperText="a1Lectin"
-                                onChange={this.handleChange("a1Lectin")}
+                                value={this.state.fifth}
+                                helperText="Enter Fifth Date"
+                                onChange={this.handleChange("fifth")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
                             <TextField
                                 className="inputs"
-                                label="aCells"
+                                label="Sixth Date"
                                 required
-                                type="text"
+                                type="date"
                                 margin="normal"
-                                value={this.state.aCells}
-                                helperText="aCells"
-                                onChange={this.handleChange("aCells")}
+                                value={this.state.sixth}
+                                helperText="Enter Sixth Date"
+                                onChange={this.handleChange("sixth")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
                             <TextField
                                 className="inputs"
-                                label="bCells"
+                                label="Seventh Date"
                                 required
-                                type="text"
+                                type="date"
                                 margin="normal"
-                                value={this.state.bCells}
-                                helperText="bCells"
-                                onChange={this.handleChange("bCells")}
+                                value={this.state.seventh}
+                                helperText="Enter Seventh Date"
+                                onChange={this.handleChange("seventh")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
                             <TextField
                                 className="inputs"
-                                label="saline"
+                                label="Discards"
                                 required
                                 type="text"
                                 margin="normal"
-                                value={this.state.saline}
-                                helperText="Saline"
-                                onChange={this.handleChange("saline")}
+                                value={this.state.discard}
+                                helperText="Enter Discard Date"
+                                onChange={this.handleChange("discard")}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
-                            />
-                            <TextField
-                                className="inputs"
-                                label="Papain"
-                                required
-                                type="text"
-                                margin="normal"
-                                value={this.state.papain}
-                                helperText="Papain"
-                                onChange={this.handleChange("papain")}
-                                InputLabelProps={{
-                                    shrink: true
-                                }}
-                            />
-                            <TextField
-                                className="inputs"
-                                label="Staff Name"
-                                required
-                                type="text"
-                                value={this.state.staffName}
-                                onChange={this.handleChange("staffName")}
-                                margin="normal"
-                                helperText="Enter Staff Name"
-                                InputLabelProps={{
-                                    shrink: true
-                                }}
-                            />
+                            />   
                         </div>
                         <div className="input-buttons">
                             <Button
