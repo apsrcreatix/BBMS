@@ -13,6 +13,8 @@ import UseKit from './UseKit';
 import AddKit from './AddKit';
 import MySnackbar from "../../MySnackbar";
 import Snackbar from '@material-ui/core/Snackbar';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
@@ -120,7 +122,10 @@ export default class Kits extends React.Component {
     
     return (
       <Router>
-      <div className="lookup-inputs-container container">
+          <Card>
+          <CardContent>
+          <h1>Kits</h1>
+      <div className="lookup-inputs-container">
        <Menu
           id="simple-menu"
           anchorEl={anchorEl}
@@ -140,7 +145,6 @@ export default class Kits extends React.Component {
           </MenuItem>
           </Link>
         </Menu>
-        <h1>Kits</h1>
         <div className="box_options">
           <TextField
             className="inputs"
@@ -181,21 +185,6 @@ export default class Kits extends React.Component {
           </Button>
           </span>
         </Tooltip>
-          <br />
-          <Tooltip title="Press clear to reset data." placement="left-start">
-          <span><Button
-            className="inputs"
-            variant="contained"
-            color="default"
-            disabled={this.state.selectKit==""}
-            onClick={() => {
-              this.setState(INITIAL_STATE);
-            }}
-          >
-            Clear
-          </Button>
-          </span>
-          </Tooltip>
           <br />
           <Tooltip title="Press Add Stock to add data for any kit." placement="left-start">
           <span>
@@ -355,6 +344,8 @@ export default class Kits extends React.Component {
           />
         </Snackbar>
       </div>
+      </CardContent>
+    </Card>
       </Router>
     );
   }

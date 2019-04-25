@@ -13,7 +13,8 @@ import UseChemical from './UseChemical';
 import AddChemical from './AddChemical';
 import MySnackbar from "../../MySnackbar";
 import Snackbar from '@material-ui/core/Snackbar';
-
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 const username = Config.AUTH.username;
 const password = Config.AUTH.token;
 const base_url = Config.SERVER_URL;
@@ -118,7 +119,10 @@ export default class Chemicals extends React.Component {
     
     return (
       <Router>
-      <div className="lookup-inputs-container container">
+        <Card>
+          <CardContent>
+          <h1>Chemicals</h1>
+      <div className="lookup-inputs-container">
        <Menu
           id="simple-menu"
           anchorEl={anchorEl}
@@ -138,7 +142,6 @@ export default class Chemicals extends React.Component {
           </MenuItem>
           </Link>
         </Menu>
-        <h1>Chemicals</h1>
         <div className="box_options">
           <TextField
             className="inputs"
@@ -343,6 +346,8 @@ export default class Chemicals extends React.Component {
           />
         </Snackbar>
       </div>
+      </CardContent>
+    </Card>
       </Router>
     );
   }
