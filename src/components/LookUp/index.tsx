@@ -59,9 +59,9 @@ export default class LookUp extends React.Component {
       }
     )
     .then((response: any) => {
-      this.setState(() => ({
+      this.setState({
         data: response.data.response
-      }));
+      });
     })
     .catch(function (error: any) {
       console.log(`error in authentication : ${error}`);
@@ -78,9 +78,9 @@ export default class LookUp extends React.Component {
       }
     )
     .then((response:any)=>{
-      this.setState(()=>({
+      this.setState({
         areaList: response.data.response
-      }));
+      });
     })
     .catch(function (error: any) {
       console.log(`error in authentication : ${error}`);
@@ -96,9 +96,9 @@ export default class LookUp extends React.Component {
       }
     )
     .then((response:any)=>{
-      this.setState(()=>({
+      this.setState({
         postOfficeList: response.data.response
-      }));
+      });
     })
     .catch(function (error: any) {
       console.log(`error in authentication : ${error}`);
@@ -114,9 +114,9 @@ export default class LookUp extends React.Component {
       }
     )
     .then((response:any)=>{
-      this.setState(()=>({
+      this.setState({
         motivatedByList: response.data.response
-      }));
+      });
     })
     .catch(function (error: any) {
       console.log(`error in authentication : ${error}`);
@@ -234,9 +234,9 @@ export default class LookUp extends React.Component {
       }
     )
       .then((response: any) => {
-        this.setState(() => ({
+        this.setState({
           data: response.data.response
-        }));
+        });
       })
       .catch(function (error: any) {
         console.log(`error in authentication : ${error}`);
