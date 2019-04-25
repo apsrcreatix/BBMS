@@ -33,7 +33,10 @@ export default {
         inputPreparation: '/bb/input/preparation',
         inputReject: '/bb/input/reject',
         outputBlood: '/bb/output/blood',
-        outputBMR: '/bb/output/bmr'
+        outputBMR: '/bb/output/bmr',
+        outputCM: '/bb/output/matching',
+        outputPG: '/bb/output/grouping',
+        outputPreservation: '/bb/output/preservation'
     },
     AUTH: {
         username: 'Haemcare - Nungambakkam',

@@ -36,6 +36,9 @@ import InputPreparation from '../Inputs/Preparation';
 import InputReject from '../Inputs/Rejects';
 import Analytics from '../Analytics';
 import OutputBlood from '../Output/Blood';
+import OutputBMR from '../Output/BMR';
+import OutputCM from '../Output/CrossMatching';
+import OutputPG from '../Output/PatientGrouping';
 
 const drawerWidth = 250;
 
@@ -235,7 +238,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Blood Master Record",
         icon: <AddIcon />,
-        main: () => <OutputBlood />
+        main: () => <OutputBMR />
       },
       {
         key: 22,
@@ -243,7 +246,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Cross Matching",
         icon: <AddIcon />,
-        main: () => <OutputBlood />
+        main: () => <OutputCM />
       },
       {
         key: 23,
@@ -251,7 +254,7 @@ class PermanentDrawerLeft extends React.Component<props,{}>{
         exact: true,
         label: "Patient Grouping",
         icon: <AddIcon />,
-        main: () => <OutputBlood />
+        main: () => <OutputPG />
       },
       {
         key: 24,

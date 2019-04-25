@@ -91,7 +91,7 @@ export default class Infectious extends React.Component {
                     </div>
                     <div className="something-table">
                         <MaterialTable
-                            title="Infectious Data"
+                            title="Preparation Data"
                             columns={[
                                 { title: "Donor ID", field: "donorID", type: "numeric" },
                                 { 
