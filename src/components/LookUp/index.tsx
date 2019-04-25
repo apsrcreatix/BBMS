@@ -46,9 +46,8 @@ const INITIAL_STATE = {
 
 export default class LookUp extends React.Component {
   state = INITIAL_STATE;
-  constructor(props: any) {
-    super(props);
-   axios
+  componentDidMount(){
+    axios
     .post(
       session_url,
       log,
